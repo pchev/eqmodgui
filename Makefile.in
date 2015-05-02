@@ -68,3 +68,12 @@ all: outdir component eqmodgui$(EXEEXT)
 revision:
 	$(LAZDIR)/tools/svn2revisioninc . revision.inc
 
+ifeq ($(OS_TARGET),darwin)
+install: 
+	./install_darwin.sh $(PREFIX)
+else
+install: 
+	./install.sh $(PREFIX) $(CPU_TARGET)
+install_win: 
+	./install_win.sh win32 $(PREFIX)
+endif
