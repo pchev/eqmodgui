@@ -51,7 +51,6 @@
       <Unit2>
         <Filename Value="eqmod_int.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="eqmod_int"/>
       </Unit2>
       <Unit3>
         <Filename Value="eqmod_setup.pas"/>
@@ -62,6 +61,7 @@
       <Unit4>
         <Filename Value="u_ccdconfig.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="u_ccdconfig"/>
       </Unit4>
     </Units>
   </ProjectOptions>

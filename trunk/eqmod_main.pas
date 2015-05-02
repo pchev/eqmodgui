@@ -256,6 +256,7 @@ end;
 
 procedure Tf_eqmod.FormDestroy(Sender: TObject);
 begin
+  eqmod.Terminate;
   config.Free;
 end;
 
