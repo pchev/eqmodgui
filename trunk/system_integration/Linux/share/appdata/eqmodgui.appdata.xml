@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+ <id type="desktop">eqmodgui.desktop</id>
+ <licence>CC0</licence>
+ <description>
+  <p>
+   Eqmodgui is a user interface for INDI Eqmod telescope driver.
+   It allow to easily set the main parameters require to use this driver
+   and manage the alignement data.
+  </p>
+ </description>
+ <screenshots>
+  <screenshot type="default" width="800" height="600">http://a.fsdn.com/con/app/proj/eqmodgui/screenshots/eqmodgui.png</screenshot>
+ </screenshots>
+ <url type="homepage">http://sourceforge.net/projects/eqmodgui/</url>
+ <updatecontact>pch@ap-i.net</updatecontact>
+</application>

@@ -1,0 +1,16 @@
+
+Copyright: 2015 Patrick Chevalley <pch@ap-i.net>
+
+Information :
+Name        : eqmodgui
+Version     : 0.0
+Release     : 1
+Group       : Sciences/Astronomy
+License     : GPL-3
+Packager    : Patrick Chevalley
+URL         : http://eqmodgui.sourceforge.net
+Summary     : User interface for INDI Eqmod telescope driver 
+Description :
+Eqmodgui is a user interface for INDI Eqmod telescope driver.
+It allow to easily set the main parameters require to use this driver and manage the alignement data.
+
