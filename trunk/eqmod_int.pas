@@ -97,7 +97,7 @@ T_indieqmod = class(TIndiBaseClient)
    configprop: ISwitchVectorProperty;
    configload,configsave,configdefault: ISwitch;
    eod_coord:  boolean;
-   Fready,Fconnected: boolean;
+   Fready,Fconnected,FAutoloadConfig: boolean;
    Findiserver, Findiserverport, Findidevice, Findideviceport: string;
    FSimulation: Boolean;
    FSlewPreset: TStringList;
@@ -194,6 +194,7 @@ T_indieqmod = class(TIndiBaseClient)
    property indiserverport: string read Findiserverport write Findiserverport;
    property indidevice: string read Findidevice write Findidevice;
    property indideviceport: string read Findideviceport write Findideviceport;
+   property AutoloadConfig: boolean read FAutoloadConfig write FAutoloadConfig;
    property Status: TDeviceStatus read FStatus;
    property Simulation: Boolean read FSimulation write FSimulation;
    property RA: double read GetRA;
@@ -365,6 +366,9 @@ begin
        FStatus := devConnected;
        if (not Fready) and Assigned(FonStatusChange) then FonStatusChange(self);
        Fready:=true;
+       if FAutoloadConfig then begin
+         LoadConfig;
+       end;
     end;
 end;
 
