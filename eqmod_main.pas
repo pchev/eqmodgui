@@ -179,7 +179,7 @@ type
     f_indigui: Tf_indigui;
     config: TCCDconfig;
     configfile,indiserver,indiserverport,indidevice,indideviceport:string;
-    ready, GUIready, indisimulation, obslock: boolean;
+    ready, GUIready, indisimulation, indiloadconfig, obslock: boolean;
     TrackMode: TTrackMode;
     ObsLat, ObsLon, ObsElev: double;
     procedure ReadConfig;
@@ -275,6 +275,7 @@ begin
  indidevice:=config.GetValue('/INDI/device','EQMod Mount');
  indideviceport:=config.GetValue('/INDI/deviceport','/dev/ttyUSB0');
  indisimulation:=config.GetValue('/INDI/simulation',false);
+ indiloadconfig:=config.GetValue('/INDI/AutoLoadConfig',true);
  SiteName.Clear;
  n:=config.GetValue('/Site/Number',0);
  for i:=1 to n do begin
@@ -311,6 +312,7 @@ begin
    if indiserverport<>'' then eqmod.indiserverport:=indiserverport;
    if indidevice<>'' then eqmod.indidevice:=indidevice;
    eqmod.indideviceport:=indideviceport;
+   eqmod.AutoloadConfig:=indiloadconfig;
    eqmod.simulation:=indisimulation;
    eqmod.Connect;
    ready:=true;
@@ -324,14 +326,17 @@ begin
    f_eqmodsetup.Server.Text:=config.GetValue('/INDI/server','localhost');
    f_eqmodsetup.Serverport.Text:=config.GetValue('/INDI/serverport','7624');
    f_eqmodsetup.Port.Text:=config.GetValue('/INDI/deviceport','/dev/ttyUSB0');
+   f_eqmodsetup.AutoLoadConfig.Checked:=config.GetValue('/INDI/AutoLoadConfig',true);
    f_eqmodsetup.Sim.Checked:=config.GetValue('/INDI/simulation',false);
    f_eqmodsetup.ShowModal;
    if f_eqmodsetup.ModalResult=mrOK then begin
       config.SetValue('/INDI/server',f_eqmodsetup.Server.Text);
       config.SetValue('/INDI/serverport',f_eqmodsetup.Serverport.Text);
       config.SetValue('/INDI/deviceport',f_eqmodsetup.Port.Text);
+      config.SetValue('/INDI/AutoLoadConfig',f_eqmodsetup.AutoLoadConfig.Checked);
       config.SetValue('/INDI/simulation',f_eqmodsetup.Sim.Checked);
       config.Flush;
+      ReadConfig;
       Connect;
    end;
  end;
