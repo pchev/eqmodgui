@@ -284,7 +284,7 @@ object f_eqmod: Tf_eqmod
           Width = 154
           Align = alClient
           Alignment = taCenter
-          Caption = 'EQMod Mount'#10'Version 0.0.1'
+          Caption = 'EQMod Mount'#10'Version 0.0.0'
           Font.Color = clRed
           Font.Height = -16
           Font.Style = [fsBold]
