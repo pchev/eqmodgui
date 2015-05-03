@@ -22,8 +22,6 @@ install -m 755 -d $destdir/share/icons
 install -m 755 -d $destdir/share/icons/hicolor
 install -m 755 -d $destdir/share/icons/hicolor/48x48
 install -m 755 -d $destdir/share/icons/hicolor/48x48/apps
-install -m 755 -d $destdir/share/icons/hicolor/scalable
-install -m 755 -d $destdir/share/icons/hicolor/scalable/apps
 
 install -v -m 755 -s eqmodgui  $destdir/bin/eqmodgui
 install -v -m 644 system_integration/Linux/share/applications/eqmodgui.desktop $destdir/share/applications/eqmodgui.desktop
