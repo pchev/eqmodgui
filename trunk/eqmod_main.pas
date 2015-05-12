@@ -146,6 +146,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure BtnTrackPaint(Sender: TObject);
     procedure ElevationChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure LatChange(Sender: TObject);
     procedure LatKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure LongChange(Sender: TObject);
@@ -254,16 +255,22 @@ begin
  StaticText1.Caption:='EQMod Mount'+crlf+eq_version;
 end;
 
-procedure Tf_eqmod.FormDestroy(Sender: TObject);
-begin
-  eqmod.Terminate;
-  config.Free;
-end;
-
 procedure Tf_eqmod.FormShow(Sender: TObject);
 begin
   ReadConfig;
   Connect;
+end;
+
+procedure Tf_eqmod.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  eqmod.Terminate;
+
+end;
+
+procedure Tf_eqmod.FormDestroy(Sender: TObject);
+begin
+  eqmod.Free;
+  config.Free;
 end;
 
 procedure Tf_eqmod.ReadConfig;
@@ -324,6 +331,7 @@ begin
  if not ready then begin
    f_eqmodsetup:=Tf_eqmodsetup.Create(self);
    f_eqmodsetup.Server.Text:=config.GetValue('/INDI/server','localhost');
+   f_eqmodsetup.Driver.Text:=config.GetValue('/INDI/device','EQMod Mount');
    f_eqmodsetup.Serverport.Text:=config.GetValue('/INDI/serverport','7624');
    f_eqmodsetup.Port.Text:=config.GetValue('/INDI/deviceport','/dev/ttyUSB0');
    f_eqmodsetup.AutoLoadConfig.Checked:=config.GetValue('/INDI/AutoLoadConfig',true);
@@ -331,6 +339,7 @@ begin
    f_eqmodsetup.ShowModal;
    if f_eqmodsetup.ModalResult=mrOK then begin
       config.SetValue('/INDI/server',f_eqmodsetup.Server.Text);
+      config.SetValue('/INDI/device',f_eqmodsetup.Driver.Text);
       config.SetValue('/INDI/serverport',f_eqmodsetup.Serverport.Text);
       config.SetValue('/INDI/deviceport',f_eqmodsetup.Port.Text);
       config.SetValue('/INDI/AutoLoadConfig',f_eqmodsetup.AutoLoadConfig.Checked);

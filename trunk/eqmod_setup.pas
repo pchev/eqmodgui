@@ -35,6 +35,8 @@ type
   Tf_eqmodsetup = class(TForm)
     Button1: TButton;
     AutoLoadConfig: TCheckBox;
+    Driver: TEdit;
+    Label3: TLabel;
     Server: TEdit;
     Serverport: TEdit;
     Label2: TLabel;
