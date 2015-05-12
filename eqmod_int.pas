@@ -132,6 +132,8 @@ T_indieqmod = class(TIndiBaseClient)
    procedure NewText(tvp: ITextVectorProperty);
    procedure NewSwitch(svp: ISwitchVectorProperty);
    procedure NewLight(lvp: ILightVectorProperty);
+   procedure DeleteDevice(dp: Basedevice);
+   procedure DeleteProperty(indiProp: IndiProperty);
    procedure ServerConnected(Sender: TObject);
    procedure ServerDisconnected(Sender: TObject);
    function  GetRA:double;
@@ -273,6 +275,8 @@ begin
  onNewText:=@NewText;
  onNewSwitch:=@NewSwitch;
  onNewLight:=@NewLight;
+ onDeleteDevice:=@DeleteDevice;
+ onDeleteProperty:=@DeleteProperty;
  onServerConnected:=@ServerConnected;
  onServerDisconnected:=@ServerDisconnected;
 end;
@@ -469,6 +473,18 @@ begin
      Fconnected:=true;
      MountDevice:=dp;
   end;
+end;
+
+procedure T_indieqmod.DeleteDevice(dp: Basedevice);
+begin
+  if dp.getDeviceName=Findidevice then begin
+     Disconnect;
+  end;
+end;
+
+procedure T_indieqmod.DeleteProperty(indiProp: IndiProperty);
+begin
+  { TODO :  check if a vital property is removed ? }
 end;
 
 procedure T_indieqmod.NewMessage(txt: string);
