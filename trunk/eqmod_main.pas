@@ -264,12 +264,13 @@ end;
 procedure Tf_eqmod.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   eqmod.Terminate;
-
+  Application.ProcessMessages;
+  sleep(500);
+  Application.ProcessMessages;
 end;
 
 procedure Tf_eqmod.FormDestroy(Sender: TObject);
 begin
-  eqmod.Free;
   config.Free;
 end;
 
@@ -328,7 +329,11 @@ end;
 
 procedure Tf_eqmod.IndiSetupClick(Sender: TObject);
 begin
- if not ready then begin
+ if ready then begin
+    if MessageDlg('Disconnect from the server?',mtConfirmation,mbYesNo,0)=mrYes then begin
+      eqmod.Disconnect;
+    end;
+ end else begin
    f_eqmodsetup:=Tf_eqmodsetup.Create(self);
    f_eqmodsetup.Server.Text:=config.GetValue('/INDI/server','localhost');
    f_eqmodsetup.Driver.Text:=config.GetValue('/INDI/device','EQMod Mount');
@@ -421,15 +426,18 @@ begin
 case eqmod.Status of
   devDisconnected:begin
                       led.Brush.Color:=clRed;
+                      IndiSetup.Caption:='Connect';
                       ready:=false;
                   end;
   devConnecting:  begin
                       NewMessage('Connecting mount...');
                       led.Brush.Color:=clOrange;
+                      IndiSetup.Caption:='Connecting';
                    end;
   devConnected:   begin
                       NewMessage('Mount connected');
                       led.Brush.Color:=clGreen;
+                      IndiSetup.Caption:='Disconnect';
                       CoordChange(Sender);
                       LSTChange(Sender);
                       PierSideChange(Sender);
@@ -894,10 +902,15 @@ end;
 
 procedure Tf_eqmod.BtnLoadAlignClick(Sender: TObject);
 var fn,site: string;
+    npoint: integer;
 begin
   fn:=ExpandFileNameUTF8('~/.indi');
   site:=trim(SiteName.Text);
   fn:=fn+'/AlignData'+site+'.xml';
+  npoint:=StrToIntDef(AlignPoints.Text,0);
+  if npoint>0 then begin
+    if MessageDlg('Load alignment data','Replace the current alignment points by the content of the file '+fn+' ?',mtConfirmation,mbYesNo,0)<>mrYes then exit;
+  end;
   eqmod.LoadAlignment(fn);
 end;
 
