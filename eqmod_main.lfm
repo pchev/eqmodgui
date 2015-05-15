@@ -1,14 +1,15 @@
 object f_eqmod: Tf_eqmod
-  Left = 96
-  Height = 580
-  Top = 0
+  Left = 79
+  Height = 591
+  Top = 17
   Width = 484
   ActiveControl = Panel1
   Caption = 'EQMod Mount'
-  ClientHeight = 580
+  ClientHeight = 591
   ClientWidth = 484
   Color = clBlack
   Font.Color = clRed
+  OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
@@ -937,6 +938,7 @@ object f_eqmod: Tf_eqmod
           Font.Color = clRed
           ParentColor = True
           ParentFont = False
+          ReadOnly = True
           TabOrder = 0
         end
         object Label8: TLabel
@@ -956,6 +958,7 @@ object f_eqmod: Tf_eqmod
           Font.Color = clRed
           ParentColor = True
           ParentFont = False
+          ReadOnly = True
           TabOrder = 1
         end
         object Label7: TLabel
@@ -1018,12 +1021,12 @@ object f_eqmod: Tf_eqmod
       Shape = stCircle
     end
     object IndiSetup: TSpeedButton
-      Left = 96
+      Left = 86
       Height = 22
       Hint = 'Basic driver settings'
       Top = 54
-      Width = 54
-      Caption = 'Setup'
+      Width = 78
+      Caption = 'Connect'
       OnClick = IndiSetupClick
       ParentFont = False
     end
@@ -1290,6 +1293,7 @@ object f_eqmod: Tf_eqmod
         Top = 4
         Width = 44
         ParentColor = True
+        ReadOnly = True
         TabOrder = 0
       end
       object Label14: TLabel
@@ -1307,6 +1311,7 @@ object f_eqmod: Tf_eqmod
         Top = 4
         Width = 45
         ParentColor = True
+        ReadOnly = True
         TabOrder = 1
       end
       object BtnClearDelta: TSpeedButton
@@ -1333,6 +1338,7 @@ object f_eqmod: Tf_eqmod
         Top = 36
         Width = 65
         ParentColor = True
+        ReadOnly = True
         TabOrder = 2
       end
       object Label16: TLabel
@@ -1350,6 +1356,7 @@ object f_eqmod: Tf_eqmod
         Top = 36
         Width = 65
         ParentColor = True
+        ReadOnly = True
         TabOrder = 3
       end
       object Label17: TLabel
@@ -1483,11 +1490,11 @@ object f_eqmod: Tf_eqmod
     end
     object GroupBox11: TGroupBox
       Left = 0
-      Height = 150
+      Height = 160
       Top = 424
       Width = 248
       Caption = 'Other Settings'
-      ClientHeight = 134
+      ClientHeight = 144
       ClientWidth = 246
       TabOrder = 2
       object BtnINDIgui: TButton
