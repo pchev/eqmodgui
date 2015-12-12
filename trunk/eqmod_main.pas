@@ -414,7 +414,6 @@ begin
   msg.Lines.Add(FormatDateTime('hh:nn:ss',now)+':'+txt);
   msg.SelStart:=msg.GetTextLen-1;
   msg.SelLength:=0;
-  msg.ScrollBy(0,msg.Lines.Count);
  { if LogToFile then begin
     WriteLog(msg);
   end;  }
