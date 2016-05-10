@@ -83,6 +83,9 @@ T_indieqmod = class(TIndiBaseClient)
    geo_lat:  INumber;
    geo_lon:  INumber;
    geo_ele:  INumber;
+   guide_rate: INumberVectorProperty;
+   guide_rateNS:  INumber;
+   guide_rateWE:  INumber;
    AlignCount: INumberVectorProperty;
    AlignCountPoint,AlignCountTriangle: INumber;
    StandardSync: INumberVectorProperty;
@@ -115,6 +118,7 @@ T_indieqmod = class(TIndiBaseClient)
    FonTrackModeChange: TNotifyEvent;
    FonTrackRateChange:TNotifyEvent;
    FonParkChange:TNotifyEvent;
+   FonGuideRateChange:TNotifyEvent;
    FonGeoCoordChange:TNotifyEvent;
    FonAlignCountChange: TNotifyEvent;
    FonSyncDeltaChange: TNotifyEvent;
@@ -165,6 +169,10 @@ T_indieqmod = class(TIndiBaseClient)
    function  GetLatitude: double;
    function  GetLongitude: double;
    function  GetElevation: double;
+   function  GetRAGuideRate:double;
+   procedure SetRAGuideRate(value:double);
+   function  GetDEGuideRate:double;
+   procedure SetDEGuideRate(value:double);
    function  GetPointCount: integer;
    function  GetTriangleCount: integer;
    function  GetDeltaRa: double;
@@ -222,6 +230,8 @@ T_indieqmod = class(TIndiBaseClient)
    property Latitude: double read GetLatitude;
    property Longitude: double read GetLongitude;
    property Elevation: double read GetElevation;
+   property RAGuideRate: double read GetRAGuideRate write SetRAGuideRate;
+   property DEGuideRate: double read GetDEGuideRate write SetDEGuideRate;
    property PointCount: integer read GetPointCount;
    property TriangleCount: integer read GetTriangleCount;
    property DeltaRa: double read GetDeltaRa;
@@ -245,6 +255,7 @@ T_indieqmod = class(TIndiBaseClient)
    property onTrackRateChange: TNotifyEvent read FonTrackRateChange write FonTrackRateChange;
    property onParkChange: TNotifyEvent read FonParkChange write FonParkChange;
    property onGeoCoordChange:TNotifyEvent read FonGeoCoordChange write FonGeoCoordChange;
+   property onGuideRateChange:TNotifyEvent read FonGuideRateChange write FonGuideRateChange;
    property onAlignCountChange:TNotifyEvent read FonAlignCountChange write FonAlignCountChange;
    property onSyncDeltaChange: TNotifyEvent read FonSyncDeltaChange write FonSyncDeltaChange;
    property onAlignmentModeChange: TNotifyEvent read FonAlignmentModeChange write FonAlignmentModeChange;
@@ -322,6 +333,7 @@ begin
     CoordSet:=nil;
     Park_opt:=nil;
     geo_coord:=nil;
+    guide_rate:=nil;
     AlignCount:=nil;
     StandardSync:=nil;
     AlignMode:=nil;
@@ -357,6 +369,7 @@ begin
        (SlewMode<>nil) and
        (SlewSpeed<>nil) and
        (Park_opt<>nil) and
+       (guide_rate<>nil) and
        (geo_coord<>nil) and
        (AlignCount<>nil) and
        (StandardSync<>nil) and
@@ -396,6 +409,7 @@ if Fconnected then begin
    if (SlewSpeed=nil) then Result:=Result+'SLEWSPEEDS, ';
    if (Park_opt=nil) then Result:=Result+'TELESCOPE_PARK, ';
    if (geo_coord=nil) then Result:=Result+'GEOGRAPHIC_COORD, ';
+   if (guide_rate=nil) then Result:=Result+'GUIDE_RATE, ';
    if (AlignCount=nil) then Result:=Result+'ALIGNCOUNT, ';
    if (StandardSync=nil) then Result:=Result+'STANDARDSYNC, ';
    if (AlignMode=nil) then Result:=Result+'ALIGNMODE, ';
@@ -603,6 +617,13 @@ begin
      geo_ele:=IUFindNumber(geo_coord,'ELEV');
      if (geo_lat=nil)or(geo_lon=nil)or(geo_ele=nil) then geo_coord:=nil;
   end
+  else if (proptype=INDI_NUMBER)and(propname='GUIDE_RATE') then begin
+     guide_rate:=indiProp.getNumber;
+     guide_rateNS:=IUFindNumber(guide_rate,'GUIDE_RATE_NS');
+     guide_rateWE:=IUFindNumber(guide_rate,'GUIDE_RATE_WE');
+     if (guide_rateNS=nil)or(guide_rateWE=nil) then guide_rate:=nil;
+     if Assigned(FonGuideRateChange) then FonGuideRateChange(self);
+  end
   else if (proptype=INDI_SWITCH)and(propname='ALIGNMODE') then begin
      AlignMode:=indiProp.getSwitch;
      for i:=0 to AlignMode.nsp-1 do begin
@@ -668,6 +689,8 @@ begin
      if Assigned(FonTrackRateChange) then FonTrackRateChange(self);
   end else if nvp=geo_coord then begin
      if Assigned(FonGeoCoordChange) then FonGeoCoordChange(self);
+  end else if nvp=guide_rate then begin
+     if Assigned(FonGuideRateChange) then FonGuideRateChange(self);
   end else if nvp=AlignCount then begin
      if Assigned(FonAlignCountChange) then FonAlignCountChange(self);
   end else if nvp=StandardSync then begin
@@ -1152,6 +1175,37 @@ begin
    sendNewSwitch(Park_opt);
  end;
 end;
+
+function  T_indieqmod.GetRAGuideRate:double;
+begin
+ if guide_rate<>nil then begin
+    result:=guide_rateWE.value;
+ end;
+end;
+
+procedure T_indieqmod.SetRAGuideRate(value:double);
+begin
+ if guide_rate<>nil then begin
+    guide_rateWE.value:=value;
+    sendNewNumber(guide_rate);
+ end;
+end;
+
+function  T_indieqmod.GetDEGuideRate:double;
+begin
+ if guide_rate<>nil then begin
+    result:=guide_rateNS.value;
+ end;
+end;
+
+procedure T_indieqmod.SetDEGuideRate(value:double);
+begin
+ if guide_rate<>nil then begin
+    guide_rateNS.value:=value;
+    sendNewNumber(guide_rate);
+ end;
+end;
+
 
 end.
 
