@@ -27,7 +27,7 @@ interface
 
 uses eqmod_int, eqmod_setup, pu_indigui, u_utils,
   u_ccdconfig, XMLConf, DOM,
-  Classes, SysUtils, FileUtil, Forms, Controls, LCLType,
+  Classes, SysUtils, LazFileUtils, Forms, Controls, LCLType,
   Graphics, Dialogs, ExtCtrls, StdCtrls, Buttons, ComCtrls;
 
 type
@@ -41,9 +41,14 @@ type
     BtnSaveIndiSettings: TSpeedButton;
     BtnSaveSite2: TSpeedButton;
     BtnLoadAlign: TSpeedButton;
+    BtnSetGuideRate: TSpeedButton;
+    GroupBox8: TGroupBox;
+    Label20: TLabel;
+    Label21: TLabel;
     LastMsg: TEdit;
     Label19: TLabel;
     LblPark: TLabel;
+    PanelGuideRate: TPanel;
     SyncModeCombo: TComboBox;
     AlignModeCombo: TComboBox;
     DeltaRa: TEdit;
@@ -111,6 +116,7 @@ type
     BtnSaveSite: TSpeedButton;
     SetSite: TSpeedButton;
     TrackDEC: TEdit;
+    GuideDEC: TEdit;
     TRackRA: TEdit;
     RA: TEdit;
     GroupBox1: TGroupBox;
@@ -130,6 +136,7 @@ type
     TopPanel: TPanel;
     IndiBtn: TPanel;
     TitlePanel: TPanel;
+    GuideRA: TEdit;
     procedure AlignModeComboChange(Sender: TObject);
     procedure BtnClearAlignmentClick(Sender: TObject);
     procedure BtnClearDeltaClick(Sender: TObject);
@@ -142,6 +149,7 @@ type
     procedure BtnSaveAlignClick(Sender: TObject);
     procedure BtnSaveIndiSettingsClick(Sender: TObject);
     procedure BtnSaveSiteClick(Sender: TObject);
+    procedure BtnSetGuideRateClick(Sender: TObject);
     procedure BtnSouthMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure BtnTrackPaint(Sender: TObject);
@@ -202,6 +210,7 @@ type
     procedure TrackRateChange(Sender: TObject);
     procedure ParkChange(Sender: TObject);
     procedure GeoCoordChange(Sender: TObject);
+    procedure GuideRateChange(Sender: TObject);
     procedure ShowObsCoord;
     procedure AlignCountChange(Sender: TObject);
     procedure SyncDeltaChange(Sender: TObject);
@@ -274,6 +283,29 @@ begin
   config.Free;
 end;
 
+
+procedure Tf_eqmod.StaticText1Click(Sender: TObject);
+var aboutmsg: string;
+begin
+  aboutmsg:='EQMod Mount '+crlf;
+  aboutmsg:=aboutmsg+eq_version+'-'+RevisionStr+' '+compile_time+crlf;
+  aboutmsg:=aboutmsg+'Compiled with:'+crlf;
+  aboutmsg:=aboutmsg+' '+compile_version+crlf+crlf;
+  aboutmsg:=aboutmsg+'Copyright (C) 2015 Patrick Chevalley'+crlf;
+  aboutmsg:=aboutmsg+'pch@ap-i.net , http://www.ap-i.net'+crlf+crlf;
+  aboutmsg:=aboutmsg+'This program is free software; you can redistribute it and/or'+crlf;
+  aboutmsg:=aboutmsg+'modify it under the terms of the GNU General Public License'+crlf;
+  aboutmsg:=aboutmsg+'as published by the Free Software Foundation; either version 3'+crlf;
+  aboutmsg:=aboutmsg+'of the License, or (at your option) any later version.'+crlf+crlf;
+  aboutmsg:=aboutmsg+'Notice:'+crlf;
+  aboutmsg:=aboutmsg+'This software as nothing to do with ASCOM Eqmod.'+crlf;
+  aboutmsg:=aboutmsg+'In case of problem with the GUI you can contact the author'+crlf;
+  aboutmsg:=aboutmsg+'mentioned above.'+crlf;
+  aboutmsg:=aboutmsg+'In case of problem with the INDI eqmod driver'+crlf;
+  aboutmsg:=aboutmsg+'look at http://www.indilib.org/'+crlf;
+  ShowMessage(aboutmsg);
+end;
+
 procedure Tf_eqmod.ReadConfig;
 var n,i: integer;
   buf: string;
@@ -312,6 +344,7 @@ begin
    eqmod.onTrackRateChange:=@TrackRateChange;
    eqmod.onParkChange:=@ParkChange;
    eqmod.onGeoCoordChange:=@GeoCoordChange;
+   eqmod.onGuideRateChange:=@GuideRateChange;
    eqmod.onAlignCountChange:=@AlignCountChange;
    eqmod.onSyncDeltaChange:=@SyncDeltaChange;
    eqmod.onSyncModeChange:=@SyncModeChange;
@@ -639,28 +672,6 @@ if (x>-99999)and(y>=-99999) then begin
 end;
 end;
 
-procedure Tf_eqmod.StaticText1Click(Sender: TObject);
-var aboutmsg: string;
-begin
-  aboutmsg:='EQMod Mount '+crlf;
-  aboutmsg:=aboutmsg+eq_version+'-'+RevisionStr+' '+compile_time+crlf;
-  aboutmsg:=aboutmsg+'Compiled with:'+crlf;
-  aboutmsg:=aboutmsg+' '+compile_version+crlf+crlf;
-  aboutmsg:=aboutmsg+'Copyright (C) 2015 Patrick Chevalley'+crlf;
-  aboutmsg:=aboutmsg+'pch@ap-i.net , http://www.ap-i.net'+crlf+crlf;
-  aboutmsg:=aboutmsg+'This program is free software; you can redistribute it and/or'+crlf;
-  aboutmsg:=aboutmsg+'modify it under the terms of the GNU General Public License'+crlf;
-  aboutmsg:=aboutmsg+'as published by the Free Software Foundation; either version 3'+crlf;
-  aboutmsg:=aboutmsg+'of the License, or (at your option) any later version.'+crlf+crlf;
-  aboutmsg:=aboutmsg+'Notice:'+crlf;
-  aboutmsg:=aboutmsg+'This software as nothing to do with ASCOM Eqmod.'+crlf;
-  aboutmsg:=aboutmsg+'In case of problem with the GUI you can contact the author'+crlf;
-  aboutmsg:=aboutmsg+'mentioned above.'+crlf;
-  aboutmsg:=aboutmsg+'In case of problem with the INDI eqmod driver'+crlf;
-  aboutmsg:=aboutmsg+'look at http://www.indilib.org/'+crlf;
-  ShowMessage(aboutmsg);
-end;
-
 Procedure Tf_eqmod.TrackRateChange(Sender: TObject);
 begin
   if ActiveControl<>TRackRA then
@@ -948,6 +959,30 @@ procedure Tf_eqmod.AlignModeComboChange(Sender: TObject);
 begin
   eqmod.ActiveAlignmentMode:=AlignModeCombo.ItemIndex
 end;
+
+//////////////////  Guide rate  box ////////////////////////
+
+procedure Tf_eqmod.GuideRateChange(Sender: TObject);
+var gra,gde: double;
+begin
+  gra:=eqmod.RAGuideRate;
+  gde:=eqmod.DEGuideRate;
+  GuideRA.Text:=FormatFloat(f1,gra);
+  GuideDEC.Text:=FormatFloat(f1,gde);
+end;
+
+procedure Tf_eqmod.BtnSetGuideRateClick(Sender: TObject);
+var gra,gde: double;
+    n:integer;
+begin
+  val(GuideRA.Text,gra,n);
+  if n<>0 then exit;
+  val(GuideDEC.Text,gde,n);
+  if n<>0 then exit;
+  eqmod.RAGuideRate:=gra;
+  eqmod.DEGuideRate:=gde;
+end;
+
 
 
 end.
