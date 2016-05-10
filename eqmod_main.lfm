@@ -14,7 +14,7 @@ object f_eqmod: Tf_eqmod
   OnDestroy = FormDestroy
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '1.6.0.3'
   Visible = False
   object Panel1: TPanel
     Left = 0
@@ -31,7 +31,7 @@ object f_eqmod: Tf_eqmod
       Top = 520
       Width = 220
       Caption = 'Park'
-      ClientHeight = 49
+      ClientHeight = 47
       ClientWidth = 218
       TabOrder = 4
       object BtnPark: TSpeedButton
@@ -47,7 +47,7 @@ object f_eqmod: Tf_eqmod
       end
       object LblPark: TLabel
         Left = 24
-        Height = 15
+        Height = 17
         Top = 0
         Width = 32
         Caption = '        '
@@ -60,7 +60,7 @@ object f_eqmod: Tf_eqmod
       Top = 280
       Width = 220
       Caption = 'Slew Controls'
-      ClientHeight = 126
+      ClientHeight = 124
       ClientWidth = 218
       TabOrder = 2
       object BtnNorth: TSpeedButton
@@ -188,6 +188,8 @@ object f_eqmod: Tf_eqmod
         BevelOuter = bvSpace
         ClientHeight = 80
         ClientWidth = 114
+        Color = clGray
+        ParentColor = False
         TabOrder = 0
         Visible = False
         object RArate: TTrackBar
@@ -234,7 +236,7 @@ object f_eqmod: Tf_eqmod
         Height = 24
         Hint = 'Revert declination direction'
         Top = 82
-        Width = 79
+        Width = 82
         Caption = 'Rev. DEC'
         OnChange = ReverseDecChange
         TabOrder = 2
@@ -335,12 +337,12 @@ object f_eqmod: Tf_eqmod
           Width = 218
           Align = alClient
           Caption = 'Mount Position'
-          ClientHeight = 190
+          ClientHeight = 188
           ClientWidth = 216
           TabOrder = 0
           object LastMsg: TEdit
             Left = 8
-            Height = 21
+            Height = 23
             Hint = 'Last message from the driver'
             Top = 150
             Width = 200
@@ -479,7 +481,7 @@ object f_eqmod: Tf_eqmod
           end
           object PierSide: TEdit
             Left = 96
-            Height = 21
+            Height = 23
             Hint = 'Side of pier'
             Top = 129
             Width = 112
@@ -491,9 +493,9 @@ object f_eqmod: Tf_eqmod
           end
           object Label6: TLabel
             Left = 21
-            Height = 15
+            Height = 17
             Top = 132
-            Width = 62
+            Width = 65
             Caption = 'Pier side'
             Font.Color = clRed
             Font.Style = [fsBold]
@@ -510,7 +512,7 @@ object f_eqmod: Tf_eqmod
           Width = 218
           Align = alClient
           Caption = 'Messages'
-          ClientHeight = 190
+          ClientHeight = 188
           ClientWidth = 216
           TabOrder = 0
           object msg: TMemo
@@ -536,7 +538,7 @@ object f_eqmod: Tf_eqmod
       Top = 424
       Width = 220
       Caption = 'Track Rate:'
-      ClientHeight = 80
+      ClientHeight = 78
       ClientWidth = 218
       TabOrder = 3
       object Panel4: TPanel
@@ -932,7 +934,7 @@ object f_eqmod: Tf_eqmod
         Visible = False
         object TrackDEC: TEdit
           Left = 124
-          Height = 21
+          Height = 23
           Hint = 'Custom DEC track speed'
           Top = 4
           Width = 62
@@ -944,15 +946,15 @@ object f_eqmod: Tf_eqmod
         end
         object Label8: TLabel
           Left = 98
-          Height = 15
+          Height = 17
           Top = 7
-          Width = 29
+          Width = 31
           Caption = 'DEC '
           ParentColor = False
         end
         object TRackRA: TEdit
           Left = 22
-          Height = 21
+          Height = 23
           Hint = 'Custom RA track speed'
           Top = 4
           Width = 73
@@ -964,7 +966,7 @@ object f_eqmod: Tf_eqmod
         end
         object Label7: TLabel
           Left = 2
-          Height = 15
+          Height = 17
           Top = 7
           Width = 20
           Caption = 'RA '
@@ -1048,7 +1050,7 @@ object f_eqmod: Tf_eqmod
       Top = 0
       Width = 248
       Caption = 'Site Information'
-      ClientHeight = 193
+      ClientHeight = 191
       ClientWidth = 246
       TabOrder = 0
       object BtnSaveSite: TSpeedButton
@@ -1097,7 +1099,7 @@ object f_eqmod: Tf_eqmod
       end
       object SiteName: TComboBox
         Left = 92
-        Height = 27
+        Height = 29
         Hint = 'Site name'
         Top = 3
         Width = 147
@@ -1108,25 +1110,25 @@ object f_eqmod: Tf_eqmod
       end
       object Label9: TLabel
         Left = 4
-        Height = 15
+        Height = 17
         Top = 40
-        Width = 51
+        Width = 52
         Caption = 'Latitude'
         ParentColor = False
       end
       object Label10: TLabel
         Left = 4
-        Height = 15
+        Height = 17
         Top = 72
-        Width = 62
+        Width = 63
         Caption = 'Longitude'
         ParentColor = False
       end
       object Label11: TLabel
         Left = 4
-        Height = 15
+        Height = 17
         Top = 102
-        Width = 57
+        Width = 58
         Caption = 'Elevation'
         ParentColor = False
       end
@@ -1150,7 +1152,7 @@ object f_eqmod: Tf_eqmod
       end
       object LatDeg: TEdit
         Left = 130
-        Height = 21
+        Height = 23
         Top = 35
         Width = 32
         OnExit = LatChange
@@ -1161,7 +1163,7 @@ object f_eqmod: Tf_eqmod
       end
       object LatMin: TEdit
         Left = 165
-        Height = 21
+        Height = 23
         Top = 35
         Width = 32
         OnExit = LatChange
@@ -1172,7 +1174,7 @@ object f_eqmod: Tf_eqmod
       end
       object LatSec: TEdit
         Left = 201
-        Height = 21
+        Height = 23
         Top = 35
         Width = 38
         OnExit = LatChange
@@ -1183,9 +1185,9 @@ object f_eqmod: Tf_eqmod
       end
       object Label12: TLabel
         Left = 4
-        Height = 15
+        Height = 17
         Top = 5
-        Width = 36
+        Width = 39
         Caption = 'Name'
         ParentColor = False
       end
@@ -1209,7 +1211,7 @@ object f_eqmod: Tf_eqmod
       end
       object LongDeg: TEdit
         Left = 130
-        Height = 21
+        Height = 23
         Top = 72
         Width = 32
         OnExit = LongChange
@@ -1220,7 +1222,7 @@ object f_eqmod: Tf_eqmod
       end
       object LongMin: TEdit
         Left = 165
-        Height = 21
+        Height = 23
         Top = 72
         Width = 32
         OnExit = LongChange
@@ -1231,7 +1233,7 @@ object f_eqmod: Tf_eqmod
       end
       object LongSec: TEdit
         Left = 201
-        Height = 21
+        Height = 23
         Top = 72
         Width = 38
         OnExit = LongChange
@@ -1242,7 +1244,7 @@ object f_eqmod: Tf_eqmod
       end
       object Elevation: TEdit
         Left = 79
-        Height = 21
+        Height = 23
         Top = 102
         Width = 49
         OnChange = ElevationChange
@@ -1267,7 +1269,7 @@ object f_eqmod: Tf_eqmod
       Top = 212
       Width = 248
       Caption = 'Alignment / Sync'
-      ClientHeight = 194
+      ClientHeight = 192
       ClientWidth = 246
       TabOrder = 1
       object BtnClearAlignment: TSpeedButton
@@ -1281,7 +1283,7 @@ object f_eqmod: Tf_eqmod
       end
       object Label13: TLabel
         Left = 40
-        Height = 15
+        Height = 17
         Top = 6
         Width = 39
         Caption = 'Points'
@@ -1289,7 +1291,7 @@ object f_eqmod: Tf_eqmod
       end
       object AlignPoints: TEdit
         Left = 83
-        Height = 21
+        Height = 23
         Hint = 'Number of alignment points'
         Top = 4
         Width = 44
@@ -1299,7 +1301,7 @@ object f_eqmod: Tf_eqmod
       end
       object Label14: TLabel
         Left = 136
-        Height = 15
+        Height = 17
         Top = 5
         Width = 55
         Caption = 'Triangles'
@@ -1307,7 +1309,7 @@ object f_eqmod: Tf_eqmod
       end
       object AlignTriangles: TEdit
         Left = 192
-        Height = 21
+        Height = 23
         Hint = 'Number of alignment triangles'
         Top = 4
         Width = 45
@@ -1326,7 +1328,7 @@ object f_eqmod: Tf_eqmod
       end
       object Label15: TLabel
         Left = 40
-        Height = 15
+        Height = 17
         Top = 38
         Width = 24
         Caption = 'dRA'
@@ -1334,7 +1336,7 @@ object f_eqmod: Tf_eqmod
       end
       object DeltaRa: TEdit
         Left = 72
-        Height = 21
+        Height = 23
         Hint = 'Current delta RA'
         Top = 36
         Width = 65
@@ -1344,15 +1346,15 @@ object f_eqmod: Tf_eqmod
       end
       object Label16: TLabel
         Left = 144
-        Height = 15
+        Height = 17
         Top = 37
-        Width = 25
+        Width = 26
         Caption = 'dDe'
         ParentColor = False
       end
       object DeltaDe: TEdit
         Left = 176
-        Height = 21
+        Height = 23
         Hint = 'Current delta Dec'
         Top = 36
         Width = 65
@@ -1362,9 +1364,9 @@ object f_eqmod: Tf_eqmod
       end
       object Label17: TLabel
         Left = 8
-        Height = 15
+        Height = 17
         Top = 72
-        Width = 68
+        Width = 72
         Caption = 'Sync mode'
         ParentColor = False
       end
@@ -1382,9 +1384,9 @@ object f_eqmod: Tf_eqmod
       end
       object Label18: TLabel
         Left = 8
-        Height = 15
+        Height = 17
         Top = 123
-        Width = 120
+        Width = 124
         Caption = 'Alignment behavior'
         ParentColor = False
       end
@@ -1495,7 +1497,7 @@ object f_eqmod: Tf_eqmod
       Top = 424
       Width = 248
       Caption = 'Other Settings'
-      ClientHeight = 144
+      ClientHeight = 142
       ClientWidth = 246
       TabOrder = 2
       object BtnINDIgui: TButton

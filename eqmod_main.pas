@@ -180,7 +180,7 @@ type
     f_indigui: Tf_indigui;
     config: TCCDconfig;
     configfile,indiserver,indiserverport,indidevice,indideviceport:string;
-    ready, GUIready, indisimulation, indiloadconfig, obslock: boolean;
+    ready, GUIready, indisimulation, indiloadconfig, obslock, LockRate: boolean;
     TrackMode: TTrackMode;
     ObsLat, ObsLon, ObsElev: double;
     procedure ReadConfig;
@@ -524,11 +524,13 @@ end;
 
 procedure Tf_eqmod.RArateChange(Sender: TObject);
 begin
+  if LockRate then begin  LockRate:=false; exit; end;
   eqmod.RASlewSpeed:=RArate.Position;
 end;
 
 procedure Tf_eqmod.DErateChange(Sender: TObject);
 begin
+  if LockRate then begin  LockRate:=false; exit; end;
   eqmod.DESlewSpeed:=DErate.Position;
 end;
 
@@ -572,7 +574,9 @@ end;
 
 Procedure Tf_eqmod.SlewSpeedChange(Sender: TObject);
 begin
+  LockRate:=true;
   RArate.Position:=eqmod.RASlewSpeed;
+  LockRate:=true;
   DErate.Position:=eqmod.DESlewSpeed;
 end;
 
@@ -589,7 +593,7 @@ end;
 
 procedure Tf_eqmod.SlewPresetChange(Sender: TObject);
 begin
-  PanelSlewRate.Visible:=(SlewPreset.ItemIndex=0);
+  PanelSlewRate.Visible:=(SlewPreset.Text='Custom');
   eqmod.ActiveSlewPreset:=SlewPreset.ItemIndex;
 end;
 
