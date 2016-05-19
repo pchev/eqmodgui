@@ -489,6 +489,10 @@ case eqmod.Status of
                       SyncDeltaChange(Sender);
                       SyncModeChange(Sender);
                       AlignModeChange(Sender);
+                      if indiloadconfig then begin
+                        eqmod.RAGuideRate:=config.GetValue('/Options/RAGuideRate',0.3);
+                        eqmod.DEGuideRate:=config.GetValue('/Options/DEGuideRate',0.3);
+                      end;
                    end;
 end;
 end;
@@ -981,6 +985,9 @@ begin
   if n<>0 then exit;
   eqmod.RAGuideRate:=gra;
   eqmod.DEGuideRate:=gde;
+  config.SetValue('/Options/RAGuideRate',gra);
+  config.SetValue('/Options/DEGuideRate',gde);
+  config.Flush;
 end;
 
 
