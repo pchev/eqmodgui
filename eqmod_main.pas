@@ -27,6 +27,9 @@ interface
 
 uses eqmod_int, eqmod_setup, pu_indigui, u_utils,
   u_ccdconfig, XMLConf, DOM,
+  {$ifdef SDL_SOUND}
+  sdl, sdl_mixer_nosmpeg,
+  {$endif}
   Classes, SysUtils, LazFileUtils, Forms, Controls, LCLType,
   Graphics, Dialogs, ExtCtrls, StdCtrls, Buttons, ComCtrls;
 
@@ -189,7 +192,9 @@ type
     config: TCCDconfig;
     configfile,indiserver,indiserverport,indidevice,indideviceport:string;
     ready, GUIready, indisimulation, indiloadconfig, obslock, LockRate: boolean;
-    TrackMode: TTrackMode;
+    SoundActive, SoundOK:boolean;
+    Appdir, SoundDir: string;
+    TrackMode, RequestTrackMode: TTrackMode;
     ObsLat, ObsLon, ObsElev: double;
     procedure ReadConfig;
     procedure Connect;
@@ -218,6 +223,8 @@ type
     procedure FillAlignMode;
     procedure SyncModeChange(Sender: TObject);
     procedure AlignModeChange(Sender: TObject);
+    procedure AbortMotion(Sender: TObject);
+    procedure PlaySound(fn: string);
   public
     { public declarations }
   end;
@@ -246,6 +253,9 @@ const
 { Tf_eqmod }
 
 procedure Tf_eqmod.FormCreate(Sender: TObject);
+{$ifdef darwin}
+var i: integer;
+{$endif}
 begin
  DefaultFormatSettings.DecimalSeparator:='.';
  Notebook1.PageIndex:=0;
@@ -256,12 +266,33 @@ begin
  GUIready:=false;
  obslock:=false;
  TrackMode:=trStop;
+ RequestTrackMode:=trStop;
  Width:=226;
  lclver:=lcl_version;
  compile_time:={$I %DATE%}+' '+{$I %TIME%};
  compile_version:='Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+LCLPlatformDirNames[WidgetSet.LCLPlatform];
  compile_system:={$I %FPCTARGETOS%};
  StaticText1.Caption:='EQMod Mount'+crlf+eq_version;
+ SoundOK:=false;
+ {$ifdef SDL_SOUND}
+ SoundOK:=(SDL_Init(SDL_INIT_AUDIO)=0);
+ if SoundOK then
+   SoundOK:=(Mix_OpenAudio(16000, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)=0);
+ {$endif}
+ appdir:=ExtractFilePath(ParamStr(0));
+ {$ifdef darwin}
+ i:=pos('.app/',appdir);
+ if i>0 then begin
+    appdir:=ExtractFilePath(copy(appdir,1,i));
+ end;
+ {$endif}
+ SoundDir:=slash(appdir)+'sound';
+ if not FileExists(slash(SoundDir)+'custom.wav') then begin
+   SoundDir:=ExpandFileName(slash(appdir)+slash('..')+slash('share')+slash('eqmodgui')+'sound');
+   if not FileExists(slash(SoundDir)+'custom.wav') then begin
+     SoundOK:=false;
+   end;
+ end;
 end;
 
 procedure Tf_eqmod.FormShow(Sender: TObject);
@@ -272,17 +303,22 @@ end;
 
 procedure Tf_eqmod.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  eqmod.Terminate;
-  Application.ProcessMessages;
-  sleep(500);
-  Application.ProcessMessages;
+  if ready then begin
+    eqmod.Terminate;
+    Application.ProcessMessages;
+    sleep(500);
+    Application.ProcessMessages;
+  end;
+  {$ifdef SDL_SOUND}
+  Mix_CloseAudio;
+  SDL_Quit;
+  {$endif}
 end;
 
 procedure Tf_eqmod.FormDestroy(Sender: TObject);
 begin
   config.Free;
 end;
-
 
 procedure Tf_eqmod.StaticText1Click(Sender: TObject);
 var aboutmsg: string;
@@ -316,6 +352,7 @@ begin
  indideviceport:=config.GetValue('/INDI/deviceport','/dev/ttyUSB0');
  indisimulation:=config.GetValue('/INDI/simulation',false);
  indiloadconfig:=config.GetValue('/INDI/AutoLoadConfig',true);
+ SoundActive:=SoundOK and config.GetValue('/Sound/Active',true);
  SiteName.Clear;
  n:=config.GetValue('/Site/Number',0);
  for i:=1 to n do begin
@@ -348,6 +385,7 @@ begin
    eqmod.onAlignCountChange:=@AlignCountChange;
    eqmod.onSyncDeltaChange:=@SyncDeltaChange;
    eqmod.onSyncModeChange:=@SyncModeChange;
+   eqmod.onAbortMotion:=@AbortMotion;
    eqmod.onAlignmentModeChange:=@AlignModeChange;
    if indiserver<>'' then eqmod.indiserver:=indiserver;
    if indiserverport<>'' then eqmod.indiserverport:=indiserverport;
@@ -368,6 +406,10 @@ begin
     end;
  end else begin
    f_eqmodsetup:=Tf_eqmodsetup.Create(self);
+   {$ifdef SDL_SOUND}
+   f_eqmodsetup.PanelSound.Visible:=true;
+   f_eqmodsetup.SoundCheckBox.Checked:=config.GetValue('/Sound/Active',SoundOK);
+   {$endif}
    f_eqmodsetup.Server.Text:=config.GetValue('/INDI/server','localhost');
    f_eqmodsetup.Driver.Text:=config.GetValue('/INDI/device','EQMod Mount');
    f_eqmodsetup.Serverport.Text:=config.GetValue('/INDI/serverport','7624');
@@ -382,6 +424,7 @@ begin
       config.SetValue('/INDI/deviceport',f_eqmodsetup.Port.Text);
       config.SetValue('/INDI/AutoLoadConfig',f_eqmodsetup.AutoLoadConfig.Checked);
       config.SetValue('/INDI/simulation',f_eqmodsetup.Sim.Checked);
+      config.SetValue('/Sound/Active',f_eqmodsetup.SoundCheckBox.Checked);
       config.Flush;
       ReadConfig;
       Connect;
@@ -632,6 +675,10 @@ procedure Tf_eqmod.SlewPresetChange(Sender: TObject);
 begin
   PanelSlewRate.Visible:=(SlewPreset.Text='Custom');
   eqmod.ActiveSlewPreset:=SlewPreset.ItemIndex;
+  if SlewPreset.ItemIndex<10 then
+    PlaySound('rate'+IntToStr(SlewPreset.ItemIndex+1)+'.wav')
+  else
+    PlaySound('custom.wav');
 end;
 
 //////////////////  Track rate box ////////////////////////
@@ -647,14 +694,27 @@ begin
      BtnTrackCustom.Down:=false;
      PanelCustTrack.Visible:=false;
       case TrackMode of
-        trStop     : BtnTrackStop.Down:=true;
-        trSidereal : BtnTrackSidereal.Down:=true;
-        trLunar    : BtnTrackLunar.Down:=true;
-        trSolar    : BtnTrackSolar.Down:=true;
+        trStop     : begin
+                     BtnTrackStop.Down:=true;
+                     if RequestTrackMode=trStop then PlaySound('stop.wav');
+                     end;
+        trSidereal : begin
+                     BtnTrackSidereal.Down:=true;
+                     PlaySound('sidereal.wav');
+                     end;
+        trLunar    : begin
+                     BtnTrackLunar.Down:=true;
+                     PlaySound('lunar.wav');
+                     end;
+        trSolar    : begin
+                     BtnTrackSolar.Down:=true;
+                     PlaySound('solar.wav');
+                     end;
         trCustom   : begin
-             BtnTrackCustom.Down:=true;
-             PanelCustTrack.Visible:=true;
-             end;
+                     BtnTrackCustom.Down:=true;
+                     PanelCustTrack.Visible:=true;
+                     PlaySound('custom.wav');
+                     end;
       end;
  end;
 end;
@@ -662,7 +722,8 @@ end;
 procedure Tf_eqmod.SetTrackModeClick(Sender: TObject);
 begin
 if sender is TSpeedButton then
-  eqmod.TrackMode:=TTrackMode(TSpeedButton(sender).tag);
+  RequestTrackMode:=TTrackMode(TSpeedButton(sender).tag);
+  eqmod.TrackMode:=RequestTrackMode;
   PanelCustTrack.Visible:=(eqmod.TrackMode=trCustom);
 end;
 
@@ -695,6 +756,11 @@ with (Sender as TSpeedButton) do begin
 end;
 end;
 
+procedure Tf_eqmod.AbortMotion(Sender: TObject);
+begin
+ PlaySound('stop.wav');
+end;
+
 //////////////////  Park/Unpark box ////////////////////////
 
 Procedure Tf_eqmod.ParkChange(Sender: TObject);
@@ -703,10 +769,12 @@ begin
   if eqmod.Park then begin
      BtnPark.Caption:='Unpark';
      LblPark.Caption:='Parked';
+     PlaySound('parked.wav');
   end
   else begin
      BtnPark.Caption:='Park';
      LblPark.Caption:='Unparked';
+     PlaySound('unparked.wav');
   end;
 end;
 
@@ -990,7 +1058,22 @@ begin
   config.Flush;
 end;
 
+//////////////////  Sound ////////////////////////
 
+procedure Tf_eqmod.PlaySound(fn: string);
+{$ifdef SDL_SOUND}
+var sound:PMix_Chunk;
+begin
+ if SoundActive then begin
+   sound:=Mix_LoadWAV(PChar(slash(SoundDir)+fn));
+   Mix_PlayChannel(1, sound, 0);
+   while Mix_Playing(1)=1 do Sleep(100);
+   Mix_FreeChunk(sound);
+ end;
+{$else}
+begin
+{$endif}
+end;
 
 end.
 

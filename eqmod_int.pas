@@ -124,6 +124,7 @@ T_indieqmod = class(TIndiBaseClient)
    FonSyncDeltaChange: TNotifyEvent;
    FonAlignmentModeChange: TNotifyEvent;
    FonSyncModeChange: TNotifyEvent;
+   FonAbortMotion: TNotifyEvent;
    FAlignmentMode: TStringList;
    FSyncMode: TStringList;
    procedure InitTimerTimer(Sender: TObject);
@@ -260,6 +261,7 @@ T_indieqmod = class(TIndiBaseClient)
    property onSyncDeltaChange: TNotifyEvent read FonSyncDeltaChange write FonSyncDeltaChange;
    property onAlignmentModeChange: TNotifyEvent read FonAlignmentModeChange write FonAlignmentModeChange;
    property onSyncModeChange: TNotifyEvent read FonSyncModeChange write FonSyncModeChange;
+   property onAbortMotion: TNotifyEvent read FonAbortMotion write FonAbortMotion;
 end;
 
 implementation
@@ -719,6 +721,8 @@ begin
         if Assigned(FonAlignmentModeChange) then FonAlignmentModeChange(self);
   end else if svp=AlignSyncMode then begin
         if Assigned(FonSyncModeChange) then FonSyncModeChange(self);
+  end else if svp=AbortMotion then begin
+        if Assigned(FonAbortMotion) then FonAbortMotion(self);
   end;
 end;
 
