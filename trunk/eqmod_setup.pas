@@ -26,7 +26,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls;
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  ExtCtrls;
 
 type
 
@@ -35,8 +36,10 @@ type
   Tf_eqmodsetup = class(TForm)
     Button1: TButton;
     AutoLoadConfig: TCheckBox;
+    SoundCheckBox: TCheckBox;
     Driver: TEdit;
     Label3: TLabel;
+    PanelSound: TPanel;
     Server: TEdit;
     Serverport: TEdit;
     Label2: TLabel;

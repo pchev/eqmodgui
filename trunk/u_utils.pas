@@ -41,6 +41,7 @@ const
 Function sgn(x:Double):Double ;
 Function SXToStr(de: Double) : string;
 Function ARToStr4(ar: Double; f: string; var d,m,s : string) : string;
+Function Slash(nom : string) : string;
 
 implementation
 
@@ -101,6 +102,12 @@ begin
     if abs(min)<10 then m:='0'+trim(m);
     s:=FormatFloat(f,sec);
     result := d+'h'+m+'m'+s+'s';
+end;
+
+Function Slash(nom : string) : string;
+begin
+result:=trim(nom);
+if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
 end;
 
 end.
