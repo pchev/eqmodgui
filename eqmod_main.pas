@@ -669,16 +669,16 @@ end;
 Procedure Tf_eqmod.SlewModeChange(Sender: TObject);
 begin
   SlewPreset.ItemIndex:=eqmod.ActiveSlewPreset;
+  if SlewPreset.ItemIndex<10 then
+    PlaySound('rate'+IntToStr(SlewPreset.ItemIndex+1)+'.wav')
+  else
+    PlaySound('custom.wav');
 end;
 
 procedure Tf_eqmod.SlewPresetChange(Sender: TObject);
 begin
   PanelSlewRate.Visible:=(SlewPreset.Text='Custom');
   eqmod.ActiveSlewPreset:=SlewPreset.ItemIndex;
-  if SlewPreset.ItemIndex<10 then
-    PlaySound('rate'+IntToStr(SlewPreset.ItemIndex+1)+'.wav')
-  else
-    PlaySound('custom.wav');
 end;
 
 //////////////////  Track rate box ////////////////////////

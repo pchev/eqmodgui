@@ -45,7 +45,8 @@
           </Linking>
           <Other>
             <CustomOptions Value="-dUseCThreads
--dUseHeapTrc"/>
+-dUseHeapTrc
+-dSDL_SOUND"/>
           </Other>
         </CompilerOptions>
       </Item2>
@@ -112,7 +113,8 @@
       </Options>
     </Linking>
     <Other>
-      <CustomOptions Value="-dUseCThreads"/>
+      <CustomOptions Value="-dUseCThreads
+-dSDL_SOUND"/>
     </Other>
   </CompilerOptions>
   <Debugging>

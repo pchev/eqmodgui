@@ -23,4 +23,5 @@ It allow to easily set the main parameters require to use this driver and manage
 /usr/share/pixmaps/eqmodgui.png
 /usr/share/icons/hicolor/48x48/apps/eqmodgui.png
 /usr/share/doc/eqmodgui
+/usr/share/eqmodgui
 
