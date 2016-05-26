@@ -39,6 +39,8 @@ T_indijoystick = class(TIndiBaseClient)
    InitTimer: TTimer;
    JoystickDevice: Basedevice;
    Joystickport: ITextVectorProperty;
+   connectprop: ISwitchVectorProperty;
+   swconnected, swdisconnected: ISwitch;
    configprop: ISwitchVectorProperty;
    configload,configsave,configdefault: ISwitch;
    Fready,Fconnected,FAutoloadConfig: boolean;
@@ -129,6 +131,7 @@ end;
 procedure T_indijoystick.ClearStatus;
 begin
     configprop:=nil;
+    connectprop:=nil;
     Fready:=false;
     Fconnected := false;
     FStatus := devDisconnected;
@@ -138,9 +141,12 @@ end;
 procedure T_indijoystick.CheckStatus;
 begin
     if Fconnected and
+       (not Fready) and
+       (connectprop<>nil) and
        (configprop<>nil)
     then begin
-       FStatus := devConnected;
+       if swconnected.s=ISS_ON then FStatus := devConnected;
+       if swdisconnected.s=ISS_ON then FStatus := devDisconnected;
        if (not Fready) and Assigned(FonStatusChange) then FonStatusChange(self);
        Fready:=true;
        if FAutoloadConfig then begin
@@ -152,10 +158,10 @@ end;
 function  T_indijoystick.GetStatusError: string;
 begin
 if Fconnected then begin
-   Result:='Missing properties: ';
+   Result:='Joystick missing properties: ';
    if (configprop=nil) then Result:=Result+'CONFIG_PROCESS, ';
 end else
-  Result:='Not connected';
+  Result:='Joystick not connected';
 end;
 
 
@@ -176,14 +182,14 @@ if not Connected then begin
   if Assigned(FonStatusChange) then FonStatusChange(self);
   InitTimer.Enabled:=true;
 end
-else msg('Already connected');
+else msg('Joystick already connected');
 end;
 
 procedure T_indijoystick.InitTimerTimer(Sender: TObject);
 begin
   InitTimer.Enabled:=false;
   if (JoystickDevice=nil)or(not Fready) then begin
-     msg('Initialisation failed.');
+     msg('Joystick initialisation failed.');
      msg(GetStatusError);
      Disconnect;
   end;
@@ -208,7 +214,7 @@ procedure T_indijoystick.ServerDisconnected(Sender: TObject);
 begin
   FStatus := devDisconnected;
   if Assigned(FonStatusChange) then FonStatusChange(self);
-  msg('Mount server disconnected');
+  msg('Joystick server disconnected');
 end;
 
 procedure T_indijoystick.NewDevice(dp: Basedevice);
@@ -248,6 +254,12 @@ begin
   if (proptype=INDI_TEXT)and(propname='DEVICE_PORT') then begin
      Joystickport:=indiProp.getText;
   end
+  else if (proptype=INDI_SWITCH)and(propname='CONNECTION') then begin
+    connectprop:=indiProp.getSwitch;
+    swconnected:=IUFindSwitch(connectprop,'CONNECT');
+    swdisconnected:=IUFindSwitch(connectprop,'DISCONNECT');
+    if (swconnected=nil)or(swdisconnected=nil) then connectprop:=nil;
+  end
   else if (proptype=INDI_SWITCH)and(propname='CONFIG_PROCESS') then begin
      configprop:=indiProp.getSwitch;
      configload:=IUFindSwitch(configprop,'CONFIG_LOAD');
@@ -269,7 +281,16 @@ begin
 end;
 
 procedure T_indijoystick.NewSwitch(svp: ISwitchVectorProperty);
+var propname: string;
+    sw: ISwitch;
+    ok:boolean;
 begin
+  //  writeln('NewSwitch: '+svp.name);
+  if (svp=connectprop) then begin
+    if swconnected.s=ISS_ON then FStatus := devConnected;
+    if swdisconnected.s=ISS_ON then FStatus := devDisconnected;
+    if Assigned(FonStatusChange) then FonStatusChange(self);
+  end;
 end;
 
 procedure T_indijoystick.NewLight(lvp: ILightVectorProperty);
