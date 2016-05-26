@@ -36,6 +36,10 @@ type
   Tf_eqmodsetup = class(TForm)
     Button1: TButton;
     AutoLoadConfig: TCheckBox;
+    JoystickDriver: TEdit;
+    JoystickCheckBox: TCheckBox;
+    Label4: TLabel;
+    PanelJoystick: TPanel;
     SoundCheckBox: TCheckBox;
     Driver: TEdit;
     Label3: TLabel;

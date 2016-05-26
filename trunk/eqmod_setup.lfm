@@ -1,11 +1,11 @@
 object f_eqmodsetup: Tf_eqmodsetup
   Left = 400
-  Height = 266
+  Height = 326
   Top = 173
   Width = 269
   ActiveControl = Port
   Caption = 'Setup'
-  ClientHeight = 266
+  ClientHeight = 326
   ClientWidth = 269
   LCLVersion = '1.6.0.3'
   Visible = False
@@ -27,7 +27,7 @@ object f_eqmodsetup: Tf_eqmodsetup
   object Sim: TCheckBox
     Left = 8
     Height = 22
-    Top = 152
+    Top = 216
     Width = 88
     Caption = 'Simulation'
     TabOrder = 1
@@ -35,7 +35,7 @@ object f_eqmodsetup: Tf_eqmodsetup
   object Button1: TButton
     Left = 96
     Height = 25
-    Top = 232
+    Top = 296
     Width = 75
     Caption = 'OK'
     ModalResult = 1
@@ -66,7 +66,7 @@ object f_eqmodsetup: Tf_eqmodsetup
   object AutoLoadConfig: TCheckBox
     Left = 8
     Height = 22
-    Top = 120
+    Top = 184
     Width = 205
     Caption = 'Load configuration on startup'
     TabOrder = 5
@@ -89,7 +89,7 @@ object f_eqmodsetup: Tf_eqmodsetup
   object PanelSound: TPanel
     Left = 8
     Height = 41
-    Top = 176
+    Top = 240
     Width = 254
     BevelOuter = bvNone
     ClientHeight = 41
@@ -103,6 +103,39 @@ object f_eqmodsetup: Tf_eqmodsetup
       Width = 93
       Caption = 'Play sound '
       TabOrder = 0
+    end
+  end
+  object JoystickCheckBox: TCheckBox
+    Left = 8
+    Height = 22
+    Top = 116
+    Width = 122
+    Caption = 'Connect joystick'
+    TabOrder = 8
+  end
+  object PanelJoystick: TPanel
+    Left = 1
+    Height = 36
+    Top = 140
+    Width = 261
+    BevelOuter = bvNone
+    ClientHeight = 36
+    ClientWidth = 261
+    TabOrder = 9
+    object JoystickDriver: TEdit
+      Left = 104
+      Height = 24
+      Top = 4
+      Width = 152
+      TabOrder = 0
+    end
+    object Label4: TLabel
+      Left = 8
+      Height = 18
+      Top = 8
+      Width = 84
+      Caption = 'Joystick driver'
+      ParentColor = False
     end
   end
 end

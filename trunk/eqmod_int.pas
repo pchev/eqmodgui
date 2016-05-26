@@ -31,7 +31,6 @@ uses indibaseclient, indibasedevice, indiapi, indicom,
 type
   TNotifyMsg = procedure(msg:string) of object;
   TNotifyNum = procedure(d: double) of object;
-  TDeviceStatus = (devDisconnected, devConnecting, devConnected);
   TTrackMode =(trStop, trSidereal, trLunar, trSolar, trCustom);
   TNumRange = record
                min,max,step: double;
