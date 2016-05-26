@@ -25,8 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 interface
 
-uses eqmod_int, eqmod_setup, pu_indigui, u_utils,
-  u_ccdconfig, XMLConf, DOM,
+uses eqmod_int, joystick_int, indiapi, eqmod_setup, pu_indigui, u_utils,
+  u_ccdconfig, XMLConf,
   {$ifdef SDL_SOUND}
   sdl, sdl_mixer_nosmpeg,
   {$endif}
@@ -188,10 +188,11 @@ type
   private
     { private declarations }
     eqmod: T_indieqmod;
+    joystick: T_indijoystick;
     f_indigui: Tf_indigui;
     config: TCCDconfig;
-    configfile,indiserver,indiserverport,indidevice,indideviceport:string;
-    ready, GUIready, indisimulation, indiloadconfig, obslock, LockRate: boolean;
+    configfile,indiserver,indiserverport,indidevice,indideviceport,joystickdevice:string;
+    ready, GUIready, indisimulation, indiloadconfig, obslock, LockRate, ConnectJoystick: boolean;
     SoundActive, SoundOK:boolean;
     Appdir, SoundDir: string;
     TrackMode, RequestTrackMode: TTrackMode;
@@ -352,6 +353,8 @@ begin
  indideviceport:=config.GetValue('/INDI/deviceport','/dev/ttyUSB0');
  indisimulation:=config.GetValue('/INDI/simulation',false);
  indiloadconfig:=config.GetValue('/INDI/AutoLoadConfig',true);
+ joystickdevice:=config.GetValue('/INDI/joystick','Joystick');
+ ConnectJoystick:=config.GetValue('/INDI/ConnectJoystick',false);
  SoundActive:=SoundOK and config.GetValue('/Sound/Active',true);
  SiteName.Clear;
  n:=config.GetValue('/Site/Number',0);
@@ -366,7 +369,17 @@ end;
 procedure Tf_eqmod.Connect;
 begin
  if not ready then begin
-   eqmod:=T_indieqmod.create;
+   if ConnectJoystick then begin
+     joystick:=T_indijoystick.Create;
+     joystick.onMsg:=@NewMessage;
+     if indiserver<>'' then joystick.indiserver:=indiserver;
+     if indiserverport<>'' then joystick.indiserverport:=indiserverport;
+     if joystickdevice<>'' then joystick.indidevice:=joystickdevice;
+     //joystick.indideviceport:=joystickdeviceport;
+     joystick.AutoloadConfig:=indiloadconfig;
+     joystick.Connect;
+   end;
+   eqmod:=T_indieqmod.Create;
    eqmod.onDestroy:=@eqmodDestroy;
    eqmod.onMsg:=@NewMessage;
    eqmod.onCoordChange:=@CoordChange;
@@ -410,6 +423,8 @@ begin
    f_eqmodsetup.PanelSound.Visible:=true;
    f_eqmodsetup.SoundCheckBox.Checked:=config.GetValue('/Sound/Active',SoundOK);
    {$endif}
+   f_eqmodsetup.JoystickCheckBox.Checked:=config.GetValue('/INDI/ConnectJoystick',false);
+   f_eqmodsetup.JoystickDriver.Text:=config.GetValue('/INDI/joystick','Joystick');
    f_eqmodsetup.Server.Text:=config.GetValue('/INDI/server','localhost');
    f_eqmodsetup.Driver.Text:=config.GetValue('/INDI/device','EQMod Mount');
    f_eqmodsetup.Serverport.Text:=config.GetValue('/INDI/serverport','7624');
@@ -418,6 +433,8 @@ begin
    f_eqmodsetup.Sim.Checked:=config.GetValue('/INDI/simulation',false);
    f_eqmodsetup.ShowModal;
    if f_eqmodsetup.ModalResult=mrOK then begin
+      config.SetValue('/INDI/ConnectJoystick',f_eqmodsetup.JoystickCheckBox.Checked);
+      config.SetValue('/INDI/joystick',f_eqmodsetup.JoystickDriver.Text);
       config.SetValue('/INDI/server',f_eqmodsetup.Server.Text);
       config.SetValue('/INDI/device',f_eqmodsetup.Driver.Text);
       config.SetValue('/INDI/serverport',f_eqmodsetup.Serverport.Text);
@@ -439,7 +456,6 @@ begin
     f_indigui.onDestroy:=@GUIdestroy;
     f_indigui.IndiServer:=indiserver;
     f_indigui.IndiPort:=indiserverport;
-    f_indigui.IndiDevice:=indidevice;
     GUIready:=true;
  end;
  f_indigui.Show;
