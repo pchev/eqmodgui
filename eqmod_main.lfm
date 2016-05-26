@@ -26,12 +26,12 @@ object f_eqmod: Tf_eqmod
     ClientWidth = 226
     TabOrder = 0
     object GroupBox5: TGroupBox
-      Left = -1
-      Height = 65
-      Top = 520
+      Left = 0
+      Height = 57
+      Top = 528
       Width = 220
       Caption = 'Park'
-      ClientHeight = 46
+      ClientHeight = 38
       ClientWidth = 218
       TabOrder = 4
       object BtnPark: TSpeedButton
@@ -55,12 +55,12 @@ object f_eqmod: Tf_eqmod
       end
     end
     object GroupBox3: TGroupBox
-      Left = -1
-      Height = 142
+      Left = 0
+      Height = 150
       Top = 280
       Width = 220
       Caption = 'Slew Controls'
-      ClientHeight = 123
+      ClientHeight = 131
       ClientWidth = 218
       TabOrder = 2
       object BtnNorth: TSpeedButton
@@ -240,6 +240,23 @@ object f_eqmod: Tf_eqmod
         Caption = 'Rev. DEC'
         OnChange = ReverseDecChange
         TabOrder = 2
+      end
+      object joystickled: TShape
+        Left = 4
+        Height = 14
+        Hint = 'Connection status'
+        Top = 108
+        Width = 14
+        Brush.Color = clRed
+        Shape = stCircle
+      end
+      object Label22: TLabel
+        Left = 24
+        Height = 18
+        Top = 104
+        Width = 46
+        Caption = 'Joystick'
+        ParentColor = False
       end
     end
     object TopPanel: TPanel
@@ -533,9 +550,9 @@ object f_eqmod: Tf_eqmod
       end
     end
     object GroupBox4: TGroupBox
-      Left = 1
+      Left = 0
       Height = 96
-      Top = 424
+      Top = 432
       Width = 220
       Caption = 'Track Rate:'
       ClientHeight = 77

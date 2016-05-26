@@ -355,6 +355,7 @@ end;
 procedure T_indieqmod.CheckStatus;
 begin
     if Fconnected and
+       (not Fready) and
        (coord_prop<>nil) and
        (horz_prop<>nil) and
        (Mlst<>nil) and

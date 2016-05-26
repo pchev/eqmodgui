@@ -46,8 +46,10 @@ type
     BtnLoadAlign: TSpeedButton;
     BtnSetGuideRate: TSpeedButton;
     GroupBox8: TGroupBox;
+    joystickled: TShape;
     Label20: TLabel;
     Label21: TLabel;
+    Label22: TLabel;
     LastMsg: TEdit;
     Label19: TLabel;
     LblPark: TLabel;
@@ -202,6 +204,7 @@ type
     procedure GUIdestroy(Sender: TObject);
     procedure eqmodDestroy(Sender: TObject);
     Procedure StatusChange(Sender: TObject);
+    Procedure JoystickStatusChange(Sender: TObject);
     Procedure CoordChange(Sender: TObject);
     Procedure AltAZChange(Sender: TObject);
     procedure NewMessage(txt: string);
@@ -376,6 +379,7 @@ begin
      if indiserverport<>'' then joystick.indiserverport:=indiserverport;
      if joystickdevice<>'' then joystick.indidevice:=joystickdevice;
      //joystick.indideviceport:=joystickdeviceport;
+     joystick.onStatusChange:=@JoystickStatusChange;
      joystick.AutoloadConfig:=indiloadconfig;
      joystick.Connect;
    end;
@@ -552,6 +556,23 @@ case eqmod.Status of
                         eqmod.RAGuideRate:=config.GetValue('/Options/RAGuideRate',0.3);
                         eqmod.DEGuideRate:=config.GetValue('/Options/DEGuideRate',0.3);
                       end;
+                   end;
+end;
+end;
+
+Procedure Tf_eqmod.JoystickStatusChange(Sender: TObject);
+begin
+case joystick.Status of
+  devDisconnected:begin
+                      joystickled.Brush.Color:=clRed;
+                  end;
+  devConnecting:  begin
+                      NewMessage('Connecting joystick...');
+                      joystickled.Brush.Color:=clOrange;
+                   end;
+  devConnected:   begin
+                      NewMessage('Joystick connected');
+                      joystickled.Brush.Color:=clGreen;
                    end;
 end;
 end;
