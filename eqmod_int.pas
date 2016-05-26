@@ -114,6 +114,7 @@ T_indieqmod = class(TIndiBaseClient)
    FonSlewSpeedChange: TNotifyEvent;
    FonSlewModeChange: TNotifyEvent;
    FonRevDecChange: TNotifyEvent;
+   FonSync: TNotifyEvent;
    FonTrackModeChange: TNotifyEvent;
    FonTrackRateChange:TNotifyEvent;
    FonParkChange:TNotifyEvent;
@@ -249,6 +250,7 @@ T_indieqmod = class(TIndiBaseClient)
    property onLSTChange: TNotifyEvent read FonLSTChange write FonLSTChange;
    property onPierSideChange: TNotifyEvent read FonPierSideChange write FonPierSideChange;
    property onRevDecChange: TNotifyEvent read FonRevDecChange write FonRevDecChange;
+   property onSync: TNotifyEvent read FonSync write FonSync;
    property onSlewSpeedChange: TNotifyEvent read FonSlewSpeedChange write FonSlewSpeedChange;
    property onSlewModeChange: TNotifyEvent read FonSlewModeChange write FonSlewModeChange;
    property onTrackModeChange: TNotifyEvent read FonTrackModeChange write FonTrackModeChange;
@@ -713,6 +715,8 @@ begin
         if Assigned(FonSlewModeChange) then FonSlewModeChange(self);
   end else if svp=RevDec then begin
         if Assigned(FonRevDecChange) then FonRevDecChange(self);
+  end else if svp=CoordSet then begin
+        if (CoordSetSync.s=ISS_ON) and Assigned(FonSync) then FonSync(self);
   end else if svp=TrackM then begin
         if Assigned(FonTrackModeChange) then FonTrackModeChange(self);
   end else if svp=Park_opt then begin

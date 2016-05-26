@@ -221,6 +221,7 @@ type
     procedure GeoCoordChange(Sender: TObject);
     procedure GuideRateChange(Sender: TObject);
     procedure ShowObsCoord;
+    procedure onsync(Sender: TObject);
     procedure AlignCountChange(Sender: TObject);
     procedure SyncDeltaChange(Sender: TObject);
     procedure FillSyncMode;
@@ -394,6 +395,7 @@ begin
    eqmod.onPierSideChange:=@PierSideChange;
    eqmod.onSlewSpeedChange:=@SlewSpeedChange;
    eqmod.onSlewModeChange:=@SlewModeChange;
+   eqmod.onSync:=@onsync;
    eqmod.onTrackModeChange:=@TrackModeChange;
    eqmod.onTrackRateChange:=@TrackRateChange;
    eqmod.onParkChange:=@ParkChange;
@@ -986,6 +988,11 @@ end;
 end;
 
 //////////////////  Alignment / Sync  box ////////////////////////
+
+procedure Tf_eqmod.onsync(Sender: TObject);
+begin
+  PlaySound('sync.wav');
+end;
 
 procedure Tf_eqmod.AlignCountChange(Sender: TObject);
 begin
