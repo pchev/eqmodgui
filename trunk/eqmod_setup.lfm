@@ -1,11 +1,11 @@
 object f_eqmodsetup: Tf_eqmodsetup
   Left = 400
-  Height = 326
+  Height = 350
   Top = 173
   Width = 269
   ActiveControl = Port
   Caption = 'Setup'
-  ClientHeight = 326
+  ClientHeight = 350
   ClientWidth = 269
   LCLVersion = '1.6.0.3'
   Visible = False
@@ -27,7 +27,7 @@ object f_eqmodsetup: Tf_eqmodsetup
   object Sim: TCheckBox
     Left = 8
     Height = 22
-    Top = 216
+    Top = 280
     Width = 88
     Caption = 'Simulation'
     TabOrder = 1
@@ -35,7 +35,7 @@ object f_eqmodsetup: Tf_eqmodsetup
   object Button1: TButton
     Left = 96
     Height = 25
-    Top = 296
+    Top = 312
     Width = 75
     Caption = 'OK'
     ModalResult = 1
@@ -89,7 +89,7 @@ object f_eqmodsetup: Tf_eqmodsetup
   object PanelSound: TPanel
     Left = 8
     Height = 41
-    Top = 240
+    Top = 232
     Width = 254
     BevelOuter = bvNone
     ClientHeight = 41
@@ -137,5 +137,13 @@ object f_eqmodsetup: Tf_eqmodsetup
       Caption = 'Joystick driver'
       ParentColor = False
     end
+  end
+  object UnparkTrack: TCheckBox
+    Left = 32
+    Height = 22
+    Top = 208
+    Width = 178
+    Caption = 'Unpark and start tracking'
+    TabOrder = 10
   end
 end

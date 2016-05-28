@@ -194,7 +194,7 @@ type
     f_indigui: Tf_indigui;
     config: TCCDconfig;
     configfile,indiserver,indiserverport,indidevice,indideviceport,joystickdevice:string;
-    ready, GUIready, indisimulation, indiloadconfig, obslock, LockRate, ConnectJoystick: boolean;
+    ready, GUIready, indisimulation, indiloadconfig, indiunparktrack, obslock, LockRate, ConnectJoystick: boolean;
     SoundActive, SoundOK:boolean;
     Appdir, SoundDir: string;
     TrackMode, RequestTrackMode: TTrackMode;
@@ -357,6 +357,7 @@ begin
  indideviceport:=config.GetValue('/INDI/deviceport','/dev/ttyUSB0');
  indisimulation:=config.GetValue('/INDI/simulation',false);
  indiloadconfig:=config.GetValue('/INDI/AutoLoadConfig',true);
+ indiunparktrack:=config.GetValue('/INDI/UnparkTrack',false);
  joystickdevice:=config.GetValue('/INDI/joystick','Joystick');
  ConnectJoystick:=config.GetValue('/INDI/ConnectJoystick',false);
  SoundActive:=SoundOK and config.GetValue('/Sound/Active',true);
@@ -436,6 +437,7 @@ begin
    f_eqmodsetup.Serverport.Text:=config.GetValue('/INDI/serverport','7624');
    f_eqmodsetup.Port.Text:=config.GetValue('/INDI/deviceport','/dev/ttyUSB0');
    f_eqmodsetup.AutoLoadConfig.Checked:=config.GetValue('/INDI/AutoLoadConfig',true);
+   f_eqmodsetup.UnparkTrack.Checked:=config.GetValue('/INDI/UnparkTrack',false);
    f_eqmodsetup.Sim.Checked:=config.GetValue('/INDI/simulation',false);
    f_eqmodsetup.ShowModal;
    if f_eqmodsetup.ModalResult=mrOK then begin
@@ -446,6 +448,7 @@ begin
       config.SetValue('/INDI/serverport',f_eqmodsetup.Serverport.Text);
       config.SetValue('/INDI/deviceport',f_eqmodsetup.Port.Text);
       config.SetValue('/INDI/AutoLoadConfig',f_eqmodsetup.AutoLoadConfig.Checked);
+      config.SetValue('/INDI/UnparkTrack',f_eqmodsetup.UnparkTrack.Checked);
       config.SetValue('/INDI/simulation',f_eqmodsetup.Sim.Checked);
       config.SetValue('/Sound/Active',f_eqmodsetup.SoundCheckBox.Checked);
       config.Flush;
@@ -557,6 +560,11 @@ case eqmod.Status of
                       if indiloadconfig then begin
                         eqmod.RAGuideRate:=config.GetValue('/Options/RAGuideRate',0.3);
                         eqmod.DEGuideRate:=config.GetValue('/Options/DEGuideRate',0.3);
+                      end;
+                      if indiunparktrack then begin
+                        eqmod.Park:=false;
+                        sleep(1000);
+                        eqmod.TrackMode:=trSidereal;
                       end;
                    end;
 end;
