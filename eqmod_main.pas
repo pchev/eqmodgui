@@ -120,6 +120,7 @@ type
     BtnSetTrackRate: TSpeedButton;
     BtnSaveSite: TSpeedButton;
     SetSite: TSpeedButton;
+    TrackTimer: TTimer;
     TrackDEC: TEdit;
     GuideDEC: TEdit;
     TRackRA: TEdit;
@@ -187,6 +188,7 @@ type
     procedure BtnSetTrackRateClick(Sender: TObject);
     procedure StaticText1Click(Sender: TObject);
     procedure SyncModeComboChange(Sender: TObject);
+    procedure TrackTimerTimer(Sender: TObject);
   private
     { private declarations }
     eqmod: T_indieqmod;
@@ -808,6 +810,12 @@ begin
  PlaySound('stop.wav');
 end;
 
+procedure Tf_eqmod.TrackTimerTimer(Sender: TObject);
+begin
+   TrackTimer.Enabled:=false;
+   eqmod.TrackMode:=trSidereal;
+end;
+
 //////////////////  Park/Unpark box ////////////////////////
 
 Procedure Tf_eqmod.ParkChange(Sender: TObject);
@@ -821,6 +829,9 @@ begin
   else begin
      BtnPark.Caption:='Park';
      LblPark.Caption:='Unparked';
+     if indiunparktrack then begin
+       TrackTimer.Enabled:=true;
+     end;
      PlaySound('unparked.wav');
   end;
 end;

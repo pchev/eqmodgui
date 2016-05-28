@@ -1699,4 +1699,11 @@ object f_eqmod: Tf_eqmod
     }
     OnClick = BtnSaveSiteClick
   end
+  object TrackTimer: TTimer
+    Enabled = False
+    Interval = 5000
+    OnTimer = TrackTimerTimer
+    left = 96
+    top = 416
+  end
 end
