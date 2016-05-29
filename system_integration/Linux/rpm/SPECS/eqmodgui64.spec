@@ -9,7 +9,7 @@ Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: x86_64
 Provides: eqmodgui
-Requires: gtk2 glib2 pango libjpeg libpng
+Requires: gtk2 glib2 pango libjpeg libpng SDL_mixer
 AutoReqProv: no
 
 %description
