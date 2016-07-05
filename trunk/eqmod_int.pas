@@ -400,7 +400,7 @@ if Fconnected then begin
    if (coord_prop=nil) then Result:=Result+'EQUATORIAL_(EOD)_COORD, ';
    if (horz_prop=nil) then Result:=Result+'HORIZONTAL_COORD, ';
    if (Mlst=nil) then Result:=Result+'TIME_LST, ';
-   if (PierSide=nil) then Result:=Result+'PIERSIDE, ';
+   if (PierSide=nil) then Result:=Result+'TELESCOPE_PIER_SIDE, ';
    if (Sim=nil) then Result:=Result+'SIMULATION, ';
    if (AbortMotion=nil) then Result:=Result+'TELESCOPE_ABORT_MOTION, ';
    if (MotionNS=nil) then Result:=Result+'TELESCOPE_MOTION_NS, ';
@@ -550,7 +550,7 @@ begin
   else if (proptype=INDI_NUMBER)and(propname='TIME_LST') then begin
      Mlst:=indiProp.getNumber;
   end
-  else if (proptype=INDI_SWITCH)and(propname='PIERSIDE') then begin
+  else if (proptype=INDI_SWITCH)and(propname='TELESCOPE_PIER_SIDE') then begin
      PierSide:=indiProp.getSwitch;
   end
   else if (proptype=INDI_SWITCH)and(propname='SIMULATION') then begin
