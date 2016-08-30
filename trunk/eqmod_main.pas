@@ -415,6 +415,7 @@ begin
    eqmod.indideviceport:=indideviceport;
    eqmod.AutoloadConfig:=indiloadconfig;
    eqmod.simulation:=indisimulation;
+   if indisimulation then StaticText1.Caption:='EQMod Mount'+crlf+'Simulation';
    eqmod.Connect;
    ready:=true;
  end;
