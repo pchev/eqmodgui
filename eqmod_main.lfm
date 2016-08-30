@@ -14,7 +14,7 @@ object f_eqmod: Tf_eqmod
   OnDestroy = FormDestroy
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '1.6.0.3'
+  LCLVersion = '1.6.0.4'
   Visible = False
   object Panel1: TPanel
     Left = 0
@@ -233,7 +233,7 @@ object f_eqmod: Tf_eqmod
       end
       object ReverseDec: TCheckBox
         Left = 1
-        Height = 22
+        Height = 21
         Hint = 'Revert declination direction'
         Top = 82
         Width = 76
@@ -1118,7 +1118,7 @@ object f_eqmod: Tf_eqmod
       end
       object SiteName: TComboBox
         Left = 92
-        Height = 30
+        Height = 24
         Hint = 'Site name'
         Top = 3
         Width = 147
@@ -1153,7 +1153,7 @@ object f_eqmod: Tf_eqmod
       end
       object LatNS: TComboBox
         Left = 79
-        Height = 28
+        Height = 22
         Top = 35
         Width = 48
         ItemHeight = 0
@@ -1212,7 +1212,7 @@ object f_eqmod: Tf_eqmod
       end
       object LongWE: TComboBox
         Left = 79
-        Height = 28
+        Height = 22
         Top = 72
         Width = 48
         ItemHeight = 0
@@ -1391,7 +1391,7 @@ object f_eqmod: Tf_eqmod
       end
       object SyncModeCombo: TComboBox
         Left = 4
-        Height = 32
+        Height = 26
         Hint = 'Select if the next sync set the delta offset'#10'or if the point is added to the alignment data'
         Top = 94
         Width = 156
@@ -1411,7 +1411,7 @@ object f_eqmod: Tf_eqmod
       end
       object AlignModeCombo: TComboBox
         Left = 4
-        Height = 32
+        Height = 26
         Hint = 'Select how the alignment is computed'
         Top = 144
         Width = 157
