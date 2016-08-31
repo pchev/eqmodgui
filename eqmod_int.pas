@@ -280,7 +280,7 @@ begin
  Findideviceport:='';
  InitTimer:=TTimer.Create(nil);
  InitTimer.Enabled:=false;
- InitTimer.Interval:=3000;
+ InitTimer.Interval:=30000;
  InitTimer.OnTimer:=@InitTimerTimer;
  onNewDevice:=@NewDevice;
  onNewMessage:=@NewMessage;
