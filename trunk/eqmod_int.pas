@@ -309,6 +309,7 @@ begin
  onServerConnected:=nil;
  onServerDisconnected:=nil;
  if InitTimer<>nil then FreeAndNil(InitTimer);
+ Terminate;
  FSlewPreset.Free;
  FAlignmentMode.Free;
  FSyncMode.Free;
