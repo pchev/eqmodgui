@@ -958,7 +958,6 @@ object f_eqmod: Tf_eqmod
           Font.Color = clRed
           ParentColor = True
           ParentFont = False
-          ReadOnly = True
           TabOrder = 0
         end
         object Label8: TLabel
@@ -978,7 +977,6 @@ object f_eqmod: Tf_eqmod
           Font.Color = clRed
           ParentColor = True
           ParentFont = False
-          ReadOnly = True
           TabOrder = 1
         end
         object Label7: TLabel
