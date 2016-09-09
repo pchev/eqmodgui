@@ -566,8 +566,6 @@ case eqmod.Status of
                       end;
                       if indiunparktrack then begin
                         eqmod.Park:=false;
-                        sleep(1000);
-                        eqmod.TrackMode:=trSidereal;
                       end;
                    end;
 end;
