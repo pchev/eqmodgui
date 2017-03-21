@@ -587,13 +587,15 @@ begin
      DEslew:=IUFindNumber(SlewSpeed,'DESLEW');
      if (RAslew=nil)or(DEslew=nil) then SlewSpeed:=nil;
   end
-  else if (proptype=INDI_NUMBER)and(propname='TRACKRATES') then begin
+  else if (proptype=INDI_NUMBER)and((propname='TELESCOPE_TRACK_RATE')or(propname='TRACKRATES')) then begin
      TrackR:=indiProp.getNumber;
-     TrackRra:=IUFindNumber(TrackR,'RATRACKRATE');
-     TrackRde:=IUFindNumber(TrackR,'DETRACKRATE');
+     TrackRra:=IUFindNumber(TrackR,'TRACK_RATE_RA');
+     if TrackRra=nil then TrackRra:=IUFindNumber(TrackR,'RATRACKRATE');
+     TrackRde:=IUFindNumber(TrackR,'TRACK_RATE_DE');
+     if TrackRde=nil then TrackRde:=IUFindNumber(TrackR,'DETRACKRATE');
      if (TrackRra=nil)or(TrackRde=nil) then TrackR:=nil;
   end
-  else if (proptype=INDI_SWITCH)and((propname='TELESCOPE_TRACK_RATE')or(propname='TRACKMODE')) then begin
+  else if (proptype=INDI_SWITCH)and((propname='TELESCOPE_TRACK_MODE')or(propname='TELESCOPE_TRACK_RATE')or(propname='TRACKMODE')) then begin
      TrackM:=indiProp.getSwitch;
      TrackSidereal:=IUFindSwitch(TrackM,'TRACK_SIDEREAL');
      if TrackSidereal=nil then TrackSidereal:=IUFindSwitch(TrackM,'SIDEREAL');
