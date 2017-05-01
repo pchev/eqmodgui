@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 interface
 
 uses eqmod_int, joystick_int, indiapi, eqmod_setup, pu_indigui, u_utils,
-  u_ccdconfig, XMLConf,
+  u_ccdconfig, XMLConf, UScaleDPI,
   {$ifdef SDL_SOUND}
   sdl, sdl_mixer_nosmpeg,
   {$endif}
@@ -280,6 +280,9 @@ begin
  compile_version:='Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+LCLPlatformDirNames[WidgetSet.LCLPlatform];
  compile_system:={$I %FPCTARGETOS%};
  StaticText1.Caption:='EQMod Mount'+crlf+eq_version;
+ UScaleDPI.UseScaling:=true;
+ UScaleDPI.SetScale(Canvas);
+ ScaleDPI(Self);
  SoundOK:=false;
  {$ifdef SDL_SOUND}
  SoundOK:=(SDL_Init(SDL_INIT_AUDIO)=0);

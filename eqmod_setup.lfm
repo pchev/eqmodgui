@@ -7,11 +7,12 @@ object f_eqmodsetup: Tf_eqmodsetup
   Caption = 'Setup'
   ClientHeight = 350
   ClientWidth = 269
-  LCLVersion = '1.6.0.3'
+  OnCreate = FormCreate
+  LCLVersion = '1.6.4.0'
   Visible = False
   object Label1: TLabel
     Left = 8
-    Height = 18
+    Height = 15
     Top = 85
     Width = 26
     Caption = 'Port'
@@ -19,16 +20,16 @@ object f_eqmodsetup: Tf_eqmodsetup
   end
   object Port: TEdit
     Left = 86
-    Height = 24
+    Height = 23
     Top = 80
     Width = 176
     TabOrder = 0
   end
   object Sim: TCheckBox
     Left = 8
-    Height = 22
+    Height = 23
     Top = 280
-    Width = 88
+    Width = 93
     Caption = 'Simulation'
     TabOrder = 1
   end
@@ -43,45 +44,45 @@ object f_eqmodsetup: Tf_eqmodsetup
   end
   object Label2: TLabel
     Left = 8
-    Height = 18
+    Height = 15
     Top = 16
-    Width = 68
+    Width = 72
     Caption = 'INDI Server'
     ParentColor = False
   end
   object Server: TEdit
     Left = 86
-    Height = 24
+    Height = 23
     Top = 14
     Width = 104
     TabOrder = 3
   end
   object Serverport: TEdit
     Left = 208
-    Height = 24
+    Height = 23
     Top = 14
     Width = 54
     TabOrder = 4
   end
   object AutoLoadConfig: TCheckBox
     Left = 8
-    Height = 22
+    Height = 23
     Top = 184
-    Width = 205
+    Width = 213
     Caption = 'Load configuration on startup'
     TabOrder = 5
   end
   object Label3: TLabel
     Left = 8
-    Height = 18
+    Height = 15
     Top = 51
-    Width = 73
+    Width = 79
     Caption = 'Driver name'
     ParentColor = False
   end
   object Driver: TEdit
     Left = 86
-    Height = 24
+    Height = 23
     Top = 47
     Width = 104
     TabOrder = 6
@@ -98,18 +99,18 @@ object f_eqmodsetup: Tf_eqmodsetup
     Visible = False
     object SoundCheckBox: TCheckBox
       Left = 0
-      Height = 22
+      Height = 23
       Top = 8
-      Width = 93
+      Width = 98
       Caption = 'Play sound '
       TabOrder = 0
     end
   end
   object JoystickCheckBox: TCheckBox
     Left = 8
-    Height = 22
+    Height = 23
     Top = 116
-    Width = 122
+    Width = 129
     Caption = 'Connect joystick'
     TabOrder = 8
   end
@@ -124,25 +125,25 @@ object f_eqmodsetup: Tf_eqmodsetup
     TabOrder = 9
     object JoystickDriver: TEdit
       Left = 104
-      Height = 24
+      Height = 23
       Top = 4
       Width = 152
       TabOrder = 0
     end
     object Label4: TLabel
       Left = 8
-      Height = 18
+      Height = 15
       Top = 8
-      Width = 84
+      Width = 87
       Caption = 'Joystick driver'
       ParentColor = False
     end
   end
   object UnparkTrack: TCheckBox
     Left = 32
-    Height = 22
+    Height = 23
     Top = 208
-    Width = 178
+    Width = 188
     Caption = 'Unpark and start tracking'
     TabOrder = 10
   end

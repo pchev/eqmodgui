@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 interface
 
-uses
+uses  UScaleDPI,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls;
 
@@ -51,6 +51,7 @@ type
     Sim: TCheckBox;
     Port: TEdit;
     Label1: TLabel;
+    procedure FormCreate(Sender: TObject);
   private
     { private declarations }
   public
@@ -63,6 +64,13 @@ var
 implementation
 
 {$R *.lfm}
+
+{ Tf_eqmodsetup }
+
+procedure Tf_eqmodsetup.FormCreate(Sender: TObject);
+begin
+   ScaleDPI(Self);
+end;
 
 end.
 
