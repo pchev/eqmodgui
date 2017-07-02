@@ -30,6 +30,7 @@ uses eqmod_int, joystick_int, indiapi, eqmod_setup, pu_indigui, u_utils,
   {$ifdef SDL_SOUND}
   sdl, sdl_mixer_nosmpeg,
   {$endif}
+  InterfaceBase,LCLVersion,
   Classes, SysUtils, LazFileUtils, Forms, Controls, LCLType,
   Graphics, Dialogs, ExtCtrls, StdCtrls, Buttons, ComCtrls;
 
@@ -242,7 +243,9 @@ var
 
 implementation
 
-uses InterfaceBase,LCLVersion;
+  {$if (lcl_fullversion >= 1070000)}
+    uses lclplatformdef;
+  {$endif}
 
 const
   clOrange=$1080EF;
