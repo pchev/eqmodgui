@@ -8,14 +8,12 @@ object f_eqmod: Tf_eqmod
   ClientHeight = 591
   ClientWidth = 484
   Color = clBlack
-  DesignTimePPI = 95
   Font.Color = clRed
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '1.8.0.4'
   Visible = False
   object Panel1: TPanel
     Left = 0
