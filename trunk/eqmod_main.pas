@@ -55,6 +55,7 @@ type
     Label19: TLabel;
     LblPark: TLabel;
     PanelGuideRate: TPanel;
+    BtnConfig: TSpeedButton;
     SyncModeCombo: TComboBox;
     AlignModeCombo: TComboBox;
     DeltaRa: TEdit;
@@ -117,7 +118,7 @@ type
     Page2: TPage;
     RArate: TTrackBar;
     DErate: TTrackBar;
-    IndiSetup: TSpeedButton;
+    IndiConnect: TSpeedButton;
     BtnSetTrackRate: TSpeedButton;
     BtnSaveSite: TSpeedButton;
     SetSite: TSpeedButton;
@@ -147,6 +148,7 @@ type
     procedure AlignModeComboChange(Sender: TObject);
     procedure BtnClearAlignmentClick(Sender: TObject);
     procedure BtnClearDeltaClick(Sender: TObject);
+    procedure BtnConfigClick(Sender: TObject);
     procedure BtnEastMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure BtnLoadAlignClick(Sender: TObject);
@@ -179,7 +181,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure IndiBtnClick(Sender: TObject);
-    procedure IndiSetupClick(Sender: TObject);
+    procedure IndiConnectClick(Sender: TObject);
     procedure RArateChange(Sender: TObject);
     procedure ReverseDecChange(Sender: TObject);
     procedure SetupBtnClick(Sender: TObject);
@@ -321,6 +323,7 @@ begin
     Application.ProcessMessages;
     sleep(500);
     Application.ProcessMessages;
+    sleep(500);
   end;
   {$ifdef SDL_SOUND}
   Mix_CloseAudio;
@@ -427,43 +430,50 @@ begin
  end;
 end;
 
-procedure Tf_eqmod.IndiSetupClick(Sender: TObject);
+
+procedure Tf_eqmod.BtnConfigClick(Sender: TObject);
+begin
+  f_eqmodsetup:=Tf_eqmodsetup.Create(self);
+  {$ifdef SDL_SOUND}
+  f_eqmodsetup.PanelSound.Visible:=true;
+  f_eqmodsetup.SoundCheckBox.Checked:=config.GetValue('/Sound/Active',SoundOK);
+  {$endif}
+  f_eqmodsetup.JoystickCheckBox.Checked:=config.GetValue('/INDI/ConnectJoystick',false);
+  f_eqmodsetup.JoystickDriver.Text:=config.GetValue('/INDI/joystick','Joystick');
+  f_eqmodsetup.Server.Text:=config.GetValue('/INDI/server','localhost');
+  f_eqmodsetup.Driver.Text:=config.GetValue('/INDI/device','EQMod Mount');
+  f_eqmodsetup.Serverport.Text:=config.GetValue('/INDI/serverport','7624');
+  f_eqmodsetup.Port.Text:=config.GetValue('/INDI/deviceport','/dev/ttyUSB0');
+  f_eqmodsetup.AutoLoadConfig.Checked:=config.GetValue('/INDI/AutoLoadConfig',true);
+  f_eqmodsetup.UnparkTrack.Checked:=config.GetValue('/INDI/UnparkTrack',false);
+  f_eqmodsetup.Sim.Checked:=config.GetValue('/INDI/simulation',false);
+  f_eqmodsetup.ShowModal;
+  if f_eqmodsetup.ModalResult=mrOK then begin
+     config.SetValue('/INDI/ConnectJoystick',f_eqmodsetup.JoystickCheckBox.Checked);
+     config.SetValue('/INDI/joystick',f_eqmodsetup.JoystickDriver.Text);
+     config.SetValue('/INDI/server',f_eqmodsetup.Server.Text);
+     config.SetValue('/INDI/device',f_eqmodsetup.Driver.Text);
+     config.SetValue('/INDI/serverport',f_eqmodsetup.Serverport.Text);
+     config.SetValue('/INDI/deviceport',f_eqmodsetup.Port.Text);
+     config.SetValue('/INDI/AutoLoadConfig',f_eqmodsetup.AutoLoadConfig.Checked);
+     config.SetValue('/INDI/UnparkTrack',f_eqmodsetup.UnparkTrack.Checked);
+     config.SetValue('/INDI/simulation',f_eqmodsetup.Sim.Checked);
+     config.SetValue('/Sound/Active',f_eqmodsetup.SoundCheckBox.Checked);
+     config.Flush;
+  end;
+end;
+
+
+procedure Tf_eqmod.IndiConnectClick(Sender: TObject);
 begin
  if ready then begin
     if MessageDlg('Disconnect from the server?',mtConfirmation,mbYesNo,0)=mrYes then begin
+      TrackTimer.Enabled:=false;
       eqmod.Disconnect;
     end;
  end else begin
-   f_eqmodsetup:=Tf_eqmodsetup.Create(self);
-   {$ifdef SDL_SOUND}
-   f_eqmodsetup.PanelSound.Visible:=true;
-   f_eqmodsetup.SoundCheckBox.Checked:=config.GetValue('/Sound/Active',SoundOK);
-   {$endif}
-   f_eqmodsetup.JoystickCheckBox.Checked:=config.GetValue('/INDI/ConnectJoystick',false);
-   f_eqmodsetup.JoystickDriver.Text:=config.GetValue('/INDI/joystick','Joystick');
-   f_eqmodsetup.Server.Text:=config.GetValue('/INDI/server','localhost');
-   f_eqmodsetup.Driver.Text:=config.GetValue('/INDI/device','EQMod Mount');
-   f_eqmodsetup.Serverport.Text:=config.GetValue('/INDI/serverport','7624');
-   f_eqmodsetup.Port.Text:=config.GetValue('/INDI/deviceport','/dev/ttyUSB0');
-   f_eqmodsetup.AutoLoadConfig.Checked:=config.GetValue('/INDI/AutoLoadConfig',true);
-   f_eqmodsetup.UnparkTrack.Checked:=config.GetValue('/INDI/UnparkTrack',false);
-   f_eqmodsetup.Sim.Checked:=config.GetValue('/INDI/simulation',false);
-   f_eqmodsetup.ShowModal;
-   if f_eqmodsetup.ModalResult=mrOK then begin
-      config.SetValue('/INDI/ConnectJoystick',f_eqmodsetup.JoystickCheckBox.Checked);
-      config.SetValue('/INDI/joystick',f_eqmodsetup.JoystickDriver.Text);
-      config.SetValue('/INDI/server',f_eqmodsetup.Server.Text);
-      config.SetValue('/INDI/device',f_eqmodsetup.Driver.Text);
-      config.SetValue('/INDI/serverport',f_eqmodsetup.Serverport.Text);
-      config.SetValue('/INDI/deviceport',f_eqmodsetup.Port.Text);
-      config.SetValue('/INDI/AutoLoadConfig',f_eqmodsetup.AutoLoadConfig.Checked);
-      config.SetValue('/INDI/UnparkTrack',f_eqmodsetup.UnparkTrack.Checked);
-      config.SetValue('/INDI/simulation',f_eqmodsetup.Sim.Checked);
-      config.SetValue('/Sound/Active',f_eqmodsetup.SoundCheckBox.Checked);
-      config.Flush;
-      ReadConfig;
-      Connect;
-   end;
+    ReadConfig;
+    Connect;
  end;
 end;
 
@@ -535,18 +545,18 @@ begin
 case eqmod.Status of
   devDisconnected:begin
                       led.Brush.Color:=clRed;
-                      IndiSetup.Caption:='Connect';
+                      IndiConnect.Caption:='Connect';
                       ready:=false;
                   end;
   devConnecting:  begin
                       NewMessage('Connecting mount...');
                       led.Brush.Color:=clOrange;
-                      IndiSetup.Caption:='Connecting';
+                      IndiConnect.Caption:='Connecting';
                    end;
   devConnected:   begin
                       NewMessage('Mount connected');
                       led.Brush.Color:=clGreen;
-                      IndiSetup.Caption:='Disconnect';
+                      IndiConnect.Caption:='Disconnect';
                       CoordChange(Sender);
                       LSTChange(Sender);
                       PierSideChange(Sender);
