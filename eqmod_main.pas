@@ -569,6 +569,7 @@ case eqmod.Status of
                       if indiloadconfig then begin
                         eqmod.RAGuideRate:=config.GetValue('/Options/RAGuideRate',0.3);
                         eqmod.DEGuideRate:=config.GetValue('/Options/DEGuideRate',0.3);
+                        eqmod.ActiveSyncMode:=config.GetValue('/Options/ActiveSyncMode',1);
                       end;
                       if indiunparktrack then begin
                         eqmod.Park:=false;
@@ -1093,6 +1094,8 @@ end;
 procedure Tf_eqmod.SyncModeComboChange(Sender: TObject);
 begin
   eqmod.ActiveSyncMode:=SyncModeCombo.ItemIndex;
+  config.SetValue('/Options/ActiveSyncMode',SyncModeCombo.ItemIndex);
+  config.Flush;
 end;
 
 procedure Tf_eqmod.AlignModeComboChange(Sender: TObject);
