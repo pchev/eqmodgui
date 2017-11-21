@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=0.5.6
+version=1.0.0
 
 builddir=/tmp/eqmodgui  # Be sure this is set to a non existent directory, it is removed after the run!
 
