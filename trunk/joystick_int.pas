@@ -53,7 +53,7 @@ T_indijoystick = class(TIndiBaseClient)
    procedure ClearStatus;
    procedure CheckStatus;
    procedure NewDevice(dp: Basedevice);
-   procedure NewMessage(txt: string);
+   procedure NewMessage(mp: IMessage);
    procedure NewProperty(indiProp: IndiProperty);
    procedure NewNumber(nvp: INumberVectorProperty);
    procedure NewText(tvp: ITextVectorProperty);
@@ -238,9 +238,10 @@ begin
   { TODO :  check if a vital property is removed ? }
 end;
 
-procedure T_indijoystick.NewMessage(txt: string);
+procedure T_indijoystick.NewMessage(mp: IMessage);
 begin
-  msg(txt);
+  msg(mp.msg);
+  mp.Free;
 end;
 
 procedure T_indijoystick.NewProperty(indiProp: IndiProperty);
