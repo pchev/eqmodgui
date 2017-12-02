@@ -12,6 +12,7 @@ if [ $# -gt 0 ]; then
 fi
 
 dirs="component/synapse/source/lib \
+     component/uniqueinstance \
      component/indiclient \
      component \
      . "
