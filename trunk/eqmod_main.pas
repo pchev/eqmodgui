@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 interface
 
 uses eqmod_int, joystick_int, indiapi, eqmod_setup, pu_indigui, u_utils,
-  u_ccdconfig, XMLConf, UScaleDPI,
+  u_ccdconfig, UniqueInstance, XMLConf, UScaleDPI,
   {$ifdef SDL_SOUND}
   sdl, sdl_mixer_nosmpeg,
   {$endif}
@@ -194,6 +194,7 @@ type
     procedure TrackTimerTimer(Sender: TObject);
   private
     { private declarations }
+    UniqueInstance1: TCdCUniqueInstance;
     eqmod: T_indieqmod;
     joystick: T_indijoystick;
     f_indigui: Tf_indigui;
@@ -204,6 +205,8 @@ type
     Appdir, SoundDir: string;
     TrackMode, RequestTrackMode: TTrackMode;
     ObsLat, ObsLon, ObsElev: double;
+    procedure OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
+    procedure InstanceRunning(Sender : TObject);
     procedure ReadConfig;
     procedure Connect;
     procedure GUIdestroy(Sender: TObject);
@@ -270,6 +273,12 @@ var i: integer;
 {$endif}
 begin
  DefaultFormatSettings.DecimalSeparator:='.';
+ UniqueInstance1:=TCdCUniqueInstance.Create(self);
+ UniqueInstance1.Identifier:='EqmodGui';
+ UniqueInstance1.OnOtherInstance:=@OtherInstance;
+ UniqueInstance1.OnInstanceRunning:=@InstanceRunning;
+ UniqueInstance1.Enabled:=true;
+ UniqueInstance1.Loaded;
  Notebook1.PageIndex:=0;
  configfile:=GetAppConfigFileUTF8(false,true,true);
  config:=TCCDconfig.Create(self);
@@ -333,7 +342,18 @@ end;
 
 procedure Tf_eqmod.FormDestroy(Sender: TObject);
 begin
-  config.Free;
+  if config <>nil then config.Free;
+end;
+
+procedure Tf_eqmod.OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
+begin
+  BringToFront;
+end;
+
+procedure Tf_eqmod.InstanceRunning(Sender : TObject);
+begin
+  writeln('Other instance of eqmodgui is running?');
+  UniqueInstance1.RetryOrHalt;
 end;
 
 procedure Tf_eqmod.StaticText1Click(Sender: TObject);

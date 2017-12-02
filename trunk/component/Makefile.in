@@ -10,12 +10,13 @@ version=0.0
 
 [target]
 dirs=synapse/source/lib \
+     uniqueinstance \
      indiclient
 units=components.pas
 
 [compiler]
 unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
-unitdir=indiclient/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/components/lazutils/lib/$(CPU_TARGET)-$(OS_TARGET)  $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
+unitdir=indiclient/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ uniqueinstance/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/components/lazutils/lib/$(CPU_TARGET)-$(OS_TARGET)  $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 includedir=./
 options=  $(fpcopts) -dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi
 
@@ -56,5 +57,5 @@ export LCL_PLATFORM
 outdir:
 	mkdir -p lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
 
-all: outdir synapse/source/lib_all indiclient_all components$(PPUEXT)
+all: outdir synapse/source/lib_all uniqueinstance_all indiclient_all components$(PPUEXT)
 

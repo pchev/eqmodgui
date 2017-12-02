@@ -7,7 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, sysutils, eqmod_main, eqmod_int, eqmod_setup, u_ccdconfig, joystick_int
+  Forms, sysutils, eqmod_main, eqmod_int, eqmod_setup, u_ccdconfig,
+  joystick_int, uniqueinstance_package
   { you can add units after this };
 
 {$R *.res}
