@@ -32,7 +32,7 @@ fi
 save_PATH=$PATH
 wd=`pwd`
 
-currentrev=$(LC_ALL=C svn info . | grep Revision: | sed 's/Revision: //')
+currentrev=$(git rev-list --count --first-parent HEAD)
 
 echo $version - $currentrev
 
@@ -63,6 +63,7 @@ if [[ $make_linux32 ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/debian $builddir
   cd $builddir
+  mkdir debian/eqmodgui/usr/
   mv bin debian/eqmodgui/usr/
   mv share debian/eqmodgui/usr/
   cd debian
@@ -77,6 +78,11 @@ if [[ $make_linux32 ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
   cd $builddir
+  mkdir -p rpm/RPMS/x86_64
+  mkdir -p rpm/RPMS/i386
+  mkdir rpm/SRPMS
+  mkdir rpm/tmp
+  mkdir -p rpm/eqmodgui/usr/
   mv debian/eqmodgui/usr/* rpm/eqmodgui/usr/
   cd rpm
   sed -i "/Version:/ s/3/$version/"  SPECS/eqmodgui.spec
@@ -110,6 +116,7 @@ if [[ $make_linux64 ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/debian $builddir
   cd $builddir
+  mkdir debian/eqmodgui64/usr/
   mv bin debian/eqmodgui64/usr/
   mv share debian/eqmodgui64/usr/
   cd debian
@@ -124,6 +131,11 @@ if [[ $make_linux64 ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
   cd $builddir
+  mkdir -p rpm/RPMS/x86_64
+  mkdir -p rpm/RPMS/i386
+  mkdir rpm/SRPMS
+  mkdir rpm/tmp
+  mkdir -p rpm/eqmodgui/usr/
   mv debian/eqmodgui64/usr/* rpm/eqmodgui/usr/
   cd rpm
   sed -i "/Version:/ s/3/$version/"  SPECS/eqmodgui64.spec
