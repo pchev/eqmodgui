@@ -73,6 +73,8 @@ T_indieqmod = class(TIndiBaseClient)
    RAslew, DEslew: INumber;
    TrackM: ISwitchVectorProperty;
    TrackSidereal,TrackLunar,TrackSolar,TrackCustom: ISwitch;
+   TrackSt: ISwitchVectorProperty;
+   TrackOn, TrackOff: ISwitch;
    TrackR: INumberVectorProperty;
    TrackRra, TrackRde: INumber;
    CoordSet: ISwitchVectorProperty;
@@ -334,6 +336,7 @@ begin
     SlewSpeed:=nil;
     TrackM:=nil;
     TrackR:=nil;
+    TrackSt:=nil;
     CoordSet:=nil;
     Park_opt:=nil;
     geo_coord:=nil;
@@ -370,6 +373,7 @@ begin
        (RevDec<>nil) and
        (TrackM<>nil) and
        (TrackR<>nil) and
+       (TrackSt<>nil) and
        (CoordSet<>nil) and
        (SlewMode<>nil) and
        (SlewSpeed<>nil) and
@@ -407,6 +411,7 @@ if Fconnected then begin
    if (MotionNS=nil) then Result:=Result+'TELESCOPE_MOTION_NS, ';
    if (MotionWE=nil) then Result:=Result+'TELESCOPE_MOTION_WE, ';
    if (RevDec=nil) then Result:=Result+'REVERSEDEC, ';
+   if (TrackSt=nil) then Result:=Result+'TELESCOPE_TRACK_STATE, ';
    if (TrackM=nil) then Result:=Result+'TELESCOPE_TRACK_RATE, ';
    if (TrackR=nil) then Result:=Result+'TRACKRATES, ';
    if (CoordSet=nil) then Result:=Result+'ON_COORD_SET, ';
@@ -608,6 +613,12 @@ begin
      if TrackCustom=nil then TrackCustom:=IUFindSwitch(TrackM,'CUSTOM');
      if (TrackSidereal=nil)or(TrackLunar=nil)or(TrackSolar=nil)or(TrackCustom=nil) then TrackM:=nil;
   end
+  else if (proptype=INDI_SWITCH)and(propname='TELESCOPE_TRACK_STATE') then begin
+     TrackSt:=indiProp.getSwitch;
+     TrackOn:=IUFindSwitch(TrackSt,'TRACK_ON');
+     TrackOff:=IUFindSwitch(TrackSt,'TRACK_OFF');
+     if (TrackOn=nil)or(TrackOff=nil) then TrackSt:=nil;
+  end
   else if (proptype=INDI_SWITCH)and(propname='ON_COORD_SET') then begin
      CoordSet:=indiProp.getSwitch;
      CoordSetTrack:=IUFindSwitch(CoordSet,'TRACK');
@@ -722,6 +733,8 @@ begin
   end else if svp=CoordSet then begin
         if (CoordSetSync.s=ISS_ON) and Assigned(FonSync) then FonSync(self);
   end else if svp=TrackM then begin
+        if Assigned(FonTrackModeChange) then FonTrackModeChange(self);
+  end else if svp=TrackSt then begin
         if Assigned(FonTrackModeChange) then FonTrackModeChange(self);
   end else if svp=Park_opt then begin
         if Assigned(FonParkChange) then FonParkChange(self);
@@ -873,6 +886,7 @@ if (MotionNS<>nil)and(MotionWE<>nil) then begin;
   sendNewSwitch(MotionNS);
   IUResetSwitch(MotionWE);
   sendNewSwitch(MotionWE);
+  SetTrackmode(trStop);
 end;
 end;
 
@@ -950,6 +964,12 @@ var sp: ISwitch;
     i:integer;
 begin
  result:=trStop;
+ if TrackSt<>nil then begin
+   if TrackOff.s=ISS_ON then begin
+     result:=trStop;
+     exit;
+   end;
+ end;
  if TrackM<>nil then begin
    sp:=IUFindOnSwitch(TrackM);
    if sp<>nil then begin
@@ -964,17 +984,19 @@ begin
 end;
 
 procedure T_indieqmod.SetTrackmode(value: TTrackMode);
-var sp: ISwitch;
-    i:integer;
+var i:integer;
     n:string;
 begin
- if TrackM<>nil then begin
-    sp:=IUFindOnSwitch(TrackM);
-    if sp<>nil then begin
-      sendNewSwitch(TrackM);
-      WaitBusy(TrackM);
+  if value=trStop then begin
+    if TrackSt<>nil then begin
+      IUResetSwitch(TrackSt);
+      TrackOff.s:=ISS_ON;
+      sendNewSwitch(TrackSt);
+      WaitBusy(TrackSt);
     end;
-    if value<>trStop then begin
+  end
+  else begin
+    if TrackM<>nil then begin
       IUResetSwitch(TrackM);
       i:=ord(value);
       n:=TrackModeName[i];
@@ -985,8 +1007,15 @@ begin
         end;
       end;
       sendNewSwitch(TrackM);
+      WaitBusy(TrackM);
     end;
- end;
+    if TrackSt<>nil then begin
+      IUResetSwitch(TrackSt);
+      TrackOn.s:=ISS_ON;
+      sendNewSwitch(TrackSt);
+      WaitBusy(TrackSt);
+    end;
+  end;
 end;
 
 function  T_indieqmod.GetRATrackRate: double;
