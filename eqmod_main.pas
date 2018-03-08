@@ -54,6 +54,8 @@ type
     LastMsg: TEdit;
     Label19: TLabel;
     LblPark: TLabel;
+    Panel3: TPanel;
+    PanelPosition: TPanel;
     PanelGuideRate: TPanel;
     BtnConfig: TSpeedButton;
     SyncModeCombo: TComboBox;
@@ -201,12 +203,13 @@ type
     config: TCCDconfig;
     configfile,indiserver,indiserverport,indidevice,indideviceport,joystickdevice:string;
     ready, GUIready, indisimulation, indiloadconfig, indiunparktrack, obslock, LockRate, ConnectJoystick: boolean;
-    SoundActive, SoundOK:boolean;
+    SoundActive, SoundOK, UseSystemColor:boolean;
     Appdir, SoundDir: string;
     TrackMode, RequestTrackMode: TTrackMode;
     ObsLat, ObsLon, ObsElev: double;
     procedure OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
     procedure InstanceRunning(Sender : TObject);
+    procedure SetTheme;
     procedure ReadConfig;
     procedure Connect;
     procedure GUIdestroy(Sender: TObject);
@@ -322,6 +325,7 @@ end;
 procedure Tf_eqmod.FormShow(Sender: TObject);
 begin
   ReadConfig;
+  SetTheme;
   Connect;
 end;
 
@@ -354,6 +358,22 @@ procedure Tf_eqmod.InstanceRunning(Sender : TObject);
 begin
   writeln('Other instance of eqmodgui is running?');
   UniqueInstance1.RetryOrHalt;
+end;
+
+
+procedure Tf_eqmod.SetTheme;
+begin
+  if UseSystemColor then begin
+    color:=clDefault;
+    font.Color:=clDefault;
+  end
+  else begin
+    color:=clBlack;
+    font.Color:=clred;
+  end;
+  PanelPosition.Font.Size:=-14;
+  PanelPosition.Font.Style:=[fsBold];
+  PanelPosition.Font.Color:=font.Color;
 end;
 
 procedure Tf_eqmod.StaticText1Click(Sender: TObject);
@@ -392,6 +412,7 @@ begin
  joystickdevice:=config.GetValue('/INDI/joystick','Joystick');
  ConnectJoystick:=config.GetValue('/INDI/ConnectJoystick',false);
  SoundActive:=SoundOK and config.GetValue('/Sound/Active',true);
+ UseSystemColor:=config.GetValue('/Theme/SystemColor',false);
  SiteName.Clear;
  n:=config.GetValue('/Site/Number',0);
  for i:=1 to n do begin
@@ -467,6 +488,7 @@ begin
   f_eqmodsetup.AutoLoadConfig.Checked:=config.GetValue('/INDI/AutoLoadConfig',true);
   f_eqmodsetup.UnparkTrack.Checked:=config.GetValue('/INDI/UnparkTrack',false);
   f_eqmodsetup.Sim.Checked:=config.GetValue('/INDI/simulation',false);
+  f_eqmodsetup.UseSysColor.Checked:=config.GetValue('/Theme/SystemColor',false);
   f_eqmodsetup.ShowModal;
   if f_eqmodsetup.ModalResult=mrOK then begin
      config.SetValue('/INDI/ConnectJoystick',f_eqmodsetup.JoystickCheckBox.Checked);
@@ -479,7 +501,12 @@ begin
      config.SetValue('/INDI/UnparkTrack',f_eqmodsetup.UnparkTrack.Checked);
      config.SetValue('/INDI/simulation',f_eqmodsetup.Sim.Checked);
      config.SetValue('/Sound/Active',f_eqmodsetup.SoundCheckBox.Checked);
+     config.SetValue('/Theme/SystemColor',f_eqmodsetup.UseSysColor.Checked);
      config.Flush;
+     if f_eqmodsetup.UseSysColor.Checked<>UseSystemColor then begin
+       UseSystemColor:=f_eqmodsetup.UseSysColor.Checked;
+       SetTheme;
+     end;
   end;
 end;
 

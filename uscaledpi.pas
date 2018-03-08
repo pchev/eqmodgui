@@ -25,7 +25,7 @@ var rs: TSize;
     sc: double;
 const teststr = 'The Lazy Fox Jumps';
       designlen = 125;
-      designhig = 15;
+      designhig = 18;
 begin
   {$ifdef SCALE_BY_DPI_ONLY}
   RunDPI:=Screen.PixelsPerInch;
