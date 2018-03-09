@@ -366,10 +366,16 @@ begin
   if UseSystemColor then begin
     color:=clDefault;
     font.Color:=clDefault;
+    SpeedButton1.Font.Color:=clDefault;
+    SetupBtn.Font.Color:=clDefault;
+    StaticText1.Color:=clDefault;
   end
   else begin
     color:=clBlack;
     font.Color:=clred;
+    SpeedButton1.Font.Color:=clGreen;
+    SetupBtn.Font.Color:=clRed;
+    StaticText1.Color:=clMaroon;
   end;
   PanelPosition.Font.Size:=-14;
   PanelPosition.Font.Style:=[fsBold];
@@ -412,7 +418,7 @@ begin
  joystickdevice:=config.GetValue('/INDI/joystick','Joystick');
  ConnectJoystick:=config.GetValue('/INDI/ConnectJoystick',false);
  SoundActive:=SoundOK and config.GetValue('/Sound/Active',true);
- UseSystemColor:=config.GetValue('/Theme/SystemColor',false);
+ UseSystemColor:=config.GetValue('/Theme/SystemColor',true);
  SiteName.Clear;
  n:=config.GetValue('/Site/Number',0);
  for i:=1 to n do begin
@@ -488,7 +494,7 @@ begin
   f_eqmodsetup.AutoLoadConfig.Checked:=config.GetValue('/INDI/AutoLoadConfig',true);
   f_eqmodsetup.UnparkTrack.Checked:=config.GetValue('/INDI/UnparkTrack',false);
   f_eqmodsetup.Sim.Checked:=config.GetValue('/INDI/simulation',false);
-  f_eqmodsetup.UseSysColor.Checked:=config.GetValue('/Theme/SystemColor',false);
+  f_eqmodsetup.UseSysColor.Checked:=config.GetValue('/Theme/SystemColor',true);
   f_eqmodsetup.ShowModal;
   if f_eqmodsetup.ModalResult=mrOK then begin
      config.SetValue('/INDI/ConnectJoystick',f_eqmodsetup.JoystickCheckBox.Checked);
@@ -539,6 +545,7 @@ end;
 
 procedure Tf_eqmod.BtnSaveIndiSettingsClick(Sender: TObject);
 begin
+ if not ready then exit;
   eqmod.SaveConfig;
 end;
 
@@ -683,57 +690,67 @@ end;
 procedure Tf_eqmod.BtnNorthMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
+  if not ready then exit;
   eqmod.MotionNorth;
 end;
 
 procedure Tf_eqmod.BtnSouthMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
+  if not ready then exit;
   eqmod.MotionSouth;
 end;
 
 procedure Tf_eqmod.BtnEastMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
+  if not ready then exit;
   eqmod.MotionEast;
 end;
 
 procedure Tf_eqmod.BtnWestMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
+  if not ready then exit;
   eqmod.MotionWest;
 end;
 
 procedure Tf_eqmod.BtnMotionMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
+  if not ready then exit;
   eqmod.MotionStop;
 end;
 
 procedure Tf_eqmod.BtnStopClick(Sender: TObject);
 begin
+  if not ready then exit;
   eqmod.MotionStop;
 end;
 
 procedure Tf_eqmod.RArateChange(Sender: TObject);
 begin
+  if not ready then exit;
   if LockRate then begin  LockRate:=false; exit; end;
   eqmod.RASlewSpeed:=RArate.Position;
 end;
 
 procedure Tf_eqmod.DErateChange(Sender: TObject);
 begin
+  if not ready then exit;
   if LockRate then begin  LockRate:=false; exit; end;
   eqmod.DESlewSpeed:=DErate.Position;
 end;
 
 procedure Tf_eqmod.RevDecChange(Sender: TObject);
 begin
+  if not ready then exit;
   ReverseDec.Checked:=eqmod.ReverseDec;
 end;
 
 procedure Tf_eqmod.ReverseDecChange(Sender: TObject);
 begin
+  if not ready then exit;
   eqmod.ReverseDec:=ReverseDec.Checked;
 end;
 
@@ -741,6 +758,7 @@ procedure Tf_eqmod.SlewSpeedRange;
 var min,max,step: integer;
     range:TNumRange;
 begin
+  if not ready then exit;
   // RA
   range:=eqmod.RASlewSpeedRange;
   min:=trunc(range.min);
@@ -767,6 +785,7 @@ end;
 
 Procedure Tf_eqmod.SlewSpeedChange(Sender: TObject);
 begin
+  if not ready then exit;
   LockRate:=true;
   RArate.Position:=eqmod.RASlewSpeed;
   LockRate:=true;
@@ -790,6 +809,7 @@ end;
 
 procedure Tf_eqmod.SlewPresetChange(Sender: TObject);
 begin
+  if not ready then exit;
   PanelSlewRate.Visible:=(SlewPreset.Text='Custom');
   eqmod.ActiveSlewPreset:=SlewPreset.ItemIndex;
 end;
@@ -834,6 +854,7 @@ end;
 
 procedure Tf_eqmod.SetTrackModeClick(Sender: TObject);
 begin
+if not ready then exit;
 if sender is TSpeedButton then
   RequestTrackMode:=TTrackMode(TSpeedButton(sender).tag);
   eqmod.TrackMode:=RequestTrackMode;
@@ -843,6 +864,7 @@ end;
 procedure Tf_eqmod.BtnSetTrackRateClick(Sender: TObject);
 var x,y: double;
 begin
+if not ready then exit;
 x:=StrToFloatDef(TrackRA.Text,-99999);
 y:=StrToFloatDef(TrackDEC.Text,-99999);
 if (x>-99999)and(y>=-99999) then begin
@@ -902,6 +924,7 @@ end;
 
 procedure Tf_eqmod.BtnParkClick(Sender: TObject);
 begin
+ if not ready then exit;
  if BtnPark.Caption='Park' then begin
   if MessageDlg('Park the telescope now?',mtConfirmation,mbYesNo,0)=mrYes then
      eqmod.Park:=true;
@@ -1020,6 +1043,7 @@ end;
 
 procedure Tf_eqmod.SetSiteClick(Sender: TObject);
 begin
+  if not ready then exit;
   LatChange(Sender);
   LongChange(Sender);
   ElevationChange(Sender);
@@ -1085,6 +1109,7 @@ end;
 
 procedure Tf_eqmod.BtnClearAlignmentClick(Sender: TObject);
 begin
+if not ready then exit;
   if MessageDlg('Clear all the alignment points?',mtConfirmation,mbYesNo,0)=mrYes then begin
      eqmod.ClearAlignment;
   end;
@@ -1098,6 +1123,7 @@ end;
 
 procedure Tf_eqmod.BtnClearDeltaClick(Sender: TObject);
 begin
+  if not ready then exit;
   if MessageDlg('Clear Sync delta?',mtConfirmation,mbYesNo,0)=mrYes then begin
      eqmod.ClearSyncDelta;
   end;
@@ -1106,6 +1132,7 @@ end;
 procedure Tf_eqmod.BtnSaveAlignClick(Sender: TObject);
 var fn,site: string;
 begin
+  if not ready then exit;
   fn:=ExpandFileNameUTF8('~/.indi');
   site:=trim(SiteName.Text);
   ForceDirectoriesUTF8(fn);
@@ -1117,6 +1144,7 @@ procedure Tf_eqmod.BtnLoadAlignClick(Sender: TObject);
 var fn,site: string;
     npoint: integer;
 begin
+  if not ready then exit;
   fn:=ExpandFileNameUTF8('~/.indi');
   site:=trim(SiteName.Text);
   fn:=fn+'/AlignData'+site+'.xml';
@@ -1151,6 +1179,7 @@ end;
 
 procedure Tf_eqmod.SyncModeComboChange(Sender: TObject);
 begin
+  if not ready then exit;
   eqmod.ActiveSyncMode:=SyncModeCombo.ItemIndex;
   config.SetValue('/Options/ActiveSyncMode',SyncModeCombo.ItemIndex);
   config.Flush;
@@ -1158,6 +1187,7 @@ end;
 
 procedure Tf_eqmod.AlignModeComboChange(Sender: TObject);
 begin
+  if not ready then exit;
   eqmod.ActiveAlignmentMode:=AlignModeCombo.ItemIndex
 end;
 
@@ -1176,6 +1206,7 @@ procedure Tf_eqmod.BtnSetGuideRateClick(Sender: TObject);
 var gra,gde: double;
     n:integer;
 begin
+  if not ready then exit;
   val(GuideRA.Text,gra,n);
   if n<>0 then exit;
   val(GuideDEC.Text,gde,n);
