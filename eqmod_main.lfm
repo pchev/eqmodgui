@@ -46,8 +46,8 @@ object f_eqmod: Tf_eqmod
         Left = 24
         Height = 19
         Top = 0
-        Width = 24
-        Caption = '        '
+        Width = 4
+        Caption = '-'
         ParentColor = False
       end
     end

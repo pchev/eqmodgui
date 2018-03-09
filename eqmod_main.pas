@@ -800,11 +800,13 @@ end;
 
 Procedure Tf_eqmod.SlewModeChange(Sender: TObject);
 begin
+if SlewPreset.ItemIndex<>eqmod.ActiveSlewPreset then begin
   SlewPreset.ItemIndex:=eqmod.ActiveSlewPreset;
   if SlewPreset.ItemIndex<10 then
     PlaySound('rate'+IntToStr(SlewPreset.ItemIndex+1)+'.wav')
   else
     PlaySound('custom.wav');
+end;
 end;
 
 procedure Tf_eqmod.SlewPresetChange(Sender: TObject);
@@ -905,8 +907,11 @@ end;
 //////////////////  Park/Unpark box ////////////////////////
 
 Procedure Tf_eqmod.ParkChange(Sender: TObject);
+var parked: boolean;
 begin
 // Park status require INDI r2162
+parked:=(LblPark.Caption='Parked');
+if (LblPark.Caption='-') or (eqmod.Park<>parked) then begin
   if eqmod.Park then begin
      BtnPark.Caption:='Unpark';
      LblPark.Caption:='Parked';
@@ -920,6 +925,7 @@ begin
      end;
      PlaySound('unparked.wav');
   end;
+end;
 end;
 
 procedure Tf_eqmod.BtnParkClick(Sender: TObject);
