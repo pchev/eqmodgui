@@ -153,9 +153,11 @@ type
     procedure BtnConfigClick(Sender: TObject);
     procedure BtnEastMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure BtnEastMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure BtnLoadAlignClick(Sender: TObject);
     procedure BtnNorthMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure BtnNorthMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure BtnParkClick(Sender: TObject);
     procedure BtnSaveAlignClick(Sender: TObject);
     procedure BtnSaveIndiSettingsClick(Sender: TObject);
@@ -163,7 +165,9 @@ type
     procedure BtnSetGuideRateClick(Sender: TObject);
     procedure BtnSouthMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure BtnSouthMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure BtnTrackPaint(Sender: TObject);
+    procedure BtnWestMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ElevationChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure LatChange(Sender: TObject);
@@ -174,8 +178,6 @@ type
     procedure SetSiteClick(Sender: TObject);
     procedure SetTrackModeClick(Sender: TObject);
     procedure BtnWestMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure BtnMotionMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure BtnStopClick(Sender: TObject);
     procedure DErateChange(Sender: TObject);
@@ -694,11 +696,23 @@ begin
   eqmod.MotionNorth;
 end;
 
+procedure Tf_eqmod.BtnNorthMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if not ready then exit;
+  eqmod.MotionNorthStop;
+end;
+
 procedure Tf_eqmod.BtnSouthMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if not ready then exit;
   eqmod.MotionSouth;
+end;
+
+procedure Tf_eqmod.BtnSouthMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if not ready then exit;
+  eqmod.MotionSouthStop;
 end;
 
 procedure Tf_eqmod.BtnEastMouseDown(Sender: TObject; Button: TMouseButton;
@@ -708,6 +722,12 @@ begin
   eqmod.MotionEast;
 end;
 
+procedure Tf_eqmod.BtnEastMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if not ready then exit;
+  eqmod.MotionEastStop;
+end;
+
 procedure Tf_eqmod.BtnWestMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -715,11 +735,10 @@ begin
   eqmod.MotionWest;
 end;
 
-procedure Tf_eqmod.BtnMotionMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure Tf_eqmod.BtnWestMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if not ready then exit;
-  eqmod.MotionStop;
+  eqmod.MotionWestStop;
 end;
 
 procedure Tf_eqmod.BtnStopClick(Sender: TObject);

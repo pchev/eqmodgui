@@ -194,6 +194,10 @@ T_indieqmod = class(TIndiBaseClient)
    procedure MotionSouth;
    procedure MotionWest;
    procedure MotionEast;
+   procedure MotionNorthStop;
+   procedure MotionSouthStop;
+   procedure MotionWestStop;
+   procedure MotionEastStop;
    procedure MotionStop;
    procedure SetTrackRate(tra,tde: double);
    procedure SetSite(ObsLat,ObsLon,ObsElev: double);
@@ -879,6 +883,38 @@ if MotionWE<>nil then begin;
 end;
 end;
 
+procedure T_indieqmod.MotionNorthStop;
+begin
+if MotionNS<>nil then begin;
+  IUResetSwitch(MotionNS);
+  sendNewSwitch(MotionNS);
+end;
+end;
+
+procedure T_indieqmod.MotionSouthStop;
+begin
+if MotionNS<>nil then begin;
+  IUResetSwitch(MotionNS);
+  sendNewSwitch(MotionNS);
+end;
+end;
+
+procedure T_indieqmod.MotionWestStop;
+begin
+if MotionWE<>nil then begin;
+  IUResetSwitch(MotionWE);
+  sendNewSwitch(MotionWE);
+end;
+end;
+
+procedure T_indieqmod.MotionEastStop;
+begin
+if MotionWE<>nil then begin;
+  IUResetSwitch(MotionWE);
+  sendNewSwitch(MotionWE);
+end;
+end;
+
 procedure T_indieqmod.MotionStop;
 begin
 if (MotionNS<>nil)and(MotionWE<>nil) then begin;
@@ -886,7 +922,6 @@ if (MotionNS<>nil)and(MotionWE<>nil) then begin;
   sendNewSwitch(MotionNS);
   IUResetSwitch(MotionWE);
   sendNewSwitch(MotionWE);
-  SetTrackmode(trStop);
 end;
 end;
 
