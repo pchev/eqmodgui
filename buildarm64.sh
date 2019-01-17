@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=1.4.0
+version=$(grep 'eq_version' eqmod_main.pas |head -1| cut -d\' -f2)
 
 builddir=/tmp/eqmodgui  # Be sure this is set to a non existent directory, it is removed after the run!
 
