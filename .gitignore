@@ -10,9 +10,11 @@ component/lib/
 component/indiclient/lib/
 component/synapse/source/lib/lib/
 component/uniqueinstance/lib/
+eqmodgui.lps
 # ignore binary
 eqmodgui
 eqmodgui.dbg
+eqmodgui*.dmg
 eqmodgui*.rpm
 eqmodgui*.deb
 eqmodgui*.tar.xz
