@@ -43,7 +43,6 @@ type
     BtnINDIgui: TButton;
     BtnSaveAlign: TSpeedButton;
     BtnSaveIndiSettings: TSpeedButton;
-    BtnSaveSite2: TSpeedButton;
     BtnLoadAlign: TSpeedButton;
     BtnSetGuideRate: TSpeedButton;
     GroupBox8: TGroupBox;
