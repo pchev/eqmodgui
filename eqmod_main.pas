@@ -384,13 +384,15 @@ begin
 end;
 
 procedure Tf_eqmod.StaticText1Click(Sender: TObject);
-var aboutmsg: string;
+var aboutmsg,cdate: string;
 begin
+  cdate:={$I %DATE%};
+  cdate:=copy(cdate,1,4);
   aboutmsg:='EQMod Mount '+crlf;
   aboutmsg:=aboutmsg+'Version '+eq_version+'-'+RevisionStr+' '+compile_time+crlf;
   aboutmsg:=aboutmsg+'Compiled with:'+crlf;
   aboutmsg:=aboutmsg+' '+compile_version+crlf+crlf;
-  aboutmsg:=aboutmsg+'Copyright (C) 2015 Patrick Chevalley'+crlf;
+  aboutmsg:=aboutmsg+'Copyright (C) '+cdate+' Patrick Chevalley'+crlf;
   aboutmsg:=aboutmsg+'pch@ap-i.net , http://www.ap-i.net'+crlf+crlf;
   aboutmsg:=aboutmsg+'This program is free software; you can redistribute it and/or'+crlf;
   aboutmsg:=aboutmsg+'modify it under the terms of the GNU General Public License'+crlf;
