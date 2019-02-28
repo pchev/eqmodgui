@@ -823,7 +823,10 @@ var sw:ISwitch;
 begin
  if PierSide<>nil then begin
     sw:=IUFindOnSwitch(PierSide);
-    result:=sw.lbl;
+    if sw<>nil then
+      result:=sw.lbl
+    else
+      result:='?';
  end
  else result:='?';
 end;
