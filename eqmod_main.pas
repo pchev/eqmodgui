@@ -123,6 +123,7 @@ type
     BtnSetTrackRate: TSpeedButton;
     BtnSaveSite: TSpeedButton;
     SetSite: TSpeedButton;
+    InitTimer: TTimer;
     TrackTimer: TTimer;
     TrackDEC: TEdit;
     GuideDEC: TEdit;
@@ -169,6 +170,7 @@ type
     procedure BtnWestMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ElevationChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure InitTimerTimer(Sender: TObject);
     procedure LatChange(Sender: TObject);
     procedure LatKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure LongChange(Sender: TObject);
@@ -327,6 +329,12 @@ procedure Tf_eqmod.FormShow(Sender: TObject);
 begin
   ReadConfig;
   SetTheme;
+  InitTimer.Enabled:=true;
+end;
+
+procedure Tf_eqmod.InitTimerTimer(Sender: TObject);
+begin
+  InitTimer.Enabled:=false;
   Connect;
 end;
 
