@@ -1,13 +1,12 @@
 object f_eqmod: Tf_eqmod
   Left = 79
-  Height = 590
+  Height = 596
   Top = 17
-  Width = 484
+  Width = 489
   ActiveControl = Panel1
   Caption = 'EQMod Mount'
-  ClientHeight = 590
-  ClientWidth = 484
-  DesignTimePPI = 95
+  ClientHeight = 596
+  ClientWidth = 489
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -15,28 +14,30 @@ object f_eqmod: Tf_eqmod
   ShowHint = True
   object Panel1: TPanel
     Left = 0
-    Height = 624
+    Height = 631
     Top = 0
-    Width = 228
+    Width = 230
     BevelOuter = bvNone
-    ClientHeight = 624
-    ClientWidth = 228
+    ClientHeight = 631
+    ClientWidth = 230
+    ParentFont = False
     TabOrder = 0
     object GroupBox5: TGroupBox
       Left = 4
-      Height = 53
-      Top = 536
-      Width = 220
+      Height = 54
+      Top = 542
+      Width = 222
       Caption = 'Park'
-      ClientHeight = 33
-      ClientWidth = 218
+      ClientHeight = 34
+      ClientWidth = 220
+      ParentFont = False
       TabOrder = 4
       object BtnPark: TSpeedButton
-        Left = 112
+        Left = 113
         Height = 24
         Hint = 'Park or Unpark the mount'
         Top = 0
-        Width = 90
+        Width = 91
         Caption = 'Unpark'
         OnClick = BtnParkClick
         ParentFont = False
@@ -48,16 +49,18 @@ object f_eqmod: Tf_eqmod
         Width = 4
         Caption = '-'
         ParentColor = False
+        ParentFont = False
       end
     end
     object GroupBox3: TGroupBox
       Left = 4
-      Height = 150
-      Top = 288
-      Width = 220
+      Height = 152
+      Top = 291
+      Width = 222
       Caption = 'Slew Controls'
-      ClientHeight = 130
-      ClientWidth = 218
+      ClientHeight = 132
+      ClientWidth = 220
+      ParentFont = False
       TabOrder = 2
       object BtnNorth: TSpeedButton
         Left = 32
@@ -140,7 +143,7 @@ object f_eqmod: Tf_eqmod
         ParentFont = False
       end
       object BtnEast: TSpeedButton
-        Left = 60
+        Left = 61
         Height = 30
         Hint = 'Move East'
         Top = 28
@@ -165,7 +168,7 @@ object f_eqmod: Tf_eqmod
         Left = 32
         Height = 30
         Hint = 'Move South'
-        Top = 56
+        Top = 57
         Width = 30
         Caption = 'S'
         OnMouseDown = BtnSouthMouseDown
@@ -173,46 +176,49 @@ object f_eqmod: Tf_eqmod
         ParentFont = False
       end
       object PanelSlewRate: TPanel
-        Left = 96
-        Height = 80
+        Left = 97
+        Height = 81
         Top = 38
-        Width = 114
+        Width = 115
         BevelOuter = bvSpace
-        ClientHeight = 80
-        ClientWidth = 114
+        ClientHeight = 81
+        ClientWidth = 115
+        ParentFont = False
         TabOrder = 0
         Visible = False
         object RArate: TTrackBar
           Left = 0
-          Height = 78
+          Height = 79
           Hint = 'RA speed'
           Top = 0
-          Width = 55
+          Width = 56
           OnChange = RArateChange
           Orientation = trVertical
           Position = 0
           ScalePos = trLeft
+          ParentFont = False
           TabOrder = 0
         end
         object DErate: TTrackBar
-          Left = 56
-          Height = 78
+          Left = 57
+          Height = 79
           Hint = 'Dec speed'
           Top = 0
-          Width = 55
+          Width = 56
           OnChange = DErateChange
           Orientation = trVertical
           Position = 0
           ScalePos = trLeft
+          ParentFont = False
           TabOrder = 1
         end
       end
       object SlewPreset: TComboBox
-        Left = 96
+        Left = 97
         Height = 35
         Hint = 'Speed setting'
         Top = 0
-        Width = 112
+        Width = 113
         ItemHeight = 0
         OnChange = SlewPresetChange
         ParentColor = True
@@ -224,17 +230,18 @@ object f_eqmod: Tf_eqmod
         Left = 1
         Height = 21
         Hint = 'Revert declination direction'
-        Top = 82
-        Width = 77
+        Top = 83
+        Width = 78
         Caption = 'Rev. DEC'
         OnChange = ReverseDecChange
+        ParentFont = False
         TabOrder = 2
       end
       object joystickled: TShape
         Left = 4
         Height = 14
         Hint = 'Connection status'
-        Top = 108
+        Top = 109
         Width = 14
         Brush.Color = clRed
         Shape = stCircle
@@ -242,21 +249,23 @@ object f_eqmod: Tf_eqmod
       object Label22: TLabel
         Left = 24
         Height = 19
-        Top = 104
+        Top = 105
         Width = 46
         Caption = 'Joystick'
         ParentColor = False
+        ParentFont = False
       end
     end
     object TopPanel: TPanel
       Left = 0
-      Height = 54
+      Height = 55
       Top = 0
-      Width = 228
+      Width = 230
       Align = alTop
       BevelOuter = bvNone
-      ClientHeight = 54
-      ClientWidth = 228
+      ClientHeight = 55
+      ClientWidth = 230
+      ParentFont = False
       TabOrder = 0
       object IndiBtn: TPanel
         Left = 4
@@ -275,23 +284,25 @@ object f_eqmod: Tf_eqmod
         OnClick = IndiBtnClick
       end
       object TitlePanel: TPanel
-        Left = 66
+        Left = 67
         Height = 45
         Top = 4
-        Width = 154
+        Width = 156
         BevelOuter = bvNone
         ClientHeight = 45
-        ClientWidth = 154
+        ClientWidth = 156
+        ParentFont = False
         TabOrder = 1
         object StaticText1: TStaticText
           Left = 0
           Height = 45
           Top = 0
-          Width = 154
+          Width = 156
           Align = alClient
           Alignment = taCenter
           Caption = 'EQMod Mount'#10'Version 0.0.0'
           OnClick = StaticText1Click
+          ParentFont = False
           TabOrder = 0
         end
       end
@@ -300,102 +311,111 @@ object f_eqmod: Tf_eqmod
       Left = 4
       Height = 24
       Hint = 'Switch informations box'
-      Top = 54
-      Width = 54
+      Top = 55
+      Width = 55
       Caption = '+'
       OnClick = SpeedButton1Click
+      ParentFont = False
     end
     object SetupBtn: TSpeedButton
-      Left = 181
+      Left = 183
       Height = 24
       Hint = 'Configuration'
-      Top = 54
+      Top = 55
       Width = 38
       Caption = '>>>'
       OnClick = SetupBtnClick
+      ParentFont = False
     end
     object Notebook1: TNotebook
       Left = 1
-      Height = 204
-      Top = 80
-      Width = 218
+      Height = 206
+      Top = 81
+      Width = 220
       PageIndex = 0
       TabOrder = 1
       TabStop = True
       object Page1: TPage
         object GroupBox1: TGroupBox
           Left = 0
-          Height = 204
+          Height = 206
           Top = 0
-          Width = 218
+          Width = 220
           Align = alClient
           Caption = 'Mount Position'
-          ClientHeight = 184
-          ClientWidth = 216
+          ClientHeight = 186
+          ClientWidth = 218
+          ParentFont = False
           TabOrder = 0
           object PanelPosition: TPanel
             Left = 0
-            Height = 127
+            Height = 128
             Top = 0
-            Width = 216
+            Width = 218
             Align = alTop
             AutoSize = True
             BevelOuter = bvNone
-            ClientHeight = 127
-            ClientWidth = 216
+            ClientHeight = 128
+            ClientWidth = 218
+            ParentFont = False
             TabOrder = 0
             object ALT: TEdit
-              Left = 88
+              Left = 89
               Height = 23
               Hint = 'Elevation'
-              Top = 104
-              Width = 128
+              Top = 105
+              Width = 129
               BorderStyle = bsNone
               ParentColor = True
+              ParentFont = False
               ReadOnly = True
               TabOrder = 0
             end
             object AZ: TEdit
-              Left = 88
+              Left = 89
               Height = 23
               Hint = 'Azimuth'
-              Top = 78
-              Width = 128
+              Top = 79
+              Width = 129
               BorderStyle = bsNone
               ParentColor = True
+              ParentFont = False
               ReadOnly = True
               TabOrder = 1
             end
             object DE: TEdit
-              Left = 88
+              Left = 89
               Height = 23
               Hint = 'Declination'
-              Top = 52
-              Width = 128
+              Top = 53
+              Width = 129
               BorderStyle = bsNone
               ParentColor = True
+              ParentFont = False
               ReadOnly = True
               TabOrder = 2
             end
             object RA: TEdit
-              Left = 88
+              Left = 89
               Height = 23
               Hint = 'Right Ascension'
               Top = 25
-              Width = 128
+              Width = 129
               BorderStyle = bsNone
               ParentColor = True
+              ParentFont = False
               ReadOnly = True
               TabOrder = 3
             end
             object LST: TEdit
-              Left = 88
+              Left = 89
               Height = 23
               Hint = 'Local Sidereal Time'
               Top = 0
-              Width = 128
+              Width = 129
               BorderStyle = bsNone
               ParentColor = True
+              ParentFont = False
               ReadOnly = True
               TabOrder = 4
             end
@@ -407,72 +427,80 @@ object f_eqmod: Tf_eqmod
               BorderSpacing.Left = 12
               Caption = 'LST'
               ParentColor = False
+              ParentFont = False
             end
             object Label1: TLabel
               Left = 12
               Height = 19
               Top = 27
-              Width = 16
+              Width = 17
               BorderSpacing.Left = 12
               Caption = 'RA'
               ParentColor = False
+              ParentFont = False
             end
             object Label2: TLabel
               Left = 12
               Height = 19
-              Top = 54
+              Top = 55
               Width = 25
               BorderSpacing.Left = 12
               Caption = 'DEC'
               ParentColor = False
+              ParentFont = False
             end
             object Label3: TLabel
               Left = 12
               Height = 19
-              Top = 80
-              Width = 16
+              Top = 81
+              Width = 17
               BorderSpacing.Left = 12
               Caption = 'AZ'
               ParentColor = False
+              ParentFont = False
             end
             object Label4: TLabel
               Left = 12
               Height = 19
-              Top = 106
-              Width = 22
+              Top = 107
+              Width = 23
               Caption = 'ALT'
               ParentColor = False
+              ParentFont = False
             end
           end
           object Panel3: TPanel
             Left = 0
-            Height = 54
-            Top = 130
-            Width = 216
+            Height = 55
+            Top = 131
+            Width = 218
             Align = alBottom
             BevelOuter = bvNone
-            ClientHeight = 54
-            ClientWidth = 216
+            ClientHeight = 55
+            ClientWidth = 218
+            ParentFont = False
             TabOrder = 1
             object Label6: TLabel
               Left = 12
               Height = 19
               Top = 3
-              Width = 55
+              Width = 56
               AutoSize = False
               BorderSpacing.Left = 12
               Caption = 'Pier side'
               ParentColor = False
+              ParentFont = False
             end
             object PierSide: TEdit
-              Left = 88
+              Left = 89
               Height = 23
               Hint = 'Side of pier'
               Top = 0
-              Width = 128
+              Width = 129
               AutoSize = False
               BorderStyle = bsNone
               ParentColor = True
+              ParentFont = False
               ReadOnly = True
               TabOrder = 0
             end
@@ -480,12 +508,13 @@ object f_eqmod: Tf_eqmod
               Left = 0
               Height = 25
               Hint = 'Last message from the driver'
-              Top = 29
-              Width = 216
+              Top = 30
+              Width = 218
               Align = alBottom
               AutoSize = False
               BorderStyle = bsNone
               ParentColor = True
+              ParentFont = False
               TabOrder = 1
             end
           end
@@ -501,6 +530,7 @@ object f_eqmod: Tf_eqmod
           Caption = 'Messages'
           ClientHeight = 186
           ClientWidth = 216
+          ParentFont = False
           TabOrder = 0
           object msg: TMemo
             Left = 5
@@ -513,6 +543,7 @@ object f_eqmod: Tf_eqmod
             BorderSpacing.Bottom = 5
             BorderStyle = bsNone
             ParentColor = True
+            ParentFont = False
             ScrollBars = ssAutoVertical
             TabOrder = 0
           end
@@ -521,25 +552,27 @@ object f_eqmod: Tf_eqmod
     end
     object GroupBox4: TGroupBox
       Left = 4
-      Height = 96
-      Top = 440
-      Width = 220
+      Height = 97
+      Top = 445
+      Width = 222
       Caption = 'Track Rate:'
-      ClientHeight = 76
-      ClientWidth = 218
+      ClientHeight = 77
+      ClientWidth = 220
+      ParentFont = False
       TabOrder = 3
       object Panel4: TPanel
         Left = 2
         Height = 30
         Top = 8
-        Width = 212
+        Width = 214
         BevelOuter = bvNone
         ClientHeight = 30
-        ClientWidth = 212
+        ClientWidth = 214
+        ParentFont = False
         TabOrder = 0
         object BtnTrackCustom: TSpeedButton
           Tag = 4
-          Left = 176
+          Left = 178
           Height = 30
           Hint = 'Custom tracking'
           Top = 0
@@ -613,7 +646,7 @@ object f_eqmod: Tf_eqmod
         end
         object BtnTrackSolar: TSpeedButton
           Tag = 3
-          Left = 136
+          Left = 137
           Height = 30
           Hint = 'Track at solar speed'
           Top = 0
@@ -687,7 +720,7 @@ object f_eqmod: Tf_eqmod
         end
         object BtnTrackLunar: TSpeedButton
           Tag = 2
-          Left = 92
+          Left = 93
           Height = 30
           Hint = 'Track at lunar speed'
           Top = 0
@@ -761,7 +794,7 @@ object f_eqmod: Tf_eqmod
         end
         object BtnTrackSidereal: TSpeedButton
           Tag = 1
-          Left = 48
+          Left = 49
           Height = 30
           Hint = 'Track at sidereal speed'
           Top = 0
@@ -913,48 +946,53 @@ object f_eqmod: Tf_eqmod
         Left = 3
         Height = 30
         Top = 38
-        Width = 212
+        Width = 214
         BevelOuter = bvNone
         ClientHeight = 30
-        ClientWidth = 212
+        ClientWidth = 214
+        ParentFont = False
         TabOrder = 1
         Visible = False
         object TrackDEC: TEdit
-          Left = 124
+          Left = 125
           Height = 31
           Hint = 'Custom DEC track speed'
           Top = 4
-          Width = 62
+          Width = 63
           ParentColor = True
+          ParentFont = False
           TabOrder = 0
         end
         object Label8: TLabel
-          Left = 98
+          Left = 99
           Height = 19
           Top = 7
           Width = 28
           Caption = 'DEC '
           ParentColor = False
+          ParentFont = False
         end
         object TRackRA: TEdit
           Left = 22
           Height = 31
           Hint = 'Custom RA track speed'
           Top = 4
-          Width = 73
+          Width = 74
           ParentColor = True
+          ParentFont = False
           TabOrder = 1
         end
         object Label7: TLabel
           Left = 2
           Height = 19
           Top = 7
-          Width = 19
+          Width = 20
           Caption = 'RA '
           ParentColor = False
+          ParentFont = False
         end
         object BtnSetTrackRate: TSpeedButton
-          Left = 186
+          Left = 188
           Height = 22
           Hint = 'Apply custom speed'
           Top = 5
@@ -992,32 +1030,33 @@ object f_eqmod: Tf_eqmod
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
           }
           OnClick = BtnSetTrackRateClick
+          ParentFont = False
         end
       end
     end
     object led: TShape
-      Left = 62
+      Left = 63
       Height = 14
       Hint = 'Connection status'
-      Top = 58
+      Top = 59
       Width = 14
       Brush.Color = clRed
       Shape = stCircle
     end
     object IndiConnect: TSpeedButton
-      Left = 80
+      Left = 81
       Height = 24
       Hint = 'Basic driver settings'
-      Top = 54
-      Width = 70
+      Top = 55
+      Width = 71
       Caption = 'Connect'
       OnClick = IndiConnectClick
       ParentFont = False
     end
     object BtnConfig: TSpeedButton
-      Left = 154
+      Left = 156
       Height = 24
-      Top = 54
+      Top = 55
       Width = 23
       Glyph.Data = {
         FA090000424DFA09000000000000360000002800000019000000190000000100
@@ -1102,30 +1141,33 @@ object f_eqmod: Tf_eqmod
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       }
       OnClick = BtnConfigClick
+      ParentFont = False
     end
   end
   object Panel2: TPanel
-    Left = 232
-    Height = 624
+    Left = 234
+    Height = 631
     Top = 0
-    Width = 250
+    Width = 253
     BevelOuter = bvNone
-    ClientHeight = 624
-    ClientWidth = 250
+    ClientHeight = 631
+    ClientWidth = 253
+    ParentFont = False
     TabOrder = 1
     Visible = False
     object GroupBox6: TGroupBox
       Left = 0
-      Height = 185
+      Height = 187
       Top = 0
-      Width = 250
+      Width = 253
       Align = alTop
       Caption = 'Site Information'
-      ClientHeight = 165
-      ClientWidth = 248
+      ClientHeight = 167
+      ClientWidth = 251
+      ParentFont = False
       TabOrder = 0
       object BtnSaveSite: TSpeedButton
-        Left = 48
+        Left = 49
         Height = 26
         Hint = 'Save site information'
         Top = 3
@@ -1167,47 +1209,52 @@ object f_eqmod: Tf_eqmod
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
         OnClick = BtnSaveSiteClick
+        ParentFont = False
       end
       object SiteName: TComboBox
-        Left = 80
+        Left = 81
         Height = 31
         Hint = 'Site name'
         Top = 3
-        Width = 159
+        Width = 161
         ItemHeight = 0
         OnChange = SiteNameChange
         ParentColor = True
+        ParentFont = False
         TabOrder = 0
       end
       object Label9: TLabel
         Left = 4
         Height = 19
         Top = 40
-        Width = 50
+        Width = 52
         Caption = 'Latitude'
         ParentColor = False
+        ParentFont = False
       end
       object Label10: TLabel
         Left = 4
         Height = 19
-        Top = 72
-        Width = 62
+        Top = 73
+        Width = 63
         Caption = 'Longitude'
         ParentColor = False
+        ParentFont = False
       end
       object Label11: TLabel
         Left = 4
         Height = 19
-        Top = 102
-        Width = 55
+        Top = 103
+        Width = 57
         Caption = 'Elevation'
         ParentColor = False
+        ParentFont = False
       end
       object LatNS: TComboBox
-        Left = 79
+        Left = 80
         Height = 31
         Top = 35
-        Width = 48
+        Width = 49
         ItemHeight = 0
         ItemIndex = 0
         Items.Strings = (
@@ -1222,35 +1269,38 @@ object f_eqmod: Tf_eqmod
         Text = 'N'
       end
       object LatDeg: TEdit
-        Left = 130
+        Left = 131
         Height = 31
         Top = 35
         Width = 32
         OnExit = LatChange
         OnKeyDown = LatKeyDown
         ParentColor = True
+        ParentFont = False
         TabOrder = 2
         Text = ' '
       end
       object LatMin: TEdit
-        Left = 165
+        Left = 167
         Height = 31
         Top = 35
         Width = 32
         OnExit = LatChange
         OnKeyDown = LatKeyDown
         ParentColor = True
+        ParentFont = False
         TabOrder = 3
         Text = ' '
       end
       object LatSec: TEdit
-        Left = 201
+        Left = 203
         Height = 31
         Top = 35
         Width = 38
         OnExit = LatChange
         OnKeyDown = LatKeyDown
         ParentColor = True
+        ParentFont = False
         TabOrder = 4
         Text = ' '
       end
@@ -1258,15 +1308,16 @@ object f_eqmod: Tf_eqmod
         Left = 4
         Height = 19
         Top = 5
-        Width = 36
+        Width = 38
         Caption = 'Name'
         ParentColor = False
+        ParentFont = False
       end
       object LongWE: TComboBox
-        Left = 79
+        Left = 80
         Height = 31
-        Top = 72
-        Width = 48
+        Top = 73
+        Width = 49
         ItemHeight = 0
         ItemIndex = 0
         Items.Strings = (
@@ -1281,54 +1332,58 @@ object f_eqmod: Tf_eqmod
         Text = 'E'
       end
       object LongDeg: TEdit
-        Left = 130
+        Left = 131
         Height = 31
-        Top = 72
+        Top = 73
         Width = 32
         OnExit = LongChange
         OnKeyDown = LongKeyDown
         ParentColor = True
+        ParentFont = False
         TabOrder = 6
         Text = ' '
       end
       object LongMin: TEdit
-        Left = 165
+        Left = 167
         Height = 31
-        Top = 72
+        Top = 73
         Width = 32
         OnExit = LongChange
         OnKeyDown = LongKeyDown
         ParentColor = True
+        ParentFont = False
         TabOrder = 7
         Text = ' '
       end
       object LongSec: TEdit
-        Left = 201
+        Left = 203
         Height = 31
-        Top = 72
+        Top = 73
         Width = 38
         OnExit = LongChange
         OnKeyDown = LongKeyDown
         ParentColor = True
+        ParentFont = False
         TabOrder = 8
         Text = ' '
       end
       object Elevation: TEdit
-        Left = 79
+        Left = 80
         Height = 31
-        Top = 102
-        Width = 49
+        Top = 103
+        Width = 50
         OnChange = ElevationChange
         ParentColor = True
+        ParentFont = False
         TabOrder = 9
         Text = ' '
       end
       object SetSite: TSpeedButton
-        Left = 80
+        Left = 81
         Height = 24
         Hint = 'Set the site information in the driver'
-        Top = 135
-        Width = 160
+        Top = 136
+        Width = 162
         Caption = 'Set'
         OnClick = SetSiteClick
         ParentFont = False
@@ -1336,13 +1391,14 @@ object f_eqmod: Tf_eqmod
     end
     object GroupBox7: TGroupBox
       Left = 0
-      Height = 204
-      Top = 185
-      Width = 250
+      Height = 206
+      Top = 187
+      Width = 253
       Align = alTop
       Caption = 'Alignment / Sync'
-      ClientHeight = 184
-      ClientWidth = 248
+      ClientHeight = 186
+      ClientWidth = 251
+      ParentFont = False
       TabOrder = 1
       object BtnClearAlignment: TSpeedButton
         Left = 8
@@ -1361,32 +1417,36 @@ object f_eqmod: Tf_eqmod
         Width = 38
         Caption = 'Points'
         ParentColor = False
+        ParentFont = False
       end
       object AlignPoints: TEdit
-        Left = 93
+        Left = 94
         Height = 31
         Hint = 'Number of alignment points'
         Top = 4
         Width = 44
         ParentColor = True
+        ParentFont = False
         ReadOnly = True
         TabOrder = 0
       end
       object Label14: TLabel
-        Left = 140
+        Left = 141
         Height = 19
         Top = 8
-        Width = 53
+        Width = 56
         Caption = 'Triangles'
         ParentColor = False
+        ParentFont = False
       end
       object AlignTriangles: TEdit
-        Left = 196
+        Left = 198
         Height = 31
         Hint = 'Number of alignment triangles'
         Top = 4
         Width = 45
         ParentColor = True
+        ParentFont = False
         ReadOnly = True
         TabOrder = 1
       end
@@ -1404,52 +1464,57 @@ object f_eqmod: Tf_eqmod
         Left = 40
         Height = 19
         Top = 40
-        Width = 24
+        Width = 25
         Caption = 'dRA'
         ParentColor = False
+        ParentFont = False
       end
       object DeltaRa: TEdit
-        Left = 72
+        Left = 73
         Height = 31
         Hint = 'Current delta RA'
         Top = 36
-        Width = 65
+        Width = 66
         ParentColor = True
+        ParentFont = False
         ReadOnly = True
         TabOrder = 2
       end
       object Label16: TLabel
-        Left = 140
+        Left = 141
         Height = 19
         Top = 40
-        Width = 25
+        Width = 26
         Caption = 'dDe'
         ParentColor = False
+        ParentFont = False
       end
       object DeltaDe: TEdit
-        Left = 176
+        Left = 178
         Height = 31
         Hint = 'Current delta Dec'
         Top = 36
-        Width = 65
+        Width = 66
         ParentColor = True
+        ParentFont = False
         ReadOnly = True
         TabOrder = 3
       end
       object Label17: TLabel
         Left = 8
         Height = 19
-        Top = 72
-        Width = 66
+        Top = 73
+        Width = 67
         Caption = 'Sync mode'
         ParentColor = False
+        ParentFont = False
       end
       object SyncModeCombo: TComboBox
         Left = 4
         Height = 35
         Hint = 'Select if the next sync set the delta offset'#10'or if the point is added to the alignment data'
-        Top = 92
-        Width = 156
+        Top = 93
+        Width = 158
         ItemHeight = 0
         OnChange = SyncModeComboChange
         ParentColor = True
@@ -1460,17 +1525,18 @@ object f_eqmod: Tf_eqmod
       object Label18: TLabel
         Left = 8
         Height = 19
-        Top = 123
-        Width = 118
+        Top = 124
+        Width = 123
         Caption = 'Alignment behavior'
         ParentColor = False
+        ParentFont = False
       end
       object AlignModeCombo: TComboBox
         Left = 4
         Height = 35
         Hint = 'Select how the alignment is computed'
-        Top = 144
-        Width = 157
+        Top = 146
+        Width = 159
         ItemHeight = 0
         OnChange = AlignModeComboChange
         ParentColor = True
@@ -1479,10 +1545,10 @@ object f_eqmod: Tf_eqmod
         TabOrder = 5
       end
       object BtnSaveAlign: TSpeedButton
-        Left = 208
+        Left = 210
         Height = 26
         Hint = 'Save the alignment data'
-        Top = 94
+        Top = 95
         Width = 26
         Glyph.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -1521,12 +1587,13 @@ object f_eqmod: Tf_eqmod
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
         OnClick = BtnSaveAlignClick
+        ParentFont = False
       end
       object BtnLoadAlign: TSpeedButton
-        Left = 171
+        Left = 173
         Height = 26
         Hint = 'Load the alignment data'
-        Top = 94
+        Top = 95
         Width = 26
         Glyph.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -1565,24 +1632,26 @@ object f_eqmod: Tf_eqmod
           00FFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
         OnClick = BtnLoadAlignClick
+        ParentFont = False
       end
     end
     object GroupBox11: TGroupBox
       Left = 0
-      Height = 128
-      Top = 461
-      Width = 250
+      Height = 129
+      Top = 466
+      Width = 253
       Align = alTop
       Caption = 'Other Settings'
-      ClientHeight = 108
-      ClientWidth = 248
+      ClientHeight = 109
+      ClientWidth = 251
+      ParentFont = False
       TabOrder = 2
       object BtnINDIgui: TButton
-        Left = 48
+        Left = 49
         Height = 24
         Hint = 'Open INDI control'
-        Top = 72
-        Width = 115
+        Top = 73
+        Width = 116
         Caption = 'INDI settings'
         OnClick = IndiBtnClick
         ParentFont = False
@@ -1590,20 +1659,21 @@ object f_eqmod: Tf_eqmod
       end
       object Label19: TLabel
         Left = 5
-        Height = 72
+        Height = 73
         Hint = 'Open the standard INDI settings'
         Top = 0
-        Width = 234
+        Width = 236
         AutoSize = False
         Caption = 'All the other settings like joystick, park position, horizon limit, can be set directly in the standard INDI dialog. '
         ParentColor = False
+        ParentFont = False
         WordWrap = True
       end
       object BtnSaveIndiSettings: TSpeedButton
-        Left = 192
+        Left = 194
         Height = 26
         Hint = 'Save the driver options'
-        Top = 72
+        Top = 73
         Width = 26
         Glyph.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -1642,63 +1712,70 @@ object f_eqmod: Tf_eqmod
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
         OnClick = BtnSaveIndiSettingsClick
+        ParentFont = False
       end
     end
     object GroupBox8: TGroupBox
       Left = 0
-      Height = 72
-      Top = 389
-      Width = 250
+      Height = 73
+      Top = 393
+      Width = 253
       Align = alTop
       Caption = 'Guide rate'
-      ClientHeight = 52
-      ClientWidth = 248
+      ClientHeight = 53
+      ClientWidth = 251
+      ParentFont = False
       TabOrder = 3
       object PanelGuideRate: TPanel
         Left = 4
         Height = 38
         Top = 8
-        Width = 236
+        Width = 238
         BevelOuter = bvNone
         ClientHeight = 38
-        ClientWidth = 236
+        ClientWidth = 238
+        ParentFont = False
         TabOrder = 0
         object GuideDEC: TEdit
-          Left = 124
+          Left = 125
           Height = 31
           Hint = 'DEC guide rate'
           Top = 4
-          Width = 62
+          Width = 63
           ParentColor = True
+          ParentFont = False
           TabOrder = 0
         end
         object Label20: TLabel
-          Left = 98
+          Left = 99
           Height = 19
           Top = 7
           Width = 28
           Caption = 'DEC '
           ParentColor = False
+          ParentFont = False
         end
         object GuideRA: TEdit
           Left = 22
           Height = 31
           Hint = 'RA guide rate'
           Top = 4
-          Width = 73
+          Width = 74
           ParentColor = True
+          ParentFont = False
           TabOrder = 1
         end
         object Label21: TLabel
           Left = 2
           Height = 19
           Top = 7
-          Width = 19
+          Width = 20
           Caption = 'RA '
           ParentColor = False
+          ParentFont = False
         end
         object BtnSetGuideRate: TSpeedButton
-          Left = 186
+          Left = 188
           Height = 24
           Hint = 'Apply guide rate'
           Top = 5
@@ -1714,14 +1791,21 @@ object f_eqmod: Tf_eqmod
     Enabled = False
     Interval = 5000
     OnTimer = TrackTimerTimer
-    left = 216
-    top = 536
+    left = 218
+    top = 542
   end
   object InitTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = InitTimerTimer
-    left = 75
-    top = 536
+    left = 76
+    top = 542
+  end
+  object UniqueInstance1: TUniqueInstance
+    Enabled = True
+    Identifier = 'EqmodGui'
+    OnOtherInstance = UniqueInstance1OtherInstance
+    left = 424
+    top = 352
   end
 end

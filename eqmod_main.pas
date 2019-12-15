@@ -147,6 +147,7 @@ type
     IndiBtn: TPanel;
     TitlePanel: TPanel;
     GuideRA: TEdit;
+    UniqueInstance1: TUniqueInstance;
     procedure AlignModeComboChange(Sender: TObject);
     procedure BtnClearAlignmentClick(Sender: TObject);
     procedure BtnClearDeltaClick(Sender: TObject);
@@ -197,9 +198,9 @@ type
     procedure StaticText1Click(Sender: TObject);
     procedure SyncModeComboChange(Sender: TObject);
     procedure TrackTimerTimer(Sender: TObject);
+    procedure UniqueInstance1OtherInstance(Sender: TObject; ParamCount: Integer; const Parameters: array of String);
   private
     { private declarations }
-    UniqueInstance1: TCdCUniqueInstance;
     eqmod: T_indieqmod;
     joystick: T_indijoystick;
     f_indigui: Tf_indigui;
@@ -210,8 +211,6 @@ type
     Appdir, SoundDir: string;
     TrackMode, RequestTrackMode: TTrackMode;
     ObsLat, ObsLon, ObsElev: double;
-    procedure OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
-    procedure InstanceRunning(Sender : TObject);
     procedure SetTheme;
     procedure ReadConfig;
     procedure Connect;
@@ -279,12 +278,6 @@ var i: integer;
 {$endif}
 begin
  DefaultFormatSettings.DecimalSeparator:='.';
- UniqueInstance1:=TCdCUniqueInstance.Create(self);
- UniqueInstance1.Identifier:='EqmodGui';
- UniqueInstance1.OnOtherInstance:=@OtherInstance;
- UniqueInstance1.OnInstanceRunning:=@InstanceRunning;
- UniqueInstance1.Enabled:=true;
- UniqueInstance1.Loaded;
  Notebook1.PageIndex:=0;
  configfile:=GetAppConfigFileUTF8(false,true,true);
  config:=TCCDconfig.Create(self);
@@ -358,17 +351,10 @@ begin
   if config <>nil then config.Free;
 end;
 
-procedure Tf_eqmod.OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
+procedure Tf_eqmod.UniqueInstance1OtherInstance(Sender: TObject; ParamCount: Integer; const Parameters: array of String);
 begin
   BringToFront;
 end;
-
-procedure Tf_eqmod.InstanceRunning(Sender : TObject);
-begin
-  writeln('Other instance of eqmodgui is running?');
-  UniqueInstance1.RetryOrHalt;
-end;
-
 
 procedure Tf_eqmod.SetTheme;
 begin
