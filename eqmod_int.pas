@@ -478,6 +478,7 @@ begin
    if (Mountport<>nil)and(Findideviceport<>'') then begin
       Mountport.tp[0].text:=Findideviceport;
       sendNewText(Mountport);
+      WaitBusy(Mountport,5000,1000);
    end;
    if (Sim<>nil) and FSimulation then begin
      IUResetSwitch(Sim);
