@@ -1779,26 +1779,25 @@ object f_eqmod: Tf_eqmod
     Enabled = False
     Interval = 5000
     OnTimer = TrackTimerTimer
-    left = 218
-    top = 542
+    Left = 218
+    Top = 542
   end
   object InitTimer: TTimer
     Enabled = False
-    Interval = 100
     OnTimer = InitTimerTimer
-    left = 76
-    top = 542
+    Left = 76
+    Top = 542
   end
   object UniqueInstance1: TUniqueInstance
     Enabled = True
     Identifier = 'EqmodGui'
     OnOtherInstance = UniqueInstance1OtherInstance
-    left = 424
-    top = 352
+    Left = 424
+    Top = 352
   end
   object ImageList1: TImageList
-    left = 114
-    top = 313
+    Left = 114
+    Top = 313
     Bitmap = {
       4C69040000001000000010000000292623002926230029262300292623002926
       2300292623002926230029262300292623002926230029262300292623002926
