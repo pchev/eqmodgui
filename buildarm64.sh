@@ -29,8 +29,8 @@ echo $version - $currentrev
 
 
 # delete old files
-  rm eqmodgui*.bz2
-  rm eqmodgui*.deb
+  rm eqmodgui-*_armhf.tar.bz2
+  rm eqmodgui_*_armhf.deb
   rm -rf $builddir
 
 # make Linux arm version
@@ -40,7 +40,7 @@ if [[ $make_linuxarm ]]; then
   make CPU_TARGET=aarch64 OS_TARGET=linux clean
   make CPU_TARGET=aarch64 OS_TARGET=linux
   if [[ $? -ne 0 ]]; then exit 1;fi
-  make install
+  make install CPU_TARGET=aarch64
   if [[ $? -ne 0 ]]; then exit 1;fi
   # tar
   cd $builddir
