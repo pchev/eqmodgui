@@ -43,6 +43,9 @@ opt_target= -k-macosx_version_min -k10.14 -k-framework -kCocoa -k-weak_framework
 else
 LCL_PLATFORM=qt5
 opt_target=-dSDL_SOUND
+ifeq ($(CPU_TARGET),arm)
+opt_target=
+endif
 endif
 endif
 export LCL_PLATFORM
