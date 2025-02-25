@@ -29,8 +29,8 @@ echo $version - $currentrev
 
 
 # delete old files
-  rm eqmodgui-*_armhf.tar.bz2
-  rm eqmodgui_*_armhf.deb
+  rm eqmodgui-*_arm64.tar.bz2
+  rm eqmodgui_*_arm64.deb
   rm -rf $builddir
 
 # make Linux arm version

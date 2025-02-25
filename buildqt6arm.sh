@@ -22,8 +22,8 @@ echo $version - $currentrev
 
 
 # delete old files
-  rm eqmodgui-qt6-*_armhf.tar.bz2
-  rm eqmodgui-qt6_*_armhf.deb
+  rm eqmodgui-qt6-*_arm64.tar.bz2
+  rm eqmodgui-qt6_*_arm64.deb
   rm -rf $builddir
 
 # make Linux arm version
