@@ -1,0 +1,16 @@
+Package: eqmodgui-qt6
+Version: 3
+Section: education
+Priority: optional
+Maintainer: Patrick Chevalley <pch@ap-i.net>
+Architecture: amd64
+Installed-Size: %size%
+Provides: eqmodgui
+Conflicts: eqmodgui
+Replaces: eqmodgui
+Depends: libc6, libqt6pas6, libglib2.0-0, libsdl-mixer1.2
+Recommends: indi-bin, indi-eqmod
+Description: User interface for INDI Eqmod telescope driver.
+ Eqmodgui is a user interface for INDI Eqmod telescope driver.
+ It allow to easily set the main parameters require to use this driver and manage the alignement data.
+ .
