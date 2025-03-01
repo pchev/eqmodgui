@@ -48,7 +48,7 @@ if [[ $make_linuxarm ]]; then
   # tar
   cd $builddir
   cd ..
-  tar cvjf eqmodgui-$version-$currentrev-linux_arm.tar.bz2 eqmodgui
+  tar cvjf eqmodgui-$version-$currentrev-linux_armhf.tar.bz2 eqmodgui
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv eqmodgui*.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
