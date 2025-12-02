@@ -277,7 +277,7 @@ const
   CR = #$0d;
   LF = #$0a;
   CRLF = CR + LF;
-  eq_version='1.7.1';
+  eq_version='1.8.0';
 
 {$i revision.inc}
 
@@ -642,11 +642,10 @@ case eqmod.Status of
                       SyncDeltaChange(Sender);
                       SyncModeChange(Sender);
                       AlignModeChange(Sender);
-                      if indiloadconfig then begin
-                        eqmod.RAGuideRate:=config.GetValue('/Options/RAGuideRate',0.3);
-                        eqmod.DEGuideRate:=config.GetValue('/Options/DEGuideRate',0.3);
-                        eqmod.ActiveSyncMode:=config.GetValue('/Options/ActiveSyncMode',1);
-                      end;
+                      eqmod.RAGuideRate:=config.GetValue('/Options/RAGuideRate',0.3);
+                      eqmod.DEGuideRate:=config.GetValue('/Options/DEGuideRate',0.3);
+                      eqmod.ActiveSyncMode:=config.GetValue('/Options/ActiveSyncMode',1);
+                      eqmod.ActiveAlignmentMode:=config.GetValue('/Options/ActiveAlignMode',1);
                       if indiunparktrack then begin
                         eqmod.Park:=false;
                       end;
@@ -1279,7 +1278,9 @@ end;
 procedure Tf_eqmod.AlignModeComboChange(Sender: TObject);
 begin
   if not ready then exit;
-  eqmod.ActiveAlignmentMode:=AlignModeCombo.ItemIndex
+  eqmod.ActiveAlignmentMode:=AlignModeCombo.ItemIndex;
+  config.SetValue('/Options/ActiveAlignMode',AlignModeCombo.ItemIndex);
+  config.Flush;
 end;
 
 //////////////////  Guide rate  box ////////////////////////

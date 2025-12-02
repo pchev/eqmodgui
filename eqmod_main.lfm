@@ -1,12 +1,12 @@
 object f_eqmod: Tf_eqmod
   Left = 79
-  Height = 596
+  Height = 656
   Top = 17
-  Width = 489
+  Width = 487
   ActiveControl = Panel1
   Caption = 'EQMod Mount'
-  ClientHeight = 596
-  ClientWidth = 489
+  ClientHeight = 656
+  ClientWidth = 487
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -14,21 +14,22 @@ object f_eqmod: Tf_eqmod
   ShowHint = True
   object Panel1: TPanel
     Left = 0
-    Height = 631
+    Height = 656
     Top = 0
     Width = 230
     BevelOuter = bvNone
-    ClientHeight = 631
+    ClientHeight = 656
     ClientWidth = 230
     TabOrder = 0
     object GroupBox5: TGroupBox
-      Left = 4
-      Height = 54
-      Top = 542
-      Width = 222
+      Left = 0
+      Height = 61
+      Top = 588
+      Width = 230
+      Align = alTop
       Caption = 'Park'
-      ClientHeight = 34
-      ClientWidth = 220
+      ClientHeight = 31
+      ClientWidth = 226
       TabOrder = 4
       object BtnPark: TSpeedButton
         Left = 113
@@ -42,21 +43,22 @@ object f_eqmod: Tf_eqmod
       end
       object LblPark: TLabel
         Left = 24
-        Height = 19
+        Height = 18
         Top = 0
-        Width = 4
+        Width = 5
         Caption = '-'
         ParentColor = False
       end
     end
     object GroupBox3: TGroupBox
-      Left = 1
-      Height = 152
-      Top = 291
-      Width = 222
+      Left = 0
+      Height = 165
+      Top = 326
+      Width = 230
+      Align = alTop
       Caption = 'Slew Controls'
-      ClientHeight = 132
-      ClientWidth = 220
+      ClientHeight = 135
+      ClientWidth = 226
       TabOrder = 2
       object BtnNorth: TSpeedButton
         Left = 32
@@ -208,11 +210,11 @@ object f_eqmod: Tf_eqmod
       end
       object SlewPreset: TComboBox
         Left = 97
-        Height = 35
+        Height = 32
         Hint = 'Speed setting'
         Top = 0
         Width = 113
-        ItemHeight = 0
+        ItemHeight = 18
         OnChange = SlewPresetChange
         ParentColor = True
         ParentFont = False
@@ -221,7 +223,7 @@ object f_eqmod: Tf_eqmod
       end
       object ReverseDec: TCheckBox
         Left = 3
-        Height = 21
+        Height = 22
         Hint = 'Revert declination direction'
         Top = 88
         Width = 77
@@ -240,7 +242,7 @@ object f_eqmod: Tf_eqmod
       end
       object Label22: TLabel
         Left = 23
-        Height = 19
+        Height = 18
         Top = 110
         Width = 46
         Caption = 'Joystick'
@@ -297,12 +299,12 @@ object f_eqmod: Tf_eqmod
     end
     object TopPanel: TPanel
       Left = 0
-      Height = 55
+      Height = 80
       Top = 0
       Width = 230
       Align = alTop
       BevelOuter = bvNone
-      ClientHeight = 55
+      ClientHeight = 80
       ClientWidth = 230
       TabOrder = 0
       object IndiBtn: TPanel
@@ -342,63 +344,172 @@ object f_eqmod: Tf_eqmod
           TabOrder = 0
         end
       end
-    end
-    object SpeedButton1: TSpeedButton
-      Left = 4
-      Height = 24
-      Hint = 'Switch informations box'
-      Top = 55
-      Width = 55
-      Caption = '+'
-      OnClick = SpeedButton1Click
-      ParentFont = False
-    end
-    object SetupBtn: TSpeedButton
-      Left = 183
-      Height = 24
-      Hint = 'Configuration'
-      Top = 55
-      Width = 38
-      Caption = '>>>'
-      OnClick = SetupBtnClick
-      ParentFont = False
+      object BtnConfig: TSpeedButton
+        Left = 156
+        Height = 24
+        Top = 55
+        Width = 23
+        Glyph.Data = {
+          FA090000424DFA09000000000000360000002800000019000000190000000100
+          200000000000C409000064000000640000000000000000000000FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00739294FF4A55
+          5AFF4A5D63FF7B9EA5FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF005A797BFF292C
+          29FF8C8E8CFF848284FF212021FF63828CFFFF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0056636BFF211C
+          21FFBDBEBDFF7B7D7BFF6B6D6BFFA5A2A5FF212421FF638284FFFF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF005663
+          6BFF292829FFA5A6A5FF848284FF9C9E9CFF8C8E8CFFA5A2A5FF212421FF637D
+          84FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00212021FF9C9E9CFF6B696BFFA5A2A5FFF7F7F7FFA5A6A5FFA5A2
+          A5FF212421FF637D84FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF006B8284FF212021FF9CA29CFF9C9E9CFFFFFBFFFFF7FB
+          F7FFA5A6A5FFA5A2A5FF212421FF637D84FFFF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF006B8284FF211C21FF9C9E9CFF9CA2
+          9CFFF7FBF7FFFFFBFFFFA5AAA5FFA5A2A5FF212421FF637D84FFFF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF006B8284FF2120
+          21FF9C9A9CFF9CA29CFFF7FBF7FFF7FBF7FFADAAADFFA5A2A5FF292829FF6379
+          84FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF006B8284FF212021FF9C9E9CFF9C9E9CFFFFFBFFFFF7FBF7FFA5A6A5FFB5B2
+          B5FF212429FF5A797BFFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF006B828CFF212021FF9C9E9CFF9C9E9CFFF7F7F7FFDEDB
+          DEFFB5B6B5FFD6D3D6FF292829FF314142FF39454AFF526163FF84AAB5FFFF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF006B868CFF181C21FF9C9E9CFF9496
+          94FF949694FFF7F3F7FFFFFBFFFFDEDFDEFFBDBABDFFB5B6B5FF737573FF211C
+          21FF63797BFFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF006B868CFF2120
+          21FFBDC3BDFFFFFBFFFFFFFFFFFFFFFFFFFFFFFBFFFFFFFBFFFFE7E7E7FFE7E7
+          E7FFCECBCEFF212021FF73969CFFFF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF006B868CFF212021FFC6C3C6FFFFFFFFFFF7FBF7FF949294FF424142FF1818
+          18FF292829FFD6D7D6FFA5A6A5FF313439FFFF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF006B7D84FF313031FFF7F7F7FFDEDFDEFF212021FF7396
+          9CFFFF00FF0063797BFF292829FFCECFCEFF181C21FFFF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF007B9EA5FF393839FFF7FBF7FFA5A6A5FF3949
+          4AFFFF00FF00FF00FF00FF00FF00637984FF292829FF212021FFFF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF0084AEB5FF212021FFEFEFEFFF7375
+          73FF39454AFFFF00FF00FF00FF00FF00FF00FF00FF00637D84FF181818FFFF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00293439FF9496
+          94FFE7E7E7FF424142FF4A555AFFFF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF007BA2
+          A5FF181C21FFADAAADFFE7E3E7FF424142FF4A555AFFFF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF007B9AA5FF212829FF393C39FF636563FF080808FF526163FFFF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        }
+        OnClick = BtnConfigClick
+        ParentFont = False
+      end
+      object led: TShape
+        Left = 63
+        Height = 14
+        Hint = 'Connection status'
+        Top = 59
+        Width = 14
+        Brush.Color = clRed
+        Shape = stCircle
+      end
+      object IndiConnect: TSpeedButton
+        Left = 81
+        Height = 24
+        Hint = 'Basic driver settings'
+        Top = 55
+        Width = 71
+        Caption = 'Connect'
+        OnClick = IndiConnectClick
+        ParentFont = False
+      end
+      object SpeedButton1: TSpeedButton
+        Left = 4
+        Height = 24
+        Hint = 'Switch informations box'
+        Top = 55
+        Width = 55
+        Caption = '+'
+        OnClick = SpeedButton1Click
+        ParentFont = False
+      end
+      object SetupBtn: TSpeedButton
+        Left = 183
+        Height = 24
+        Hint = 'Configuration'
+        Top = 55
+        Width = 38
+        Caption = '>>>'
+        OnClick = SetupBtnClick
+        ParentFont = False
+      end
     end
     object Notebook1: TNotebook
-      Left = 1
-      Height = 206
-      Top = 81
-      Width = 220
+      Left = 0
+      Height = 246
+      Top = 80
+      Width = 230
       PageIndex = 0
+      Align = alTop
       TabOrder = 1
       TabStop = True
       object Page1: TPage
         object GroupBox1: TGroupBox
           Left = 0
-          Height = 206
+          Height = 246
           Top = 0
-          Width = 220
+          Width = 230
           Align = alClient
           Caption = 'Mount Position'
-          ClientHeight = 186
-          ClientWidth = 218
+          ClientHeight = 216
+          ClientWidth = 226
           TabOrder = 0
           object PanelPosition: TPanel
             Left = 0
-            Height = 128
+            Height = 160
             Top = 0
-            Width = 218
-            Align = alTop
-            AutoSize = True
+            Width = 226
             BevelOuter = bvNone
-            ClientHeight = 128
-            ClientWidth = 218
+            ClientHeight = 160
+            ClientWidth = 226
             TabOrder = 0
             object ALT: TEdit
               Left = 89
-              Height = 23
+              Height = 28
               Hint = 'Elevation'
-              Top = 105
+              Top = 128
               Width = 129
+              AutoSize = False
               BorderStyle = bsNone
               ParentColor = True
               ReadOnly = True
@@ -406,10 +517,11 @@ object f_eqmod: Tf_eqmod
             end
             object AZ: TEdit
               Left = 89
-              Height = 23
+              Height = 28
               Hint = 'Azimuth'
-              Top = 79
+              Top = 96
               Width = 129
+              AutoSize = False
               BorderStyle = bsNone
               ParentColor = True
               ReadOnly = True
@@ -417,10 +529,11 @@ object f_eqmod: Tf_eqmod
             end
             object DE: TEdit
               Left = 89
-              Height = 23
+              Height = 28
               Hint = 'Declination'
-              Top = 53
+              Top = 64
               Width = 129
+              AutoSize = False
               BorderStyle = bsNone
               ParentColor = True
               ReadOnly = True
@@ -428,10 +541,11 @@ object f_eqmod: Tf_eqmod
             end
             object RA: TEdit
               Left = 89
-              Height = 23
+              Height = 28
               Hint = 'Right Ascension'
-              Top = 25
+              Top = 32
               Width = 129
+              AutoSize = False
               BorderStyle = bsNone
               ParentColor = True
               ReadOnly = True
@@ -439,56 +553,67 @@ object f_eqmod: Tf_eqmod
             end
             object LST: TEdit
               Left = 89
-              Height = 23
+              Height = 28
               Hint = 'Local Sidereal Time'
               Top = 0
               Width = 129
+              AutoSize = False
               BorderStyle = bsNone
               ParentColor = True
               ReadOnly = True
               TabOrder = 4
             end
             object Label5: TLabel
+              AnchorSideTop.Control = LST
+              AnchorSideTop.Side = asrCenter
               Left = 12
-              Height = 19
-              Top = 2
-              Width = 21
+              Height = 18
+              Top = 5
+              Width = 23
               BorderSpacing.Left = 12
               Caption = 'LST'
               ParentColor = False
             end
             object Label1: TLabel
+              AnchorSideTop.Control = RA
+              AnchorSideTop.Side = asrCenter
               Left = 12
-              Height = 19
-              Top = 27
-              Width = 17
+              Height = 18
+              Top = 37
+              Width = 18
               BorderSpacing.Left = 12
               Caption = 'RA'
               ParentColor = False
             end
             object Label2: TLabel
+              AnchorSideTop.Control = DE
+              AnchorSideTop.Side = asrCenter
               Left = 12
-              Height = 19
-              Top = 55
+              Height = 18
+              Top = 69
               Width = 25
               BorderSpacing.Left = 12
               Caption = 'DEC'
               ParentColor = False
             end
             object Label3: TLabel
+              AnchorSideTop.Control = AZ
+              AnchorSideTop.Side = asrCenter
               Left = 12
-              Height = 19
-              Top = 81
-              Width = 17
+              Height = 18
+              Top = 101
+              Width = 16
               BorderSpacing.Left = 12
               Caption = 'AZ'
               ParentColor = False
             end
             object Label4: TLabel
+              AnchorSideTop.Control = ALT
+              AnchorSideTop.Side = asrCenter
               Left = 12
-              Height = 19
-              Top = 107
-              Width = 23
+              Height = 18
+              Top = 133
+              Width = 24
               Caption = 'ALT'
               ParentColor = False
             end
@@ -496,17 +621,18 @@ object f_eqmod: Tf_eqmod
           object Panel3: TPanel
             Left = 0
             Height = 55
-            Top = 131
-            Width = 218
-            Align = alBottom
+            Top = 160
+            Width = 226
             BevelOuter = bvNone
             ClientHeight = 55
-            ClientWidth = 218
+            ClientWidth = 226
             TabOrder = 1
             object Label6: TLabel
+              AnchorSideTop.Control = PierSide
+              AnchorSideTop.Side = asrCenter
               Left = 12
               Height = 19
-              Top = 3
+              Top = 2
               Width = 56
               AutoSize = False
               BorderSpacing.Left = 12
@@ -530,7 +656,7 @@ object f_eqmod: Tf_eqmod
               Height = 25
               Hint = 'Last message from the driver'
               Top = 30
-              Width = 218
+              Width = 226
               Align = alBottom
               AutoSize = False
               BorderStyle = bsNone
@@ -545,17 +671,17 @@ object f_eqmod: Tf_eqmod
           Left = 0
           Height = 206
           Top = 0
-          Width = 218
+          Width = 230
           Align = alClient
           Caption = 'Messages'
-          ClientHeight = 186
-          ClientWidth = 216
+          ClientHeight = 194
+          ClientWidth = 218
           TabOrder = 0
           object msg: TMemo
             Left = 5
-            Height = 181
+            Height = 171
             Top = 0
-            Width = 206
+            Width = 216
             Align = alClient
             BorderSpacing.Left = 5
             BorderSpacing.Right = 5
@@ -569,13 +695,14 @@ object f_eqmod: Tf_eqmod
       end
     end
     object GroupBox4: TGroupBox
-      Left = 4
+      Left = 0
       Height = 97
-      Top = 445
-      Width = 222
+      Top = 491
+      Width = 230
+      Align = alTop
       Caption = 'Track Rate:'
-      ClientHeight = 77
-      ClientWidth = 220
+      ClientHeight = 67
+      ClientWidth = 226
       TabOrder = 3
       object Panel4: TPanel
         Left = 2
@@ -970,7 +1097,7 @@ object f_eqmod: Tf_eqmod
         Visible = False
         object TrackDEC: TEdit
           Left = 125
-          Height = 23
+          Height = 20
           Hint = 'Custom DEC track speed'
           Top = 4
           Width = 63
@@ -980,15 +1107,15 @@ object f_eqmod: Tf_eqmod
         end
         object Label8: TLabel
           Left = 99
-          Height = 19
+          Height = 18
           Top = 7
-          Width = 28
+          Width = 29
           Caption = 'DEC '
           ParentColor = False
         end
         object TRackRA: TEdit
           Left = 22
-          Height = 23
+          Height = 20
           Hint = 'Custom RA track speed'
           Top = 4
           Width = 74
@@ -998,7 +1125,7 @@ object f_eqmod: Tf_eqmod
         end
         object Label7: TLabel
           Left = 2
-          Height = 19
+          Height = 18
           Top = 7
           Width = 20
           Caption = 'RA '
@@ -1046,115 +1173,6 @@ object f_eqmod: Tf_eqmod
         end
       end
     end
-    object led: TShape
-      Left = 63
-      Height = 14
-      Hint = 'Connection status'
-      Top = 59
-      Width = 14
-      Brush.Color = clRed
-      Shape = stCircle
-    end
-    object IndiConnect: TSpeedButton
-      Left = 81
-      Height = 24
-      Hint = 'Basic driver settings'
-      Top = 55
-      Width = 71
-      Caption = 'Connect'
-      OnClick = IndiConnectClick
-      ParentFont = False
-    end
-    object BtnConfig: TSpeedButton
-      Left = 156
-      Height = 24
-      Top = 55
-      Width = 23
-      Glyph.Data = {
-        FA090000424DFA09000000000000360000002800000019000000190000000100
-        200000000000C409000064000000640000000000000000000000FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00739294FF4A55
-        5AFF4A5D63FF7B9EA5FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF005A797BFF292C
-        29FF8C8E8CFF848284FF212021FF63828CFFFF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0056636BFF211C
-        21FFBDBEBDFF7B7D7BFF6B6D6BFFA5A2A5FF212421FF638284FFFF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF005663
-        6BFF292829FFA5A6A5FF848284FF9C9E9CFF8C8E8CFFA5A2A5FF212421FF637D
-        84FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00212021FF9C9E9CFF6B696BFFA5A2A5FFF7F7F7FFA5A6A5FFA5A2
-        A5FF212421FF637D84FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF006B8284FF212021FF9CA29CFF9C9E9CFFFFFBFFFFF7FB
-        F7FFA5A6A5FFA5A2A5FF212421FF637D84FFFF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF006B8284FF211C21FF9C9E9CFF9CA2
-        9CFFF7FBF7FFFFFBFFFFA5AAA5FFA5A2A5FF212421FF637D84FFFF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF006B8284FF2120
-        21FF9C9A9CFF9CA29CFFF7FBF7FFF7FBF7FFADAAADFFA5A2A5FF292829FF6379
-        84FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF006B8284FF212021FF9C9E9CFF9C9E9CFFFFFBFFFFF7FBF7FFA5A6A5FFB5B2
-        B5FF212429FF5A797BFFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF006B828CFF212021FF9C9E9CFF9C9E9CFFF7F7F7FFDEDB
-        DEFFB5B6B5FFD6D3D6FF292829FF314142FF39454AFF526163FF84AAB5FFFF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF006B868CFF181C21FF9C9E9CFF9496
-        94FF949694FFF7F3F7FFFFFBFFFFDEDFDEFFBDBABDFFB5B6B5FF737573FF211C
-        21FF63797BFFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF006B868CFF2120
-        21FFBDC3BDFFFFFBFFFFFFFFFFFFFFFFFFFFFFFBFFFFFFFBFFFFE7E7E7FFE7E7
-        E7FFCECBCEFF212021FF73969CFFFF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF006B868CFF212021FFC6C3C6FFFFFFFFFFF7FBF7FF949294FF424142FF1818
-        18FF292829FFD6D7D6FFA5A6A5FF313439FFFF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF006B7D84FF313031FFF7F7F7FFDEDFDEFF212021FF7396
-        9CFFFF00FF0063797BFF292829FFCECFCEFF181C21FFFF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF007B9EA5FF393839FFF7FBF7FFA5A6A5FF3949
-        4AFFFF00FF00FF00FF00FF00FF00637984FF292829FF212021FFFF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF0084AEB5FF212021FFEFEFEFFF7375
-        73FF39454AFFFF00FF00FF00FF00FF00FF00FF00FF00637D84FF181818FFFF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00293439FF9496
-        94FFE7E7E7FF424142FF4A555AFFFF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF007BA2
-        A5FF181C21FFADAAADFFE7E3E7FF424142FF4A555AFFFF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF007B9AA5FF212829FF393C39FF636563FF080808FF526163FFFF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-      }
-      OnClick = BtnConfigClick
-      ParentFont = False
-    end
   end
   object Panel2: TPanel
     Left = 234
@@ -1173,8 +1191,8 @@ object f_eqmod: Tf_eqmod
       Width = 253
       Align = alTop
       Caption = 'Site Information'
-      ClientHeight = 167
-      ClientWidth = 251
+      ClientHeight = 157
+      ClientWidth = 249
       TabOrder = 0
       object BtnSaveSite: TSpeedButton
         Left = 49
@@ -1222,18 +1240,18 @@ object f_eqmod: Tf_eqmod
       end
       object SiteName: TComboBox
         Left = 81
-        Height = 31
+        Height = 32
         Hint = 'Site name'
         Top = 3
         Width = 161
-        ItemHeight = 0
+        ItemHeight = 24
         OnChange = SiteNameChange
         ParentColor = True
         TabOrder = 0
       end
       object Label9: TLabel
         Left = 4
-        Height = 19
+        Height = 18
         Top = 40
         Width = 51
         Caption = 'Latitude'
@@ -1241,7 +1259,7 @@ object f_eqmod: Tf_eqmod
       end
       object Label10: TLabel
         Left = 4
-        Height = 19
+        Height = 18
         Top = 73
         Width = 63
         Caption = 'Longitude'
@@ -1249,18 +1267,18 @@ object f_eqmod: Tf_eqmod
       end
       object Label11: TLabel
         Left = 4
-        Height = 19
+        Height = 18
         Top = 103
-        Width = 55
+        Width = 56
         Caption = 'Elevation'
         ParentColor = False
       end
       object LatNS: TComboBox
         Left = 80
-        Height = 31
+        Height = 32
         Top = 35
         Width = 49
-        ItemHeight = 0
+        ItemHeight = 24
         ItemIndex = 0
         Items.Strings = (
           'N'
@@ -1275,7 +1293,7 @@ object f_eqmod: Tf_eqmod
       end
       object LatDeg: TEdit
         Left = 131
-        Height = 23
+        Height = 20
         Top = 35
         Width = 32
         BorderStyle = bsNone
@@ -1287,7 +1305,7 @@ object f_eqmod: Tf_eqmod
       end
       object LatMin: TEdit
         Left = 167
-        Height = 23
+        Height = 20
         Top = 35
         Width = 32
         BorderStyle = bsNone
@@ -1299,7 +1317,7 @@ object f_eqmod: Tf_eqmod
       end
       object LatSec: TEdit
         Left = 203
-        Height = 23
+        Height = 20
         Top = 35
         Width = 38
         BorderStyle = bsNone
@@ -1311,7 +1329,7 @@ object f_eqmod: Tf_eqmod
       end
       object Label12: TLabel
         Left = 4
-        Height = 19
+        Height = 18
         Top = 5
         Width = 37
         Caption = 'Name'
@@ -1319,10 +1337,10 @@ object f_eqmod: Tf_eqmod
       end
       object LongWE: TComboBox
         Left = 80
-        Height = 31
+        Height = 32
         Top = 73
         Width = 49
-        ItemHeight = 0
+        ItemHeight = 24
         ItemIndex = 0
         Items.Strings = (
           'E'
@@ -1337,7 +1355,7 @@ object f_eqmod: Tf_eqmod
       end
       object LongDeg: TEdit
         Left = 131
-        Height = 23
+        Height = 20
         Top = 73
         Width = 32
         BorderStyle = bsNone
@@ -1349,7 +1367,7 @@ object f_eqmod: Tf_eqmod
       end
       object LongMin: TEdit
         Left = 167
-        Height = 23
+        Height = 20
         Top = 73
         Width = 32
         BorderStyle = bsNone
@@ -1361,7 +1379,7 @@ object f_eqmod: Tf_eqmod
       end
       object LongSec: TEdit
         Left = 203
-        Height = 23
+        Height = 20
         Top = 73
         Width = 38
         BorderStyle = bsNone
@@ -1373,7 +1391,7 @@ object f_eqmod: Tf_eqmod
       end
       object Elevation: TEdit
         Left = 80
-        Height = 23
+        Height = 20
         Top = 103
         Width = 50
         BorderStyle = bsNone
@@ -1400,8 +1418,8 @@ object f_eqmod: Tf_eqmod
       Width = 253
       Align = alTop
       Caption = 'Alignment / Sync'
-      ClientHeight = 186
-      ClientWidth = 251
+      ClientHeight = 176
+      ClientWidth = 249
       TabOrder = 1
       object BtnClearAlignment: TSpeedButton
         Left = 8
@@ -1415,7 +1433,7 @@ object f_eqmod: Tf_eqmod
       end
       object Label13: TLabel
         Left = 40
-        Height = 19
+        Height = 18
         Top = 8
         Width = 38
         Caption = 'Points'
@@ -1423,7 +1441,7 @@ object f_eqmod: Tf_eqmod
       end
       object AlignPoints: TEdit
         Left = 94
-        Height = 23
+        Height = 20
         Hint = 'Number of alignment points'
         Top = 4
         Width = 44
@@ -1434,7 +1452,7 @@ object f_eqmod: Tf_eqmod
       end
       object Label14: TLabel
         Left = 141
-        Height = 19
+        Height = 18
         Top = 8
         Width = 56
         Caption = 'Triangles'
@@ -1442,7 +1460,7 @@ object f_eqmod: Tf_eqmod
       end
       object AlignTriangles: TEdit
         Left = 198
-        Height = 23
+        Height = 20
         Hint = 'Number of alignment triangles'
         Top = 4
         Width = 45
@@ -1463,15 +1481,15 @@ object f_eqmod: Tf_eqmod
       end
       object Label15: TLabel
         Left = 40
-        Height = 19
+        Height = 18
         Top = 40
-        Width = 25
+        Width = 26
         Caption = 'dRA'
         ParentColor = False
       end
       object DeltaRa: TEdit
         Left = 73
-        Height = 23
+        Height = 20
         Hint = 'Current delta RA'
         Top = 36
         Width = 66
@@ -1482,15 +1500,15 @@ object f_eqmod: Tf_eqmod
       end
       object Label16: TLabel
         Left = 141
-        Height = 19
+        Height = 18
         Top = 40
-        Width = 26
+        Width = 25
         Caption = 'dDe'
         ParentColor = False
       end
       object DeltaDe: TEdit
         Left = 178
-        Height = 23
+        Height = 20
         Hint = 'Current delta Dec'
         Top = 36
         Width = 66
@@ -1501,7 +1519,7 @@ object f_eqmod: Tf_eqmod
       end
       object Label17: TLabel
         Left = 8
-        Height = 19
+        Height = 18
         Top = 73
         Width = 67
         Caption = 'Sync mode'
@@ -1509,11 +1527,11 @@ object f_eqmod: Tf_eqmod
       end
       object SyncModeCombo: TComboBox
         Left = 4
-        Height = 35
+        Height = 32
         Hint = 'Select if the next sync set the delta offset'#10'or if the point is added to the alignment data'
         Top = 93
         Width = 158
-        ItemHeight = 0
+        ItemHeight = 18
         OnChange = SyncModeComboChange
         ParentColor = True
         ParentFont = False
@@ -1522,7 +1540,7 @@ object f_eqmod: Tf_eqmod
       end
       object Label18: TLabel
         Left = 8
-        Height = 19
+        Height = 18
         Top = 124
         Width = 122
         Caption = 'Alignment behavior'
@@ -1530,11 +1548,11 @@ object f_eqmod: Tf_eqmod
       end
       object AlignModeCombo: TComboBox
         Left = 4
-        Height = 35
+        Height = 32
         Hint = 'Select how the alignment is computed'
         Top = 146
         Width = 159
-        ItemHeight = 0
+        ItemHeight = 18
         OnChange = AlignModeComboChange
         ParentColor = True
         ParentFont = False
@@ -1637,8 +1655,8 @@ object f_eqmod: Tf_eqmod
       Width = 253
       Align = alTop
       Caption = 'Other Settings'
-      ClientHeight = 109
-      ClientWidth = 251
+      ClientHeight = 99
+      ClientWidth = 249
       TabOrder = 2
       object BtnINDIgui: TButton
         Left = 49
@@ -1714,8 +1732,8 @@ object f_eqmod: Tf_eqmod
       Width = 253
       Align = alTop
       Caption = 'Guide rate'
-      ClientHeight = 53
-      ClientWidth = 251
+      ClientHeight = 43
+      ClientWidth = 249
       TabOrder = 3
       object PanelGuideRate: TPanel
         Left = 4
@@ -1728,7 +1746,7 @@ object f_eqmod: Tf_eqmod
         TabOrder = 0
         object GuideDEC: TEdit
           Left = 125
-          Height = 23
+          Height = 20
           Hint = 'DEC guide rate'
           Top = 4
           Width = 63
@@ -1738,15 +1756,15 @@ object f_eqmod: Tf_eqmod
         end
         object Label20: TLabel
           Left = 99
-          Height = 19
+          Height = 18
           Top = 7
-          Width = 28
+          Width = 29
           Caption = 'DEC '
           ParentColor = False
         end
         object GuideRA: TEdit
           Left = 22
-          Height = 23
+          Height = 20
           Hint = 'RA guide rate'
           Top = 4
           Width = 74
@@ -1756,7 +1774,7 @@ object f_eqmod: Tf_eqmod
         end
         object Label21: TLabel
           Left = 2
-          Height = 19
+          Height = 18
           Top = 7
           Width = 20
           Caption = 'RA '
@@ -1779,14 +1797,14 @@ object f_eqmod: Tf_eqmod
     Enabled = False
     Interval = 5000
     OnTimer = TrackTimerTimer
-    Left = 218
-    Top = 542
+    Left = 24
+    Top = 584
   end
   object InitTimer: TTimer
     Enabled = False
     OnTimer = InitTimerTimer
-    Left = 76
-    Top = 542
+    Left = 64
+    Top = 488
   end
   object UniqueInstance1: TUniqueInstance
     Enabled = True
