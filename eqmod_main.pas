@@ -49,7 +49,9 @@ type
     BtnSaveIndiSettings: TSpeedButton;
     BtnLoadAlign: TSpeedButton;
     BtnSetGuideRate: TSpeedButton;
+    cbPPEC: TCheckBox;
     GroupBox8: TGroupBox;
+    GroupBoxPPEC: TGroupBox;
     ImageList1: TImageList;
     joystickled: TShape;
     Label20: TLabel;
@@ -182,6 +184,7 @@ type
     procedure BtnSouthWestMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure BtnTrackPaint(Sender: TObject);
     procedure BtnWestMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure cbPPECChange(Sender: TObject);
     procedure ElevationChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure InitTimerTimer(Sender: TObject);
@@ -246,6 +249,7 @@ type
     procedure ParkChange(Sender: TObject);
     procedure GeoCoordChange(Sender: TObject);
     procedure GuideRateChange(Sender: TObject);
+    procedure PPECChange(Sender: TObject);
     procedure ShowObsCoord;
     procedure onsync(Sender: TObject);
     procedure AlignCountChange(Sender: TObject);
@@ -464,6 +468,7 @@ begin
    eqmod.onPierSideChange:=@PierSideChange;
    eqmod.onSlewSpeedChange:=@SlewSpeedChange;
    eqmod.onSlewModeChange:=@SlewModeChange;
+   eqmod.onPPECChange:=@PPECChange;
    eqmod.onSync:=@onsync;
    eqmod.onTrackModeChange:=@TrackModeChange;
    eqmod.onTrackRateChange:=@TrackRateChange;
@@ -644,8 +649,16 @@ case eqmod.Status of
                       AlignModeChange(Sender);
                       eqmod.RAGuideRate:=config.GetValue('/Options/RAGuideRate',0.3);
                       eqmod.DEGuideRate:=config.GetValue('/Options/DEGuideRate',0.3);
+                      GroupBoxPPEC.Visible:=eqmod.HasPPEC;
+                      if GroupBoxPPEC.Visible then
+                        eqmod.PPEC:=config.GetValue('/Options/PPEC',false);
                       eqmod.ActiveSyncMode:=config.GetValue('/Options/ActiveSyncMode',1);
                       eqmod.ActiveAlignmentMode:=config.GetValue('/Options/ActiveAlignMode',1);
+                      GroupBoxPPEC.Visible:=eqmod.HasPPEC;
+                      if GroupBoxPPEC.Visible then begin
+                        cbPPEC.Checked:=config.GetValue('/Options/PPEC',false);
+                        eqmod.PPEC:=cbPPEC.Checked;
+                      end;
                       if indiunparktrack then begin
                         eqmod.Park:=false;
                       end;
@@ -1308,6 +1321,19 @@ begin
   config.SetValue('/Options/RAGuideRate',gra);
   config.SetValue('/Options/DEGuideRate',gde);
   config.Flush;
+end;
+
+//////////////////  PPEC  box ////////////////////////
+
+procedure Tf_eqmod.PPECChange(Sender: TObject);
+begin
+  cbPPEC.Checked:=eqmod.PPEC;
+end;
+
+procedure Tf_eqmod.cbPPECChange(Sender: TObject);
+begin
+  eqmod.PPEC:=cbPPEC.Checked;
+  config.SetValue('/Options/PPEC',cbPPEC.Checked);
 end;
 
 //////////////////  Sound ////////////////////////

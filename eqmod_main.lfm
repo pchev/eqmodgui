@@ -1176,11 +1176,11 @@ object f_eqmod: Tf_eqmod
   end
   object Panel2: TPanel
     Left = 234
-    Height = 631
+    Height = 656
     Top = 0
     Width = 253
     BevelOuter = bvNone
-    ClientHeight = 631
+    ClientHeight = 656
     ClientWidth = 253
     TabOrder = 1
     Visible = False
@@ -1651,7 +1651,7 @@ object f_eqmod: Tf_eqmod
     object GroupBox11: TGroupBox
       Left = 0
       Height = 129
-      Top = 466
+      Top = 520
       Width = 253
       Align = alTop
       Caption = 'Other Settings'
@@ -1790,6 +1790,26 @@ object f_eqmod: Tf_eqmod
           OnClick = BtnSetGuideRateClick
           ParentFont = False
         end
+      end
+    end
+    object GroupBoxPPEC: TGroupBox
+      Left = 0
+      Height = 54
+      Top = 466
+      Width = 253
+      Align = alTop
+      Caption = 'PPEC'
+      ClientHeight = 24
+      ClientWidth = 249
+      TabOrder = 4
+      object cbPPEC: TCheckBox
+        Left = 8
+        Height = 22
+        Top = 0
+        Width = 200
+        Caption = 'Activate PPEC (need training)'
+        OnChange = cbPPECChange
+        TabOrder = 0
       end
     end
   end

@@ -67,6 +67,9 @@ T_indieqmod = class(TIndiBaseClient)
    MotionWE: ISwitchVectorProperty;
    MotionW: ISwitch;
    MotionE: ISwitch;
+   PPEC_prop: ISwitchVectorProperty;
+   PPEC_OFF: ISwitch;
+   PPEC_ON: ISwitch;
    RevDec: ISwitchVectorProperty;
    SlewMode: ISwitchVectorProperty;
    SlewSpeed: INumberVectorProperty;
@@ -123,6 +126,7 @@ T_indieqmod = class(TIndiBaseClient)
    FonGuideRateChange:TNotifyEvent;
    FonGeoCoordChange:TNotifyEvent;
    FonAlignCountChange: TNotifyEvent;
+   FonPPECChange: TNotifyEvent;
    FonSyncDeltaChange: TNotifyEvent;
    FonAlignmentModeChange: TNotifyEvent;
    FonSyncModeChange: TNotifyEvent;
@@ -185,6 +189,9 @@ T_indieqmod = class(TIndiBaseClient)
    function  GetActiveSyncMode: integer;
    procedure SetActiveSyncMode(value: integer);
    function  GetStatusError: string;
+   function  GetHasPPEC: boolean;
+   function  GetPPEC: boolean;
+   procedure SetPPEC(value: boolean);
  public
    constructor Create;
    destructor  Destroy; override;
@@ -224,6 +231,8 @@ T_indieqmod = class(TIndiBaseClient)
    property Aperture: double read GetAperture;
    property FocaleLength: double read GetFocaleLength;
    property ReverseDec: Boolean read GetRevDec write SetRevDec;
+   property HasPPEC: Boolean read GetHasPPEC;
+   property PPEC: Boolean read GetPPEC write SetPPEC;
    property SlewPreset: TStringList read FSlewPreset;
    property ActiveSlewPreset: integer read GetActiveSlewPreset write SetActiveSlewPreset;
    property RASlewSpeedRange: TNumRange read GetRASlewSpeedRange;
@@ -264,6 +273,7 @@ T_indieqmod = class(TIndiBaseClient)
    property onParkChange: TNotifyEvent read FonParkChange write FonParkChange;
    property onGeoCoordChange:TNotifyEvent read FonGeoCoordChange write FonGeoCoordChange;
    property onGuideRateChange:TNotifyEvent read FonGuideRateChange write FonGuideRateChange;
+   property onPPECChange:TNotifyEvent read FonPPECChange write FonPPECChange;
    property onAlignCountChange:TNotifyEvent read FonAlignCountChange write FonAlignCountChange;
    property onSyncDeltaChange: TNotifyEvent read FonSyncDeltaChange write FonSyncDeltaChange;
    property onAlignmentModeChange: TNotifyEvent read FonAlignmentModeChange write FonAlignmentModeChange;
@@ -335,6 +345,7 @@ begin
     AbortMotion:=nil;
     MotionNS:=nil;
     MotionWE:=nil;
+    PPEC_prop:=nil;
     RevDec:=nil;
     SlewMode:=nil;
     SlewSpeed:=nil;
@@ -583,6 +594,13 @@ begin
      MotionE:=IUFindSwitch(MotionWE,'MOTION_EAST');
      if (MotionW=nil)or(MotionE=nil) then MotionWE:=nil;
   end
+  else if (proptype=INDI_SWITCH)and(propname='PPEC') then begin
+     PPEC_prop:=indiProp.getSwitch;
+     PPEC_OFF:=IUFindSwitch(PPEC_prop,'PPEC_OFF');
+     PPEC_ON:=IUFindSwitch(PPEC_prop,'PPEC_ON');
+     if (PPEC_OFF=nil)or(PPEC_ON=nil) then PPEC_prop:=nil;
+     if Assigned(FonPPECChange) then FonPPECChange(self);
+  end
   else if (proptype=INDI_SWITCH)and(propname='REVERSEDEC') then begin
      RevDec:=indiProp.getSwitch;
   end
@@ -749,6 +767,8 @@ begin
         if Assigned(FonSyncModeChange) then FonSyncModeChange(self);
   end else if svp=AbortMotion then begin
         if Assigned(FonAbortMotion) then FonAbortMotion(self);
+  end else if svp=PPEC_prop then begin
+        if Assigned(FonPPECChange) then FonPPECChange(self);
   end;
 end;
 
@@ -1286,6 +1306,29 @@ begin
  end;
 end;
 
+function  T_indieqmod.GetHasPPEC: boolean;
+begin
+  result:= PPEC_prop<>nil;
+end;
+
+function  T_indieqmod.GetPPEC: boolean;
+begin
+ if PPEC_prop<>nil then begin
+    result:=PPEC_ON.s=ISS_ON;
+ end;
+end;
+
+procedure T_indieqmod.SetPPEC(value: boolean);
+begin
+ if PPEC_prop<>nil then begin
+   IUResetSwitch(PPEC_prop);
+   if value then
+      PPEC_ON.s:=ISS_ON
+   else
+     PPEC_OFF.s:=ISS_ON;
+   sendNewSwitch(PPEC_prop);
+ end;
+end;
 
 end.
 
