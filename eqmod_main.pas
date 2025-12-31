@@ -281,7 +281,7 @@ const
   CR = #$0d;
   LF = #$0a;
   CRLF = CR + LF;
-  eq_version='1.8.0';
+  eq_version='1.8.1';
 
 {$i revision.inc}
 
